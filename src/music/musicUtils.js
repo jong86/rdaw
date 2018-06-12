@@ -1,7 +1,8 @@
+// @flow
 import MonoSynth from './instruments/MonoSynth'
 const monoSynth = new MonoSynth();
 
-const convertKeyCodeToFreq = (keyCode) => {
+const convertKeyCodeToFreq = (keyCode: number): number => {
   // get octaveMultiplier from redux store
 
   let freq;
@@ -18,7 +19,7 @@ const convertKeyCodeToFreq = (keyCode) => {
 }
 
 export const armedInstrument = {
-  play: (keyCode) => {
+  play: (keyCode: number): void => {
     // convert keyCode to frequency in hz
     const freq = convertKeyCodeToFreq(keyCode);
     console.log(freq, keyCode);
@@ -28,7 +29,7 @@ export const armedInstrument = {
     monoSynth.play(freq);
   },
 
-  stop: (keyCode) => {
+  stop: (keyCode: number): void => {
     // Find armed instrument... (right now just monoSynth)
     monoSynth.stop();
   }
