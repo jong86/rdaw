@@ -1,13 +1,8 @@
 {
-  "name": "basic-electron-react-boilerplate",
+  "name": "webaudioproj",
   "version": "0.7.0",
-  "description": "Minimal and modern react+electron+webpack boilerplate",
-  "author": "Phillip Barbiero",
-  "homepage": "https://github.com/pbarbiero/basic-electron-react-boilerplate",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pbarbiero/basic-electron-react-boilerplate.git"
-  },
+  "description": "Refined Digital Audio Workstation",
+  "author": "Jon Gaspar",
   "license": "MIT",
   "main": "main.js",
   "scripts": {
@@ -18,8 +13,10 @@
     "postpackage": "electron-packager ./ --out=./builds"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.1.2",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babili-webpack-plugin": "^0.1.2",
     "css-loader": "^0.28.1",
