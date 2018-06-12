@@ -1,4 +1,4 @@
-class Track {
+export default class Track {
   constructor(type) {
     // this.id = uuid();
     this.type = type;

@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 
 class App extends React.Component {
   render() {
-    var context = new AudioContext;
-    var oscillator = context.createOscillator();
-    oscillator.frequency.value = 201;
-
-    oscillator.connect(context.destination);
-
-    // oscillator.start(0);
-
-
-
     return (
       <div>
         <h1>Hello, Electron!</h1>
