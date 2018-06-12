@@ -1,18 +1,20 @@
 import context from '../audioContext';
+import Instrument from './Instrument';
 
-export default class {
+export default class extends Instrument {
   constructor() {
+    super();
     this.isPlaying = false;
   }
 
-  play() {
+  play(freq) {
     if (!this.isPlaying) {
       this.isPlaying = true;
+      const currentTime = context.currentTime;
 
       this.oscillator = context.createOscillator();
       this.oscillator.connect(context.destination);
-
-      const currentTime = context.currentTime;
+      this.oscillator.frequency.setValueAtTime(freq, currentTime);
       this.oscillator.start(currentTime);
     }
   }
@@ -21,6 +23,7 @@ export default class {
     if (this.isPlaying) {
       this.oscillator.stop();
       this.isPlaying = false;
+      this.printSomething();
     }
   }
 }
