@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 
 import MonoSynth from './devices/instruments/MonoSynth.jsx';
 
-const styles = {
+const styles: Object = {
   container: {
     backgroundColor: '#2d3436',
     position: 'fixed',
@@ -12,7 +12,12 @@ const styles = {
     left: 0,
     height: 188,
     width: '100%',
-    padding: 8,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingTop: 12,
+    paddingBottom: 12,
+    display: 'flex',
+    alignItems: 'flex-start',
   }
 }
 

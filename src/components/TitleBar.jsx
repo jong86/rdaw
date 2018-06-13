@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-const styles = {
+const styles: Object = {
   container: {
     backgroundColor: '#2d3436',
     position: 'fixed',

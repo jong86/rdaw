@@ -2,14 +2,11 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-const styles = {
+const styles: Object = {
   container: {
     backgroundColor: 'tomato',
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    height: 256,
-    width: '100%',
+    height: 16,
+    width: 16,
   }
 }
 
@@ -19,7 +16,7 @@ type Props = {
 
 type State = {};
 
-class Template extends React.Component<Props, State> {
+class Default extends React.Component<Props, State> {
   render() {
     const { classes } = this.props
 
@@ -30,5 +27,5 @@ class Template extends React.Component<Props, State> {
   }
 }
 
-Template = injectSheet(styles)(Template);
-export default Template;
+Default = injectSheet(styles)(Default);
+export default Default;

@@ -5,11 +5,20 @@ import injectSheet from 'react-jss';
 import TitleBar from './TitleBar.jsx';
 import DeviceBar from './DeviceBar.jsx';
 
-const styles = {
+const styles: Object = {
   '@global': {
     body: {
       fontFamily: 'Arial',
       backgroundColor: '#34495e',
+    },
+
+    div: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      userSelect: 'none',
+      cursor: 'default',
     },
   }
 };

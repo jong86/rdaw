@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
 import Device from '../Device.jsx';
+import { Knob } from '../deviceWidgets';
 
-const styles = {
+
+const styles: Object = {
   container: {
   }
 }
@@ -20,8 +22,8 @@ class MonoSynth extends React.Component<Props, State> {
     const { classes } = this.props
 
     return (
-      <Device className={classes.container} name="MonoSynth">
-        
+      <Device name="MonoSynth">
+        <Knob />
       </Device>
     );
   }

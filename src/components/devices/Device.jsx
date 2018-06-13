@@ -2,12 +2,32 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-const styles = {
+const styleConstants: {
+  borderRadius: number,
+} = {
+  borderRadius: 8,
+}
+
+const styles: Object = {
   container: {
     backgroundColor: '#95a5a6',
     height: '100%',
     width: 'fit-content',
-    borderRadius: 8,
+    borderRadius: styleConstants.borderRadius,
+    padding: 4,
+    position: 'relative',
+  },
+
+  titleBar: {
+    width: '100%',
+    height: 12,
+    left: 0,
+    top: 0,
+    position: 'absolute',
+    backgroundColor: '#718093',
+    fontSize: 8,
+    borderTopLeftRadius: styleConstants.borderRadius,
+    borderTopRightRadius: styleConstants.borderRadius,
   }
 }
 
@@ -25,7 +45,11 @@ class Device extends React.Component<Props, State> {
 
     return (
       <div className={classes.container}>
-        { this.props.name }
+        <div className={classes.titleBar}>
+          { this.props.name }
+        </div>
+
+
         { this.props.children }
       </div>
     );
