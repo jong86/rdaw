@@ -1,13 +1,15 @@
 // @flow
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
-import DeviceBar from './DeviceBar';
+
+import TitleBar from './TitleBar.jsx';
+import DeviceBar from './DeviceBar.jsx';
 
 const styles = {
   '@global': {
     body: {
       fontFamily: 'Arial',
-      backgroundColor: '#2c3e50',
+      backgroundColor: '#34495e',
     },
   }
 };
@@ -24,6 +26,7 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className={classes.container}>
+        <TitleBar />
         <DeviceBar />
       </div>
     );

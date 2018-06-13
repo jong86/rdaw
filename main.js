@@ -18,8 +18,13 @@ if ( process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) 
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1024, height: 768, show: false
+    width: 1024,
+    height: 768,
+    show: false,
+    titleBarStyle: 'hidden',
   });
+
+
 
   // and load the index.html of the app.
   let indexPath;
@@ -55,6 +60,10 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  mainWindow.webContents.on('did-finish-load', function() {
+    mainWindow.setTitle('rDAW');
+  })
 }
 
 // This method will be called when Electron has finished

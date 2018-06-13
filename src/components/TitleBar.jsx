@@ -4,7 +4,13 @@ import injectSheet from 'react-jss';
 
 const styles = {
   container: {
-    border: '1px solid tomato',
+    backgroundColor: '#2d3436',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    height: 22,
+    width: '100%',
+    '-webkit-app-region': 'drag',
   }
 }
 
@@ -14,17 +20,16 @@ type Props = {
 
 type State = {};
 
-class DeviceBar extends React.Component<Props, State> {
+class TitleBar extends React.Component<Props, State> {
   render() {
     const { classes } = this.props
 
     return (
       <div className={classes.container}>
-        hello from devicebar
       </div>
     );
   }
 }
 
-DeviceBar = injectSheet(styles)(DeviceBar);
-export default DeviceBar;
+TitleBar = injectSheet(styles)(TitleBar);
+export default TitleBar;
