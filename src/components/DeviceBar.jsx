@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
-import MonoSynth from './instruments/MonoSynth.jsx';
+import MonoSynth from './devices/instruments/MonoSynth.jsx';
 
 const styles = {
   container: {
