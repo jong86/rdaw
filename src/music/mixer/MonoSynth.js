@@ -1,29 +1,29 @@
-import context from '../audioContext';
-import Instrument from './Instrument';
+// @flow
+import context from '../audioContext'
+import MIDITrack from './MIDITrack'
 
-export default class extends Instrument {
-  constructor() {
+export default class extends MIDITrack {
+  constructor(): void {
     super();
     this.isPlaying = false;
   }
 
-  play(freq) {
+  play(freq: number): void {
     if (!this.isPlaying) {
       this.isPlaying = true;
       const currentTime = context.currentTime;
 
       this.oscillator = context.createOscillator();
-      this.oscillator.connect(context.destination);
+      this.oscillator.connect(this.masterGain);
       this.oscillator.frequency.setValueAtTime(freq, currentTime);
       this.oscillator.start(currentTime);
     }
   }
 
-  stop() {
+  stop(): void {
     if (this.isPlaying) {
       this.oscillator.stop();
       this.isPlaying = false;
-      this.printSomething();
     }
   }
 }

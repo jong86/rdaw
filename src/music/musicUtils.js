@@ -1,5 +1,5 @@
 // @flow
-import MonoSynth from './instruments/MonoSynth'
+import MonoSynth from './mixer/MonoSynth'
 const monoSynth = new MonoSynth();
 
 const convertKeyCodeToFreq = (keyCode: number): number => {

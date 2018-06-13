@@ -1,11 +1,16 @@
+// @flow
 import React, { Component } from 'react';
+import DeviceBar from './DeviceBar';
 
-class App extends React.Component {
+type Props = {};
+
+type State = {};
+
+class App extends React.Component<Props, State> {
   render() {
     return (
       <div>
-        <h1>Hello, Electron!</h1>
-        <p>I hope you enjoy using basic-electron-react-boilerplate to start your dev off right!</p>
+        <DeviceBar />
       </div>
     );
   }

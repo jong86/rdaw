@@ -6,8 +6,8 @@
   "license": "MIT",
   "main": "main.js",
   "repository": {
-    "type" : "git",
-    "url" : "https://gitlab.com/jong86/webaudioproj"
+    "type": "git",
+    "url": "https://gitlab.com/jong86/webaudioproj"
   },
   "scripts": {
     "prod": "webpack --config webpack.build.config.js && electron --noDevServer .",
@@ -33,6 +33,7 @@
     "react-dom": "^16.0.0",
     "style-loader": "^0.19.0",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "react-jss": "^8.5.1"
   }
 }

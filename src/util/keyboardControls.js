@@ -1,3 +1,4 @@
+// @flow
 import { armedInstrument } from '../music/musicUtils';
 
 export default () => {
