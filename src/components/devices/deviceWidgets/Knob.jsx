@@ -37,17 +37,27 @@ type State = {
 };
 
 class Default extends React.Component<Props, State> {
-  constructor(): void {
-    super()
+  listenForMouseY: () => void;
+
+  constructor(props): void {
+    super(props)
     this.state = {
       knobAngle: 0,
     }
+
+    this.listenForMouseY = this.listenForMouseY.bind(this);
   }
 
-  componentDidMount(): void {
-    document.addEventListener('mousemove', (e: Object): void => {
-      console.log(e);
-    })
+  setKnobAngle(e: Object): void {
+    this.setState({ knobAngle: e.clientY })
+  }
+
+  listenForMouseY(): void {
+    document.addEventListener('mousemove', this.setKnobAngle)
+  }
+
+  stopListeningForMouseY(): void {
+    document.removeEventListener('mousemove', this.setKnobAngle);
   }
 
   render(): Object {
@@ -55,7 +65,10 @@ class Default extends React.Component<Props, State> {
     const { knobAngle } = this.state
 
     return (
-      <div className={classes.container}>
+      <div
+        className={classes.container}
+        onDrag={() => console.log("entered drag")}
+      >
         <div className={classes.knob}>
           <div className={classes.indicatorLine} style={{ transform: `rotate(${knobAngle}deg)` }}/>
         </div>
