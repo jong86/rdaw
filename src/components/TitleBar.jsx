@@ -11,6 +11,7 @@ const styles: Object = {
     height: 22,
     width: '100%',
     '-webkit-app-region': 'drag',
+    zIndex: 1,
   }
 }
 

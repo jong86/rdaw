@@ -92,9 +92,9 @@ const project =
           {
             filename: 'guitar1.wav',
             duration: 128,
-            // -> need to deal with length
-            // -> guitar1.wav would start on 1st grid item of track
-            // -> if there was a null before this it would start on 2nd 16th note
+            // > need to deal with length
+            // > guitar1.wav would start on 1st grid item of track
+            // > if there was a null before this it would start on 2nd 16th note
           }
         ]
       ]
@@ -109,7 +109,7 @@ const project2 =
   clips:
   {
     /*
-      -List of all existing audio clips in project
+      List of all existing audio clips in project
     */
     audio:
     [
@@ -123,8 +123,8 @@ const project2 =
     midi:
     [
       /*
-        -List of all existing midi clips in project
-        -Every time one is copy + pasted or duplicated, a new one is created here.
+        List of all existing midi clips in project
+        Every time one is copy + pasted or duplicated, a new one is created here.
       */
       {
         id: 'lkj832dsad',
@@ -155,7 +155,7 @@ const project2 =
               note: 'F',
               duration: 3,
               /*
-                -Even if previous A# note duration goes past this note,
+                Even if previous A# note duration goes past this note,
                 the A# will not be started again,
                 because the synth will only play notes
                 that are started on a grid division
@@ -185,7 +185,8 @@ const project2 =
   [
     // drums
     {
-      type: 'DRUMS',
+      type: 'MIDI',
+      deviceChain: [],
       timeline:
       [
         // 1/16th
@@ -205,7 +206,8 @@ const project2 =
 
     // synth
     {
-      type: 'SYNTH',
+      type: 'MIDI',
+      deviceChain: [],
       timeline: [],
     },
 

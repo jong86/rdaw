@@ -28,6 +28,9 @@ type Props = {
 type State = {};
 
 class DeviceBar extends React.Component<Props, State> {
+  /* To display instruments/effects for whatever the selectedTrack is (in redux) */
+
+
   render() {
     const { classes } = this.props
 

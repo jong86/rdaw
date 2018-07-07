@@ -18,6 +18,12 @@ type Props = {
 type State = {};
 
 class MonoSynth extends React.Component<Props, State> {
+  componentDidMount() {
+
+    // Adds a Monosynth to redux state, which will then make a webaudioapi class instance of Monosynth
+
+  }
+
   render() {
     const { classes } = this.props
 
