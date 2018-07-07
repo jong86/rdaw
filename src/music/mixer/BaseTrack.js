@@ -46,7 +46,6 @@ export default class {
     if (!exists(this.overdriveGain)) {
       this.overdriveGain = context.createGain();
       this.overdriveGain.gain.value = 0.1;
-      debugger
 
       this._disconnectAllNodesInDeviceChain();
       this.deviceChain.splice(-1, 0, this.overdriveGain);
