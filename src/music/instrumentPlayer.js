@@ -8,7 +8,7 @@ export default {
     // convert keyCode to frequency in hz
     // Is connected to redux
     // Finds out which instrument is armed, then plays it
-    monoSynth.play(midiNote);
+    monoSynth.overdrive().play(midiNote);
 
     // desired code:
     // getInstrumentById(instrumentId).play();

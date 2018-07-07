@@ -49,9 +49,9 @@ export default class extends MIDITrack {
     this.outputGain.gain.setTargetAtTime(1.0, currentTime, env.attack);
 
     this.lfo.connect(this.modulationGain);
-    this.modulationGain.connect(this.masterGain.gain);
+    this.modulationGain.connect(this.preFXGain.gain);
     this.hfo.connect(this.outputGain);
-    this.outputGain.connect(this.masterGain);
+    this.outputGain.connect(this.preFXGain);
 
     this.lfo.start(currentTime);
     this.hfo.start(currentTime);
