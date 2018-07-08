@@ -77,7 +77,7 @@ export default () => {
       const { keyCode } = event;
 
       if (keyCode >= 65 && keyCode <= 90) {
-        // return instrumentPlayer.stop(keyCode);
+        return instrumentPlayer.stop();
       }
     })
   )

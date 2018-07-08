@@ -14,7 +14,7 @@ export default {
     // getInstrumentById(instrumentId).play();
   },
 
-  stop: (note: number, instrumentId: number): void => {
+  stop: (): void => {
     // Find armed instrument... (right now just monoSynth)
     monoSynth.stop();
   }

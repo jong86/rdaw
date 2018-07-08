@@ -52,7 +52,6 @@ export default class {
       this._connectAllNodesInDeviceChain();
     }
 
-    console.log(this.deviceChain)
     return this;
   }
 }
