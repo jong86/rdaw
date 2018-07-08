@@ -1,12 +1,14 @@
 // @flow
 import React from 'react';
 import injectSheet from 'react-jss';
+import { store } from '../redux/store.js';
+const state = store.getState();
 
 const styles: Object = {
   container: {
     backgroundColor: '#2d3436',
     position: 'fixed',
-    top: 0,
+    top: state.gui.TitleBar.height,
     left: 0,
     width: '100%',
     paddingLeft: 8,
@@ -15,6 +17,7 @@ const styles: Object = {
     paddingBottom: 12,
     display: 'flex',
     alignItems: 'flex-start',
+    zIndex: 0,
   }
 }
 

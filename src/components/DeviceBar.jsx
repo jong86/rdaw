@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 import injectSheet from 'react-jss';
+import { store } from '../redux/store.js';
+const state = store.getState();
 
 import MonoSynth from './devices/instruments/MonoSynth.jsx';
 
@@ -10,7 +12,7 @@ const styles: Object = {
     position: 'fixed',
     bottom: 0,
     left: 0,
-    height: 188,
+    height: state.gui.DeviceBar.height,
     width: '100%',
     paddingLeft: 8,
     paddingRight: 8,
@@ -18,6 +20,7 @@ const styles: Object = {
     paddingBottom: 12,
     display: 'flex',
     alignItems: 'flex-start',
+    zIndex: 1,
   }
 }
 

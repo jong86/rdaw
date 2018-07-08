@@ -2,10 +2,12 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import { store } from '../redux/store.js';
+const state = store.getState();
 
 // store.getState() gets current state
 // store.subscribe() takes a callback to do every time state changes
 // store.dispatch() changes state
+
 
 
 const styles: Object = {
@@ -14,10 +16,10 @@ const styles: Object = {
     position: 'fixed',
     top: 0,
     left: 0,
-    height: 22,
+    height: state.gui.TitleBar.height,
     width: '100%',
     '-webkit-app-region': 'drag',
-    zIndex: 1,
+    zIndex: 2,
   }
 }
 
