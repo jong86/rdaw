@@ -2,15 +2,12 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 
-import MonoSynth from './devices/instruments/MonoSynth.jsx';
-
 const styles: Object = {
   container: {
     backgroundColor: '#2d3436',
     position: 'fixed',
-    bottom: 0,
+    top: 0,
     left: 0,
-    height: 188,
     width: '100%',
     paddingLeft: 8,
     paddingRight: 8,
@@ -27,20 +24,17 @@ type Props = {
 
 type State = {};
 
-class DeviceBar extends React.Component<Props, State> {
-  /* To display instruments/effects for whatever the selectedTrack is (in redux) */
-
-
+class Arrangement extends React.Component<Props, State> {
   render() {
     const { classes } = this.props
 
     return (
       <div className={classes.container}>
-        <MonoSynth />
+        This is arrangement
       </div>
     );
   }
 }
 
-DeviceBar = injectSheet(styles)(DeviceBar);
-export default DeviceBar;
+Arrangement = injectSheet(styles)(Arrangement);
+export default Arrangement;

@@ -1,6 +1,12 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import injectSheet from 'react-jss';
+import { store } from '../redux/store.js';
+
+// store.getState() gets current state
+// store.subscribe() takes a callback to do every time state changes
+// store.dispatch() changes state
+
 
 const styles: Object = {
   container: {

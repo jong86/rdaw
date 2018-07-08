@@ -1,6 +1,7 @@
 {
   "presets": [
     "react",
-    "flow"
+    "flow",
+    "babel-preset-stage-2"
   ]
 }

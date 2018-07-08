@@ -1,9 +1,10 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import injectSheet from 'react-jss';
 
 import TitleBar from './TitleBar.jsx';
 import DeviceBar from './DeviceBar.jsx';
+import Arrangement from './Arrangement.jsx';
 
 const styles: Object = {
   '@global': {
@@ -36,6 +37,7 @@ class App extends React.Component<Props, State> {
     return (
       <div className={classes.container}>
         <TitleBar />
+        <Arrangement />
         <DeviceBar />
       </div>
     );
