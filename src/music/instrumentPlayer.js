@@ -1,5 +1,5 @@
 // @flow
-import MonoSynth from './mixer/MonoSynth'
+import MonoSynth from './devices/MonoSynth'
 const monoSynth = new MonoSynth();
 
 

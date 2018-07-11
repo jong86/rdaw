@@ -1,18 +1,19 @@
 // @flow
 import React from 'react';
 import injectSheet from 'react-jss';
+// import { store } from '../../../redux/store';
+// const state = store.getState();
+// const { global } = state.gui
 
-const styleConstants: {
-  borderRadius: number,
-} = {
-  borderRadius: 8,
-}
+import TrackOptions from './TrackOptions.jsx';
+import TrackContent from './TrackContent.jsx';
+
 
 const styles: Object = {
   container: {
     backgroundColor: '#95a5a6',
-    borderRadius: styleConstants.borderRadius,
-    padding: 4,
+    padding: '5em',
+    width: '500px',
     position: 'relative',
   },
 }
@@ -31,7 +32,8 @@ class Track extends React.Component<Props, State> {
 
     return (
       <div className={classes.container}>
-        This is a track
+        <TrackOptions />
+        <TrackContent />
       </div>
     );
   }

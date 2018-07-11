@@ -4,18 +4,18 @@ import injectSheet from 'react-jss';
 import { store } from '../redux/store.js';
 const state = store.getState();
 
+import Track from './arrangement/Track/Track.jsx';
+
 const styles: Object = {
   container: {
-    backgroundColor: '#2d3436',
+    backgroundColor: '#222',
     position: 'fixed',
     top: state.gui.TitleBar.height,
     left: 0,
     width: '100%',
-    paddingLeft: 8,
-    paddingRight: 8,
-    paddingTop: 12,
-    paddingBottom: 12,
+    height: '100%',
     display: 'flex',
+    justifyContent: 'flex-start',
     alignItems: 'flex-start',
     zIndex: 0,
   }
@@ -33,7 +33,7 @@ class Arrangement extends React.Component<Props, State> {
 
     return (
       <div className={classes.container}>
-        This is arrangement
+        <Track />
       </div>
     );
   }

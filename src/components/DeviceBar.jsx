@@ -3,6 +3,7 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import { store } from '../redux/store.js';
 const state = store.getState();
+const { global } = state.gui;
 
 import MonoSynth from './devices/instruments/MonoSynth.jsx';
 
@@ -14,10 +15,7 @@ const styles: Object = {
     left: 0,
     height: state.gui.DeviceBar.height,
     width: '100%',
-    paddingLeft: 8,
-    paddingRight: 8,
-    paddingTop: 12,
-    paddingBottom: 12,
+    padding: global.paddingMd,
     display: 'flex',
     alignItems: 'flex-start',
     zIndex: 1,

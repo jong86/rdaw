@@ -1,4 +1,4 @@
-import BaseTrack from './BaseTrack'
+import BaseDevice from './BaseDevice'
 
 const tuning = 440;
 
@@ -12,7 +12,7 @@ const freq = (function midiFreq(tuning, midi) {
 })(tuning)
 
 
-export default class extends BaseTrack {
+export default class extends BaseDevice {
   convertMIDINoteToFreq(midiNote): number {
     return freq(midiNote);
   }

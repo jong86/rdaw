@@ -1,6 +1,6 @@
 // @flow
 import context from '../audioContext'
-import MIDITrack from './MIDITrack'
+import MIDIDevice from './MIDIDevice'
 
 const bufferSize = 2 * context.sampleRate; // Creates noise buffer to use for percussion
 const noiseBuffer = context.createBuffer(1, bufferSize, context.sampleRate);
@@ -9,7 +9,7 @@ for (let i = 0; i < bufferSize; i++) {
   output[i] = Math.random() * 2 - 1;
 }
 
-export default class extends MIDITrack {
+export default class extends MIDIDevice {
   constructor(): void {
     super();
   }

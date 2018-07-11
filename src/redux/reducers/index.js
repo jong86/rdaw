@@ -2,13 +2,11 @@
 import { combineReducers } from 'redux'
 import initialState from '../initialState';
 
-import arrangement from './arrangement';
-import mixer from './mixer';
+import tracks from './tracks';
 import gui from './gui';
 
 const appReducer = combineReducers({
-  arrangement,
-  mixer,
+  tracks,
   gui,
 })
 
