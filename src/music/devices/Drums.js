@@ -14,6 +14,19 @@ export default class extends MIDIDevice {
     super();
   }
 
+  play(midiNote: number): void {
+    switch (midiNote) {
+      case 60:
+        this.kick();
+        break;
+      case 61:
+        this.snare();
+        break;
+      default:
+        break;
+    }
+  }
+
   kick(): void {
     // Kick osc part:
     const osc = context.createOscillator(); // Create oscillator (i.e. 'bass guitar')
