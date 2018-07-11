@@ -4,9 +4,8 @@ import injectSheet from 'react-jss';
 
 const styles: Object = {
   container: {
-    backgroundColor: 'tomato',
-    height: 16,
-    width: 16,
+    height: '192px',
+    width: '100%',
   }
 }
 
@@ -27,5 +26,8 @@ class Default extends React.Component<Props, State> {
   }
 }
 
-Default = injectSheet(styles)(Default);
-export default Default;
+export default (
+  injectSheet(styles)(
+    Default
+  )
+);

@@ -38,7 +38,7 @@ class App extends React.Component<Props, State> {
       <div className={classes.container}>
         <TitleBar />
         <Arrangement />
-        <DeviceBar />
+        {/* <DeviceBar /> */}
       </div>
     );
   }
