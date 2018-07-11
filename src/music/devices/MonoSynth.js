@@ -73,11 +73,13 @@ export default class extends MIDIDevice {
   }
 
   stop(): void {
-    const currentTime = context.currentTime;
+    if (this.isPlaying) {
+      const currentTime = context.currentTime;
 
-    this.outputGain.gain.setTargetAtTime(0.0, currentTime, 0.01);
-    this.hfo.stop();
+      this.outputGain.gain.setTargetAtTime(0.0, currentTime, 0.01);
+      this.hfo.stop();
 
-    this.isPlaying = false;
+      this.isPlaying = false;
+    }
   }
 }
