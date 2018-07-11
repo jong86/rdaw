@@ -2,12 +2,17 @@
 import context from '../audioContext'
 import MIDIDevice from './MIDIDevice'
 
-const bufferSize = 2 * context.sampleRate; // Creates noise buffer to use for percussion
-const noiseBuffer = context.createBuffer(1, bufferSize, context.sampleRate);
-const output = noiseBuffer.getChannelData(0);
-for (let i = 0; i < bufferSize; i++) {
-  output[i] = Math.random() * 2 - 1;
+function createNoiseBuffer() {
+  const bufferSize = 2 * context.sampleRate; // Creates noise buffer to use for percussion
+  const noiseBuffer = context.createBuffer(1, bufferSize, context.sampleRate);
+  const output = noiseBuffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++) {
+    output[i] = Math.random() * 2 - 1;
+  }
+  return noiseBuffer
 }
+
+const noiseBuffer = createNoiseBuffer();
 
 export default class extends MIDIDevice {
   constructor(): void {
@@ -161,7 +166,7 @@ export default class extends MIDIDevice {
     noiseGain.connect(context.destination);
 
     noise.start();
-    noise.stop(context.currentTime + 0.03);
+    noise.stop(context.currentTime + 2);
   }
 
 
