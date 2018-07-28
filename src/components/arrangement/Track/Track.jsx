@@ -11,8 +11,9 @@ const styles: Object = {
   container: {
     backgroundColor: '#95a5a6',
     width: '100%',
-    position: 'relative',
     paddingLeft: TRACK_OPTIONS_WIDTH + 1,
+    position: 'relative',
+    margin: 2,
   },
 }
 
@@ -42,10 +43,7 @@ const mapStateToProps = state => ({
   gui: state.gui,
 })
 
-export default (
-  connect(mapStateToProps)(
-    injectSheet(styles)(
-      Track
-  ))
-);
 
+Track = connect(mapStateToProps)(Track);
+Track = injectSheet(styles)(Track);
+export default Track;

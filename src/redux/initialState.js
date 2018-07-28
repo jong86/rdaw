@@ -21,12 +21,12 @@ export default {
       instrument: 'DRUMS',
     },
     {
-      id: 0,
+      id: 1,
       type: 'MIDI',
       instrument: 'DRUMS',
     },
     {
-      id: 0,
+      id: 2,
       type: 'MIDI',
       instrument: 'DRUMS',
     },

@@ -15,7 +15,7 @@ type Props = {
 
 type State = {};
 
-class Default extends React.Component<Props, State> {
+class TrackContent extends React.Component<Props, State> {
   render() {
     const { classes } = this.props
 
@@ -26,8 +26,5 @@ class Default extends React.Component<Props, State> {
   }
 }
 
-export default (
-  injectSheet(styles)(
-    Default
-  )
-);
+TrackContent = injectSheet(styles)(TrackContent);
+export default TrackContent;

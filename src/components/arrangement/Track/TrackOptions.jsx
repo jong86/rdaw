@@ -18,7 +18,7 @@ type Props = {
 
 type State = {};
 
-class Default extends React.Component<Props, State> {
+class TrackOptions extends React.Component<Props, State> {
   render() {
     const { classes } = this.props
 
@@ -30,8 +30,5 @@ class Default extends React.Component<Props, State> {
 }
 
 
-export default (
-  injectSheet(styles)(
-    Default
-  )
-);
+TrackOptions = injectSheet(styles)(TrackOptions)
+export default TrackOptions;
