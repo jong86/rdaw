@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 const state = store.getState();
 
 import Track from './arrangement/Track/Track.jsx';
+import type { tracks } from '../definitions/state.js.flow';
 
 const styles: Object = {
   container: {
@@ -24,7 +25,7 @@ const styles: Object = {
 
 type Props = {
   classes: Object,
-  tracks: Array<Object>
+  tracks: tracks,
 };
 
 type State = {};
@@ -32,7 +33,8 @@ type State = {};
 class Arrangement extends React.Component<Props, State> {
   render() {
     const { classes, tracks } = this.props
-    const renderTracks = tracks.map((track, index) => {
+
+    const renderTracks = tracks.list.map((track, index) => {
       return <Track key={index} track={track} />
     })
 

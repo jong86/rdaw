@@ -1,0 +1,41 @@
+// @flow
+
+export type track = {
+  id: number,
+  type: string,
+  instrument: string,
+  isArmed: boolean,
+}
+
+export type tracks = {
+  list: Array<track>,
+}
+
+export type appState = {
+  gui: {
+    global: {
+      borderRadius: number,
+      paddingSm: [number, number],
+      paddingMd: [number, number],
+      paddingLg: [number, number],
+    },
+    DeviceBar: {
+      height: number,
+    },
+    TitleBar: {
+      height: number,
+    },
+  },
+
+  global: {
+    title: string,
+    tempo: number,
+    timeSignature: {
+      numerator: number,
+      denominator: number,
+    },
+    swing: number,
+  },
+
+  tracks: tracks,
+}
