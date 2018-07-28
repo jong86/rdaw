@@ -20,7 +20,7 @@ const styles: Object = {
 type Props = {
   classes: Object,
   children: Object,
-  name: string,
+  track: Object,
 };
 
 type State = {};
@@ -28,7 +28,10 @@ type State = {};
 
 class Track extends React.Component<Props, State> {
   render() {
-    const { classes } = this.props
+    const { classes, track } = this.props;
+
+    console.log('track', track);
+
 
     return (
       <div className={classes.container}>

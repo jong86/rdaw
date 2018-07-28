@@ -17,7 +17,9 @@ if (NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION__) {
 }
 
 export const store = createStore(
-  persistedReducer,
+  // Commenting out persistedReducer for dev for now
+  // persistedReducer,
+  reducer,
   reduxDevTools
 )
 

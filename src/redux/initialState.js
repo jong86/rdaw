@@ -20,15 +20,5 @@ export default {
       type: 'MIDI',
       instrument: 'DRUMS',
     },
-    {
-      id: 1,
-      type: 'MIDI',
-      instrument: 'DRUMS',
-    },
-    {
-      id: 2,
-      type: 'MIDI',
-      instrument: 'DRUMS',
-    },
   ]
 }
