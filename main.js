@@ -48,7 +48,9 @@ function createWindow() {
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
     // Open the DevTools automatically if developing
-    if ( dev ) {
+    if (dev) {
+      BrowserWindow.addDevToolsExtension('/Users/jon/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.2.4_0');
+      BrowserWindow.addDevToolsExtension('/Users/jon/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.15.3_0');
       mainWindow.webContents.openDevTools();
     }
   });
@@ -63,6 +65,7 @@ function createWindow() {
 
   mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.setTitle('rDAW');
+    mainWindow.maximize();
   })
 }
 

@@ -6,6 +6,7 @@ import TitleBar from './TitleBar.jsx';
 import DeviceBar from './DeviceBar.jsx';
 import Arrangement from './Arrangement.jsx';
 
+
 const styles: Object = {
   '@global': {
     body: {

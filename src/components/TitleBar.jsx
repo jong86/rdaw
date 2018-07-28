@@ -14,7 +14,7 @@ const styles: Object = {
     height: state.gui.TitleBar.height,
     width: '100%',
     '-webkit-app-region': 'drag',
-    zIndex: 2,
+    zIndex: 5,
   }
 }
 
