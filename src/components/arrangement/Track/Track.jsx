@@ -10,7 +10,7 @@ const TRACK_OPTIONS_WIDTH = 128;
 const styles: Object = {
   container: {
     backgroundColor: '#95a5a6',
-    width: '100%',
+    width: `calc(100% - ${TRACK_OPTIONS_WIDTH}px)`,
     paddingLeft: TRACK_OPTIONS_WIDTH + 1,
     position: 'relative',
     margin: 2,
@@ -29,9 +29,6 @@ type State = {};
 class Track extends React.Component<Props, State> {
   render() {
     const { classes, track } = this.props;
-
-    console.log('track', track);
-
 
     return (
       <div className={classes.container}>

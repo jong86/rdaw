@@ -24,12 +24,10 @@ class Timeline extends React.Component<Props, State> {
   render() {
     const { classes, dimensions } = this.props
 
-    console.log('dimensions', dimensions);
-
     return (
       <Stage
-        width={window.innerWidth}
-        height={window.innerHeight}
+        width={dimensions.width}
+        height={dimensions.height}
       >
         <Layer>
           <GridLine
