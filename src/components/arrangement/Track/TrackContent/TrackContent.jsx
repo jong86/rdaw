@@ -4,8 +4,9 @@ import Measure from 'react-measure'
 import injectSheet from 'react-jss';
 import type { rectDimensions } from '../../../../defs/defs.js.flow';
 
-import Timeline from './Timeline.jsx';
-import NoteRows from './NoteRows.jsx';
+// import Timeline from './Timeline.jsx';
+// import NoteRows from './NoteRows.jsx';
+import Sequencer from './Sequencer.jsx';
 
 const styles: Object = {
   container: {
@@ -36,31 +37,16 @@ class TrackContent extends React.Component<Props, State> {
         bounds
       >
         {({ measureRef, contentRect }) => {
-          const dimensions: rectDimensions = {
-            width: contentRect.bounds.width,
-            height: contentRect.bounds.height,
-          }
+          const { width, height } = contentRect.bounds;
 
-          if (type === 'MIDI') {
-            return (
-              <div
-                className={classes.container}
-                ref={measureRef}
-              >
-                <NoteRows dimensions={dimensions} />
-                <Timeline dimensions={dimensions} />
-              </div>
-            )
-          } else {
-            return (
-              <div
-                className={classes.container}
-                ref={measureRef}
-              >
-                This is an audio track
-              </div>
-            )
-          }
+          return (
+            <div
+              className={classes.container}
+              ref={measureRef}
+            >
+              {instrument === "DRUMS" && <Sequencer containerWidth={width} containerHeight={height} />}
+            </div>
+          )
         }}
       </Measure>
     );

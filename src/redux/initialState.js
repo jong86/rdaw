@@ -41,6 +41,7 @@ const initialState: appState = {
       timeline: [],
       gui: {
         height: 100,
+        sequencerHeight: null,
         optionsWidth: 128,
       }
     }]
