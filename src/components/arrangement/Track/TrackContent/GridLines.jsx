@@ -20,9 +20,11 @@ type Props = {
   horizontal: boolean,
   vertical: boolean,
   hStart: number,
-  hEnd: number,
   vStart: number,
+  hEnd: number,
   vEnd: number,
+  hLength: number,
+  vLength: number,
   hSpacing: number,
   vSpacing: number,
   hColor: 'string',
@@ -31,7 +33,16 @@ type Props = {
 
 type State = {};
 
-function lines(direction: string, start: number, end: number, spacing: number, color: string): Array<Object> {
+type lineOptions = {
+  direction: string,
+  start: number,
+  end: number,
+  length: number,
+  spacing: number,
+  color: string,
+}
+
+function lines({ direction, start, end, length, spacing, color}: lineOptions): Array<Object> {
   const dimensionUnits = arrayFrom(start, end);
 
   return dimensionUnits.map((unit: number, index: number): any => {
@@ -39,15 +50,15 @@ function lines(direction: string, start: number, end: number, spacing: number, c
 
     if (direction === 'horizontal') {
       x1 = 0;
-      y1 = index;
-      x2 = end;
-      y2 = index;
+      y1 = unit;
+      x2 = length;
+      y2 = unit;
 
     } else if (direction === 'vertical') {
-      x1 = index;
+      x1 = unit;
       y1 = 0;
-      x2 = index;
-      y2 = end;
+      x2 = unit;
+      y2 = length;
     }
 
     if (index % spacing === 0) {
@@ -70,9 +81,11 @@ class GridLines extends React.Component<Props, State> {
       horizontal,
       vertical,
       hStart,
-      hEnd,
       vStart,
+      hEnd,
       vEnd,
+      hLength,
+      vLength,
       hSpacing,
       vSpacing,
       hColor,
@@ -81,13 +94,26 @@ class GridLines extends React.Component<Props, State> {
 
     let horizontalLines, verticalLines;
 
-
     if (horizontal) {
-      horizontalLines = lines('horizontal', hStart, hEnd, hSpacing, hColor);
+      horizontalLines = lines({
+        direction: 'horizontal',
+        start: hStart,
+        end: hEnd,
+        length: hLength,
+        spacing: vSpacing,
+        color: hColor,
+      });
     }
 
     if (vertical) {
-      verticalLines = lines('vertical', vStart, vEnd, vSpacing, vColor);
+      verticalLines = lines({
+        direction: 'vertical',
+        start: vStart,
+        end: vEnd,
+        length: vLength,
+        spacing: hSpacing,
+        color: vColor,
+      });
     }
 
     return (

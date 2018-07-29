@@ -35,15 +35,17 @@ class Sequencer extends React.Component<Props, State> {
       >
         <GridLines
           horizontal
-          hStart={1}
-          hEnd={containerWidth}
-          hSpacing={containerHeight / 16}
-          hColor='#a00'
+          hStart={0}
+          hEnd={100}
+          hLength={containerWidth}
+          hSpacing={32}
+          hColor='#666'
           vertical
           vStart={0}
-          vEnd={containerWidth}
-          vSpacing={32}
-          vColor='#0a0'
+          vEnd={100}
+          vLength={containerHeight}
+          vSpacing={containerHeight / 16}
+          vColor='#555'
         />
       </Stage>
     );
