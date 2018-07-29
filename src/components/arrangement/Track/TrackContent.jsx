@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 
+import Timeline from './Timeline/Timeline.jsx';
+
 const styles: Object = {
   container: {
     height: '192px',
@@ -21,6 +23,7 @@ class TrackContent extends React.Component<Props, State> {
 
     return (
       <div className={classes.container}>
+        <Timeline />
       </div>
     );
   }

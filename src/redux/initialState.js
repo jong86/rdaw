@@ -3,7 +3,11 @@ import type { appState } from '../definitions/state.js.flow';
 
 const initialState: appState = {
   gui: {
-    global: {
+    view: {
+      zoom: 1.0,
+      left: 0.0,
+    },
+    theme: {
       borderRadius: 4,
       paddingSm: [6, 4],
       paddingMd: [12, 8],
@@ -28,15 +32,13 @@ const initialState: appState = {
   },
 
   tracks: {
-    list: [
-      {
-        id: 0,
-        type: 'MIDI',
-        instrument: 'DRUMS',
-        isArmed: true,
-        timeline: [],
-      },
-    ]
+    list: [{
+      id: 0,
+      type: 'MIDI',
+      instrument: 'DRUMS',
+      isArmed: true,
+      timeline: [],
+    }]
   },
 }
 

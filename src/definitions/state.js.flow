@@ -13,7 +13,7 @@ export type tracks = {
 
 export type appState = {
   gui: {
-    global: {
+    theme: {
       borderRadius: number,
       paddingSm: [number, number],
       paddingMd: [number, number],
