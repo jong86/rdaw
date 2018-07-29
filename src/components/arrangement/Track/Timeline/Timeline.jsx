@@ -5,8 +5,6 @@ import Konva from "konva";
 import { Stage, Layer, Image, Rect } from "react-konva";
 import GridLine from './GridLine.jsx';
 
-
-
 const styles: Object = {
   container: {
     backgroundColor: 'tomato',
@@ -26,18 +24,17 @@ class Timeline extends React.Component<Props, State> {
     const { classes } = this.props
 
     return (
-      <Stage width={window.innerWidth} height={window.innerHeight}>
+      <Stage
+        width={window.innerWidth}
+        height={window.innerHeight}
+      >
         <Layer>
-          <Rect
-            x={0}
-            y={10}
-            width={50}
-            height={50}
-            fill='green'
-            draggable
-            cornerRadius={16}
+          <GridLine
+            x1={0}
+            y1={0}
+            x2={0}
+            y2={50}
           />
-          <GridLine />
         </Layer>
       </Stage>
     );

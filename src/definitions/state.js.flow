@@ -1,5 +1,4 @@
 // @flow
-
 export type track = {
   id: number,
   type: string,
@@ -13,6 +12,10 @@ export type tracks = {
 
 export type appState = {
   gui: {
+    view: {
+      zoom: number,
+      left: number,
+    },
     theme: {
       borderRadius: number,
       paddingSm: [number, number],

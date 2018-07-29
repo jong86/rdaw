@@ -8,6 +8,8 @@ const styles: Object = {
   container: {
     height: '192px',
     width: '100%',
+    display: 'flex',
+    alignItems: 'flex-end',
   }
 }
 
@@ -18,12 +20,22 @@ type Props = {
 type State = {};
 
 class TrackContent extends React.Component<Props, State> {
+  node: Object;
+
+  constructor() {
+    super();
+    this.node = React.createRef();
+  }
+
   render() {
     const { classes } = this.props
 
     return (
-      <div className={classes.container}>
-        <Timeline />
+      <div
+        className={classes.container}
+        ref={this.node}
+      >
+        <Timeline containerNode={this.node} />
       </div>
     );
   }
