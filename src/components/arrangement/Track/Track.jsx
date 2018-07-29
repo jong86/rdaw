@@ -3,7 +3,7 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import { connect } from 'react-redux';
 import TrackOptions from './TrackOptions.jsx';
-import TrackContent from './TrackContent.jsx';
+import TrackContent from './TrackContent/TrackContent.jsx';
 
 const TRACK_OPTIONS_WIDTH = 128;
 

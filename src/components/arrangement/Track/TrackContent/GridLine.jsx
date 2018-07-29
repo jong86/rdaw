@@ -3,17 +3,18 @@ import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import { Line } from "react-konva";
 
-type coordinates = {
+type props = {
   x1: number,
   y1: number,
   x2: number,
   y2: number,
+  color: string,
 }
 
-const GridLine = ({ x1, y1, x2, y2 }: coordinates) => (
+const GridLine = ({ x1, y1, x2, y2, color }: props) => (
   <Line
     points={[x1, y1, x2, y2]}
-    stroke="grey"
+    stroke={color}
   />
 );
 

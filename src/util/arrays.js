@@ -1,6 +1,6 @@
 // @flow
 
-export function countFrom(a: number, b: number): Array<number> {
+export function arrayFrom(a: number, b: number): Array<number> {
   const array = [];
 
   for (let i = a; i < b; i++) {

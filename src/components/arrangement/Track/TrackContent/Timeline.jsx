@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 import Konva from "konva";
 import { Stage, Layer, Image, Rect } from "react-konva";
 import GridLine from './GridLine.jsx';
-import { countFrom } from '../../../../util/arrays';
+import { arrayFrom } from '../../../../util/arrays';
 
 const styles: Object = {
   container: {
@@ -24,9 +24,9 @@ type State = {};
 class Timeline extends React.Component<Props, State> {
   render() {
     const { classes, dimensions } = this.props
-    const widthUnits = countFrom(0, dimensions.width);
+    const widthUnits = arrayFrom(0, dimensions.width);
 
-    const gridLines = widthUnits.map((unit: number, index: number): ?Object => {
+    const gridLinesVert = widthUnits.map((unit: number, index: number): ?Object => {
       if (index % 10 === 0) {
         return (
           <GridLine
@@ -35,6 +35,7 @@ class Timeline extends React.Component<Props, State> {
             y1={0}
             x2={index}
             y2={dimensions.height}
+            color="grey"
           />
         )
       }
@@ -46,7 +47,7 @@ class Timeline extends React.Component<Props, State> {
         height={dimensions.height}
       >
         <Layer>
-          {gridLines}
+          {gridLinesVert}
         </Layer>
       </Stage>
     );

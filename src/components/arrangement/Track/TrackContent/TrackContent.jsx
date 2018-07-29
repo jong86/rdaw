@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import Measure from 'react-measure'
 import injectSheet from 'react-jss';
-import type { rectDimensions } from '../../../defs/defs.js.flow';
+import type { rectDimensions } from '../../../../defs/defs.js.flow';
 
-import Timeline from './Timeline/Timeline.jsx';
+import Timeline from './Timeline.jsx';
 
 const styles: Object = {
   container: {
