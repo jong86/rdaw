@@ -16,7 +16,7 @@ export type tracks = {
 }
 
 export type appState = {
-  gui: {
+  global: {
     view: {
       zoom: number,
       left: number,
@@ -35,7 +35,7 @@ export type appState = {
     },
   },
 
-  global: {
+  project: {
     title: string,
     tempo: number,
     timeSignature: {

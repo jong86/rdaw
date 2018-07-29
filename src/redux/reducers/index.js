@@ -3,11 +3,11 @@ import { combineReducers } from 'redux'
 import initialState from '../initialState';
 
 import tracks from './tracks';
-import gui from './gui';
+import global from './global';
 
 const appReducer = combineReducers({
   tracks,
-  gui,
+  global,
 })
 
 export default (state: Object, action: Object): Object => {

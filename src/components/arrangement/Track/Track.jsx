@@ -5,13 +5,11 @@ import { connect } from 'react-redux';
 import TrackOptions from './TrackOptions.jsx';
 import TrackContent from './TrackContent/TrackContent.jsx';
 
-const TRACK_OPTIONS_WIDTH = 128;
-
 const styles: Object = {
   container: {
     backgroundColor: '#95a5a6',
-    width: `calc(100% - ${TRACK_OPTIONS_WIDTH}px)`,
-    paddingLeft: TRACK_OPTIONS_WIDTH + 1,
+    width: props => `calc(100% - ${props.track.gui.optionsWidth}px)`,
+    paddingLeft: props => props.track.gui.optionsWidth + 1,
     position: 'relative',
     margin: 2,
   },
@@ -32,7 +30,10 @@ class Track extends React.Component<Props, State> {
 
     return (
       <div className={classes.container}>
-        <TrackOptions width={TRACK_OPTIONS_WIDTH} />
+        <TrackOptions
+          width={track.gui.optionsWidth}
+          name={track.name}
+        />
         <TrackContent
           type={track.type}
           instrument={track.instrument}
@@ -42,9 +43,11 @@ class Track extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = state => ({
-  gui: state.gui,
-})
+const mapStateToProps = state => {
+  return {
+    global: state.global,
+  }
+}
 
 
 Track = connect(mapStateToProps)(Track);

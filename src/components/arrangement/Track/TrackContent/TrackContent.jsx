@@ -41,19 +41,26 @@ class TrackContent extends React.Component<Props, State> {
             height: contentRect.bounds.height,
           }
 
-          return (
-            <div
-              className={classes.container}
-              ref={measureRef}
-            >
-              {type === 'MIDI' &&
-                <div>
-                  <NoteRows dimensions={dimensions} />
-                  <Timeline dimensions={dimensions} />
-                </div>
-              }
-            </div>
-          )
+          if (type === 'MIDI') {
+            return (
+              <div
+                className={classes.container}
+                ref={measureRef}
+              >
+                <NoteRows dimensions={dimensions} />
+                <Timeline dimensions={dimensions} />
+              </div>
+            )
+          } else {
+            return (
+              <div
+                className={classes.container}
+                ref={measureRef}
+              >
+                This is an audio track
+              </div>
+            )
+          }
         }}
       </Measure>
     );

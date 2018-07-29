@@ -1,7 +1,7 @@
 // @flow
 import initialState from '../initialState';
 
-export default (state: Object = initialState.gui, action: Object): Object => {
+export default (state: Object = initialState.global, action: Object): Object => {
   switch (action.type) {
     case 'DO_SOMETHING':
       return {

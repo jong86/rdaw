@@ -2,7 +2,7 @@
 import type { appState } from '../defs/defs.js.flow';
 
 const initialState: appState = {
-  gui: {
+  global: {
     view: {
       zoom: 1.0,
       left: 0.0,
@@ -21,7 +21,7 @@ const initialState: appState = {
     }
   },
 
-  global: {
+  project: {
     title: '',
     tempo: 140,
     timeSignature: {
@@ -34,10 +34,15 @@ const initialState: appState = {
   tracks: {
     list: [{
       id: 0,
+      name: 'Drums',
       type: 'MIDI',
       instrument: 'DRUMS',
       isArmed: true,
       timeline: [],
+      gui: {
+        height: 100,
+        optionsWidth: 128,
+      }
     }]
   },
 }
