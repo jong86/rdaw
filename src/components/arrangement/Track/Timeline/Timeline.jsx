@@ -15,13 +15,21 @@ const styles: Object = {
 
 type Props = {
   classes: Object,
+  parentNode: Object,
 };
 
 type State = {};
 
 class Timeline extends React.Component<Props, State> {
   render() {
-    const { classes } = this.props
+    const { classes, parentNode } = this.props
+
+    const dimensions = {
+      height: parentNode.offsetHeight,
+      // right: parentNode.current.clientWidth,
+    }
+
+    console.log('dimensions', dimensions);
 
     return (
       <Stage

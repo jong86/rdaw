@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import Measure from 'react-measure'
 import injectSheet from 'react-jss';
 
 import Timeline from './Timeline/Timeline.jsx';
@@ -20,23 +21,28 @@ type Props = {
 type State = {};
 
 class TrackContent extends React.Component<Props, State> {
-  node: Object;
-
-  constructor() {
-    super();
-    this.node = React.createRef();
-  }
+  node: Object = React.createRef();
 
   render() {
     const { classes } = this.props
 
     return (
-      <div
-        className={classes.container}
-        ref={this.node}
+      <Measure
+        bounds  
       >
-        <Timeline containerNode={this.node} />
-      </div>
+        {({ measureRef, contentRect }) => {
+          console.log('contentRect', contentRect);
+
+          return (
+            <div
+              className={classes.container}
+              ref={measureRef}
+            >
+              <Timeline parentNode={this.node} />
+            </div>
+          )
+        }}
+      </Measure>
     );
   }
 }
