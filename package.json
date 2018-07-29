@@ -41,6 +41,8 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "konva": "^2.1.7",
+    "react-konva": "^1.7.12",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-persist": "^5.10.0"
