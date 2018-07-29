@@ -18,7 +18,12 @@ type Props = {
   classes: Object,
 };
 
-type State = {};
+type State = {
+  dimensions: {
+    width: number,
+    height: number,
+  }
+};
 
 class TrackContent extends React.Component<Props, State> {
   node: Object = React.createRef();
@@ -28,17 +33,22 @@ class TrackContent extends React.Component<Props, State> {
 
     return (
       <Measure
-        bounds  
+        bounds
       >
         {({ measureRef, contentRect }) => {
           console.log('contentRect', contentRect);
+
+          const dimensions: Object = {
+            width: contentRect.bounds.width,
+            height: contentRect.bounds.height,
+          }
 
           return (
             <div
               className={classes.container}
               ref={measureRef}
             >
-              <Timeline parentNode={this.node} />
+              <Timeline dimensions={dimensions} />
             </div>
           )
         }}
