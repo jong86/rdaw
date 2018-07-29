@@ -11,7 +11,10 @@ type coordinates = {
 }
 
 const GridLine = ({ x1, y1, x2, y2 }: coordinates) => (
-  <Line points={[x1, y1, x2, y2]} stroke="black" />
+  <Line
+    points={[x1, y1, x2, y2]}
+    stroke="grey"
+  />
 );
 
 export default GridLine;
