@@ -1,4 +1,9 @@
 // @flow
+export type rectDimensions = {
+  width: number,
+  height: number,
+}
+
 export type track = {
   id: number,
   type: string,

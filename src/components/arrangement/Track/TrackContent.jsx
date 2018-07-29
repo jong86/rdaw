@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Measure from 'react-measure'
 import injectSheet from 'react-jss';
+import type { rectDimensions } from '../../../defs/defs.js.flow';
 
 import Timeline from './Timeline/Timeline.jsx';
 
@@ -18,12 +19,7 @@ type Props = {
   classes: Object,
 };
 
-type State = {
-  dimensions: {
-    width: number,
-    height: number,
-  }
-};
+type State = {};
 
 class TrackContent extends React.Component<Props, State> {
   node: Object = React.createRef();
@@ -36,9 +32,7 @@ class TrackContent extends React.Component<Props, State> {
         bounds
       >
         {({ measureRef, contentRect }) => {
-          console.log('contentRect', contentRect);
-
-          const dimensions: Object = {
+          const dimensions: rectDimensions = {
             width: contentRect.bounds.width,
             height: contentRect.bounds.height,
           }

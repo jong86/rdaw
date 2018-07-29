@@ -1,5 +1,5 @@
 // @flow
-import type { appState } from '../definitions/state.js.flow';
+import type { appState } from '../defs/defs.js.flow';
 
 const initialState: appState = {
   gui: {

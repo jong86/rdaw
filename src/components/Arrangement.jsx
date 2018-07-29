@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const state = store.getState();
 
 import Track from './arrangement/Track/Track.jsx';
-import type { tracks } from '../definitions/state.js.flow';
+import type { tracks } from '../defs/defs.js.flow';
 
 const styles: Object = {
   container: {
