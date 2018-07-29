@@ -33,7 +33,10 @@ class Track extends React.Component<Props, State> {
     return (
       <div className={classes.container}>
         <TrackOptions width={TRACK_OPTIONS_WIDTH} />
-        <TrackContent />
+        <TrackContent
+          type={track.type}
+          instrument={track.instrument}
+        />
       </div>
     );
   }

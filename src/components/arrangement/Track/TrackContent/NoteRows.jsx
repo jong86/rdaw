@@ -23,21 +23,21 @@ type Props = {
 
 type State = {};
 
-class Timeline extends React.Component<Props, State> {
+class NoteRows extends React.Component<Props, State> {
   render() {
     const { classes, dimensions } = this.props
-    const widthUnits = arrayFrom(0, dimensions.width);
+    const heightUnits = arrayFrom(0, dimensions.height);
 
-    const verticalGridLines = widthUnits.map((unit: number, index: number): ?Object => {
-      if (index % 32 === 0) {
+    const horizontalGridLines = heightUnits.map((unit: number, index: number): ?Object => {
+      if (index % (dimensions.height / 16) === 0) {
         return (
           <GridLine
             key={index}
-            x1={index}
-            y1={0}
-            x2={index}
-            y2={dimensions.height}
-            color="grey"
+            x1={0}
+            y1={index}
+            x2={dimensions.width}
+            y2={index}
+            color="silver"
           />
         )
       }
@@ -45,16 +45,17 @@ class Timeline extends React.Component<Props, State> {
 
     return (
       <Stage
+        className={classes.container}
         width={dimensions.width}
         height={dimensions.height}
       >
         <Layer>
-          {verticalGridLines}
+          {horizontalGridLines}
         </Layer>
       </Stage>
     );
   }
 }
 
-Timeline = injectSheet(styles)(Timeline);
-export default Timeline;
+NoteRows = injectSheet(styles)(NoteRows);
+export default NoteRows;

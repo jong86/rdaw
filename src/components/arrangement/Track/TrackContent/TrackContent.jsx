@@ -5,6 +5,7 @@ import injectSheet from 'react-jss';
 import type { rectDimensions } from '../../../../defs/defs.js.flow';
 
 import Timeline from './Timeline.jsx';
+import NoteRows from './NoteRows.jsx';
 
 const styles: Object = {
   container: {
@@ -12,11 +13,14 @@ const styles: Object = {
     width: '100%',
     display: 'flex',
     alignItems: 'flex-end',
+    position: 'relative',
   }
 }
 
 type Props = {
   classes: Object,
+  type: string,
+  instrument: string,
 };
 
 type State = {};
@@ -25,7 +29,7 @@ class TrackContent extends React.Component<Props, State> {
   node: Object = React.createRef();
 
   render() {
-    const { classes } = this.props
+    const { classes, type, instrument } = this.props
 
     return (
       <Measure
@@ -42,7 +46,12 @@ class TrackContent extends React.Component<Props, State> {
               className={classes.container}
               ref={measureRef}
             >
-              <Timeline dimensions={dimensions} />
+              {type === 'MIDI' &&
+                <div>
+                  <NoteRows dimensions={dimensions} />
+                  <Timeline dimensions={dimensions} />
+                </div>
+              }
             </div>
           )
         }}
