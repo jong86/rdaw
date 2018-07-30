@@ -1,14 +1,12 @@
 // @flow
 import initialState from '../initialState';
 import type { note } from '../../defs/defs.js.flow';
-import { insertNoteFramesToTimeline, TimelineModifier } from './reducerUtils/tracksUtil';
+import NoteMaker from './reducerUtils/NoteMaker';
 
 export default (state: Object = initialState.tracks, action: Object): Object => {
   switch (action.type) {
     case 'CREATE_NOTE':
       let { trackIndex, duration, startsAt, midiNum }: note = action.options;
-
-      console.log('trackIndex, duration, startsAt', trackIndex, duration, startsAt);
 
       const noteOptions = {
         duration,
@@ -16,14 +14,12 @@ export default (state: Object = initialState.tracks, action: Object): Object => 
         midiNum,
       }
 
-      const timelineModifier = new TimelineModifier(
+      const noteMaker = new NoteMaker(
         state.list[trackIndex].timeline,
         noteOptions
       );
 
-      console.log('newTimeline', newTimeline);
-
-
+      console.log('timelineModifier.getNewTimeline();', noteMaker.getNewTimeline());
 
       return {
         ...state,
