@@ -6,26 +6,21 @@ import NoteMaker from './reducerUtils/NoteMaker';
 export default (state: Object = initialState.tracks, action: Object): Object => {
   switch (action.type) {
     case 'CREATE_NOTE':
-      let { trackIndex, duration, startsAt, midiNum }: note = action.options;
-
-      const noteOptions = {
-        duration,
-        startsAt,
-        midiNum,
-      }
+      let { trackIndex }: note = action.options;
 
       const noteMaker = new NoteMaker(
         state.list[trackIndex].timeline,
-        noteOptions
+        action.options,
       );
 
-      console.log('timelineModifier.getNewTimeline();', noteMaker.getNewTimeline());
+      state.list[trackIndex] = {
+        ...state.list[trackIndex],
+        timeline: noteMaker.getNewTimeline(),
+      };
 
-      return {
-        ...state,
-      }
+      return state;
 
     default:
-      return state
+      return state;
   }
 }
