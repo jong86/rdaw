@@ -6,6 +6,10 @@ const initialState: appState = {
     view: {
       zoom: 1.0,
       left: 0.0,
+      grid: {
+        numerator: 1, // max 8
+        denominator: 4, // max 1024
+      },
     },
     theme: {
       borderRadius: 4,
@@ -38,11 +42,21 @@ const initialState: appState = {
       type: 'MIDI',
       instrument: 'DRUMS',
       isArmed: true,
-      timeline: [],
+      timeline: [
+        [
+          {
+            note: 24, // C1
+          },
+        ],
+        // ... 1024 arrays of note objects per bar
+      ],
       gui: {
         height: 100,
-        sequencerHeight: null,
         optionsWidth: 128,
+        sequencer: {
+          hSpacing: 32,
+          vSpacing: 0,
+        }
       }
     }]
   },

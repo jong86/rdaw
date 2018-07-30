@@ -22,6 +22,7 @@ type Props = {
   classes: Object,
   type: string,
   instrument: string,
+  timeline: Array<Array<Object>>,
 };
 
 type State = {};
@@ -30,7 +31,7 @@ class TrackContent extends React.Component<Props, State> {
   node: Object = React.createRef();
 
   render() {
-    const { classes, type, instrument } = this.props
+    const { classes, type, instrument, timeline } = this.props
 
     return (
       <Measure
@@ -44,7 +45,7 @@ class TrackContent extends React.Component<Props, State> {
               className={classes.container}
               ref={measureRef}
             >
-              {instrument === "DRUMS" && <Sequencer containerWidth={width} containerHeight={height} />}
+              {instrument === "DRUMS" && <Sequencer containerWidth={width} containerHeight={height} timeline={timeline} />}
             </div>
           )
         }}

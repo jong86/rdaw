@@ -37,6 +37,7 @@ class Track extends React.Component<Props, State> {
         <TrackContent
           type={track.type}
           instrument={track.instrument}
+          timeline={track.timeline}
         />
       </div>
     );

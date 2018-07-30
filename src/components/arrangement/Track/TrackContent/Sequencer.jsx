@@ -4,6 +4,7 @@ import injectSheet from 'react-jss';
 import Konva from "konva";
 import { Stage, Layer, Image, Rect } from "react-konva";
 import GridLines from './GridLines.jsx';
+import Notes from './Notes.jsx';
 import { arrayFrom } from '../../../../util/arrays';
 
 const styles: Object = {
@@ -20,13 +21,14 @@ type Props = {
   classes: Object,
   containerWidth: number,
   containerHeight: number,
+  timeline: Array<Array<Object>>,
 };
 
 type State = {};
 
 class Sequencer extends React.Component<Props, State> {
   render() {
-    const { classes, containerWidth, containerHeight } = this.props
+    const { classes, containerWidth, containerHeight, timeline } = this.props
 
     return (
       <Stage
@@ -47,6 +49,8 @@ class Sequencer extends React.Component<Props, State> {
           vSpacing={containerHeight / 16}
           vColor='#555'
         />
+
+        <Notes timeline={timeline} />
       </Stage>
     );
   }
