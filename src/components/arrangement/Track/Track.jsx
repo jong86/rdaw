@@ -8,10 +8,12 @@ import TrackContent from './TrackContent/TrackContent.jsx';
 const styles: Object = {
   container: {
     backgroundColor: '#95a5a6',
+    height: props => props.track.gui.height,
     width: props => `calc(100% - ${props.track.gui.optionsWidth}px)`,
     paddingLeft: props => props.track.gui.optionsWidth + 1,
     position: 'relative',
-    margin: 2,
+    margin: 8,
+    borderRadius: 16,
   },
 }
 

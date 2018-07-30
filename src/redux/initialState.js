@@ -22,7 +22,13 @@ const initialState: appState = {
     },
     TitleBar: {
       height: 22,
-    }
+    },
+    constants: {
+      numNotes: {
+        DRUMS: 16,
+        SYNTH: 127,
+      },
+    },
   },
 
   project: {
@@ -51,12 +57,8 @@ const initialState: appState = {
         // ... 1024 arrays of note objects per bar
       ],
       gui: {
-        height: 100,
+        height: 192,
         optionsWidth: 128,
-        sequencer: {
-          hSpacing: 32,
-          vSpacing: 0,
-        }
       }
     }]
   },

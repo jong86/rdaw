@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import Measure from 'react-measure'
 import injectSheet from 'react-jss';
 import type { rectDimensions } from '../../../../defs/defs.js.flow';
@@ -10,7 +10,7 @@ import Sequencer from './Sequencer.jsx';
 
 const styles: Object = {
   container: {
-    height: '192px',
+    height: '100%',
     width: '100%',
     display: 'flex',
     alignItems: 'flex-end',
@@ -45,7 +45,14 @@ class TrackContent extends React.Component<Props, State> {
               className={classes.container}
               ref={measureRef}
             >
-              {instrument === "DRUMS" && <Sequencer containerWidth={width} containerHeight={height} timeline={timeline} />}
+              {instrument === "DRUMS" &&
+                <Sequencer
+                  containerWidth={width}
+                  containerHeight={height}
+                  timeline={timeline}
+                  instrument={instrument}
+                />
+              }
             </div>
           )
         }}

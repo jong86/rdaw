@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import injectSheet from 'react-jss';
 import Konva from "konva";
 import { Layer, Line } from "react-konva";
@@ -45,33 +45,35 @@ type lineOptions = {
 function lines({ direction, start, end, length, spacing, color}: lineOptions): Array<Object> {
   const dimensionUnits = arrayFrom(start, end);
 
-  return dimensionUnits.map((unit: number, index: number): any => {
+  const array = [];
+
+  for (let i = start; i < end; i += spacing) {
     let x1, y1, x2, y2;
 
     if (direction === 'horizontal') {
       x1 = 0;
-      y1 = unit;
+      y1 = i;
       x2 = length;
-      y2 = unit;
+      y2 = i;
 
     } else if (direction === 'vertical') {
-      x1 = unit;
+      x1 = i;
       y1 = 0;
-      x2 = unit;
+      x2 = i;
       y2 = length;
     }
 
-    if (index % spacing === 0) {
-      return (
-        <Line
-          key={index}
-          points={[x1, y1, x2, y2]}
-          stroke={color}
-          strokeWidth={1}
-        />
-      )
-    }
-  })
+    array.push(
+      <Line
+        key={i}
+        points={[x1, y1, x2, y2]}
+        stroke={color}
+        strokeWidth={1}
+      />
+    )
+  }
+
+  return array;
 }
 
 class GridLines extends React.Component<Props, State> {
