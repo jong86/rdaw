@@ -1,19 +1,8 @@
 // @flow
 import React from 'react';
-import injectSheet from 'react-jss';
 import Konva from "konva";
 import { Layer, Line } from "react-konva";
 import { arrayFrom } from '../../../../util/arrays';
-
-const styles: Object = {
-  container: {
-    height: '100%',
-    width: '100%',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-  }
-}
 
 type Props = {
   classes: Object,
@@ -77,7 +66,6 @@ function lines({ direction, start, end, length, spacing, color}: lineOptions): A
 class GridLines extends React.Component<Props, State> {
   render() {
     const {
-      classes,
       horizontal,
       vertical,
       hStart,
@@ -125,5 +113,4 @@ class GridLines extends React.Component<Props, State> {
   }
 }
 
-GridLines = injectSheet(styles)(GridLines);
 export default GridLines;
