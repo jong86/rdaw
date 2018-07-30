@@ -43,12 +43,10 @@ type lineOptions = {
 }
 
 function lines({ direction, start, end, length, spacing, color}: lineOptions): Array<Object> {
-  const dimensionUnits = arrayFrom(start, end);
-
   const array = [];
+  let i, x1, y1, x2, y2;
 
-  for (let i = start; i < end; i += spacing) {
-    let x1, y1, x2, y2;
+  for (i = start; i < end; i += spacing) {
 
     if (direction === 'horizontal') {
       x1 = 0;
