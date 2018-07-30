@@ -1,21 +1,21 @@
 // @flow
 import initialState from '../initialState';
 import type { note } from '../../defs/defs.js.flow';
+import { createNoteFrameArray } from './reducerUtils/tracksUtil';
 
 export default (state: Object = initialState.tracks, action: Object): Object => {
   switch (action.type) {
     case 'CREATE_NOTE':
-      // let { trackIndex, duration, startsAt }: note = action;
+      let { trackIndex, duration, startsAt, midiNum }: note = action.options;
 
-  console.log('action.options', action.options);
-
-      // 1. Get index of track from tracks.list
+      console.log('trackIndex, duration, startsAt', trackIndex, duration, startsAt);
 
 
-      // 2. Create array of note objects to insert (One Initiator, many Continuations)
+      // 1. Create array of note objects to insert (One Initiator, many Continuations)
+      const noteFrameArray = createNoteFrameArray(24, 4096);
+      console.log('noteFrameArray', noteFrameArray);
 
-
-      // 3. Insert these note objects in subsequent positions in the timeline array
+      // 2. Insert these note objects in subsequent positions in the timeline array
 
 
 

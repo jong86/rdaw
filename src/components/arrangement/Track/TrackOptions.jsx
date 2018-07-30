@@ -47,6 +47,7 @@ class TrackOptions extends React.Component<Props, State> {
             this.props.createNote({
               trackIndex: 0,
               duration: 16,
+              startsAt: 0,
             })
           }}
         >
