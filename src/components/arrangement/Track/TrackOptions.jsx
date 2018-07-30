@@ -6,11 +6,12 @@ import Text from '../../generic/Text.jsx';
 
 const styles: Object =  {
   container: {
-    // backgroundColor: 'silver',
     height: '100%',
     width: props => props.width,
     position: 'absolute',
     left: 0,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   }
 }
 
@@ -27,7 +28,11 @@ class TrackOptions extends React.Component<Props, State> {
 
     return (
       <div className={classes.container}>
-        <Text>
+        <Text
+          style={{
+            margin: 16,
+          }}
+        >
           {name}
         </Text>
       </div>

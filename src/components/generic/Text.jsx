@@ -4,13 +4,13 @@ import injectSheet from 'react-jss';
 
 const styles = {
   container: {
-    color: 'brown',
+    color: 'black',
   }
 }
 
-let Text = ({ children, classes }) => {
+let Text = ({ children, classes, style }) => {
   return (
-    <div className={classes.container}>
+    <div className={classes.container} style={style}>
       {children}
     </div>
   )

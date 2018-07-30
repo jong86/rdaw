@@ -5,7 +5,6 @@ import { Layer, Line } from "react-konva";
 import { arrayFrom } from '../../../../util/arrays';
 
 type Props = {
-  classes: Object,
   horizontal: boolean,
   vertical: boolean,
   hStart: number,
@@ -16,8 +15,8 @@ type Props = {
   vLength: number,
   hSpacing: number,
   vSpacing: number,
-  hColor: 'string',
-  vColor: 'string',
+  hColor: string,
+  vColor: string,
 };
 
 type State = {};
