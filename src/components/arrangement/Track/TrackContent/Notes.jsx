@@ -5,25 +5,27 @@ import { Layer, Rect } from "react-konva";
 
 type Props = {
   timeline: Array<Array<Object>>,
-  noteHeight: number,
-  noteWidth: number,
+  gridVSpacing: number,
+  gridHSpacing: number,
 };
 
 type State = {};
 
 class Notes extends React.Component<Props, State> {
   render() {
-    const { timeline, noteHeight, noteWidth } = this.props
+    const { timeline, gridHSpacing, gridVSpacing } = this.props
 
     return (
       <Layer>
         <Rect
-          height={noteHeight}
-          width={noteWidth}
-          x={0}
+          height={gridVSpacing - 1}
+          width={(gridHSpacing * 1) - 1}
+          x={1}
           y={0}
-          fill="red"
-          opacity={0.5}
+          fill="#a00"
+          stroke="#333"
+          strokeWidth={0}
+          opacity={1}
         />
       </Layer>
     );

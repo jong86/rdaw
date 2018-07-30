@@ -27,8 +27,8 @@ class Sequencer extends React.Component<Props, State> {
       numNotes,
     } = this.props;
 
-    const noteWidth = 32;
-    const noteHeight = containerHeight / numNotes[instrument];
+    const hSpacing = 32;
+    const vSpacing = (containerHeight / numNotes[instrument]);
 
     return (
       <Stage
@@ -40,20 +40,20 @@ class Sequencer extends React.Component<Props, State> {
           hStart={0}
           hEnd={containerHeight}
           hLength={containerWidth}
-          hSpacing={noteWidth}
+          hSpacing={hSpacing}
           hColor='#666'
           vertical
           vStart={0}
           vEnd={containerWidth}
           vLength={containerHeight}
-          vSpacing={noteHeight}
+          vSpacing={vSpacing}
           vColor='#555'
         />
 
         <Notes
           timeline={timeline}
-          noteWidth={noteWidth}
-          noteHeight={noteHeight}
+          gridHSpacing={hSpacing}
+          gridVSpacing={vSpacing}
         />
       </Stage>
     );
