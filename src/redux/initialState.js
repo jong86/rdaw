@@ -49,12 +49,23 @@ const initialState: appState = {
       instrument: 'DRUMS',
       isArmed: true,
       timeline: [
-        [
-          {
-            note: 24, // C1
-          },
-        ],
-        // ... 1024 arrays of note objects per bar
+        // [
+        //   {
+        //     id: '23asdasd89a',
+        //     midiNum: 24, // C1
+        //     type: 'INITIATOR',
+        //     duration: 4096, // 1 bar,
+        //   },
+        // ],
+        // [
+        //   {
+        //     id: '98sdajbkdas',
+        //     midiNum: 24, // C1
+        //     type: 'CONTINUATION',
+        //     initiatorId: '23asdasd89a'
+        //   },
+        // ],
+        // ... 4096 arrays of note objects per bar
       ],
       gui: {
         height: 192,

@@ -1,8 +1,10 @@
 // @flow
 import React from 'react';
 import injectSheet from 'react-jss';
+import { connect } from 'react-redux';
 
 import Text from '../../generic/Text.jsx';
+import { bindActionCreators } from '../../../../node_modules/redux';
 
 const styles: Object =  {
   container: {
@@ -18,13 +20,15 @@ const styles: Object =  {
 type Props = {
   classes: Object,
   name: string,
+  trackIndex: number,
+  createNote: Function,
 };
 
 type State = {};
 
 class TrackOptions extends React.Component<Props, State> {
   render() {
-    const { classes, name } = this.props
+    const { classes, name, trackIndex } = this.props
 
     return (
       <div className={classes.container}>
@@ -35,10 +39,31 @@ class TrackOptions extends React.Component<Props, State> {
         >
           {name}
         </Text>
+        <div
+          style={{
+            border: '1px solid grey'
+          }}
+          onClick={() => {
+            this.props.createNote({
+              trackIndex: 0,
+              duration: 16,
+            })
+          }}
+        >
+          test make note
+        </div>
       </div>
     );
   }
 }
 
-TrackOptions = injectSheet(styles)(TrackOptions)
+const mapDispatchToProps = dispatch => ({
+  createNote: options => dispatch({
+    type: 'CREATE_NOTE',
+    options,
+  })
+})
+
+TrackOptions = connect(null, mapDispatchToProps)(TrackOptions);
+TrackOptions = injectSheet(styles)(TrackOptions);
 export default TrackOptions;

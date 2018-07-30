@@ -103,7 +103,13 @@ const project =
 }
 
 
-/* 2nd iteration of this idea */
+
+/*
+[2nd iteration of this idea]
+=> 4096 vertical 'grid segments' per bar.
+=> that gives 256 bidirectional degrees of swing per 1/16th notes
+*/
+
 const project2 =
 {
   clips:

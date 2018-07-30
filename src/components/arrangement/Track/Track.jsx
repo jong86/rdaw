@@ -21,6 +21,7 @@ type Props = {
   classes: Object,
   children: Object,
   track: Object,
+  trackIndex: number,
 };
 
 type State = {};
@@ -28,13 +29,14 @@ type State = {};
 
 class Track extends React.Component<Props, State> {
   render() {
-    const { classes, track } = this.props;
+    const { classes, trackIndex, track } = this.props;
 
     return (
       <div className={classes.container}>
         <TrackOptions
           width={track.gui.optionsWidth}
           name={track.name}
+          trackIndex={trackIndex}
         />
         <TrackContent
           type={track.type}

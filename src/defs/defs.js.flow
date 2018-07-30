@@ -1,20 +1,4 @@
 // @flow
-export type rectDimensions = {
-  width: number,
-  height: number,
-}
-
-export type track = {
-  id: number,
-  type: string,
-  instrument: string,
-  isArmed: boolean,
-}
-
-export type tracks = {
-  list: Array<track>,
-}
-
 export type appState = {
   global: {
     view: {
@@ -47,3 +31,26 @@ export type appState = {
 
   tracks: tracks,
 }
+
+export type note = {
+  trackIndex: number,
+  duration: number,
+  startsAt: number,
+}
+
+export type rectDimensions = {
+  width: number,
+  height: number,
+}
+
+export type track = {
+  id: number,
+  type: string,
+  instrument: string,
+  isArmed: boolean,
+}
+
+export type tracks = {
+  list: Array<track>,
+}
+
