@@ -36,6 +36,7 @@ export type note = {
   trackIndex: number,
   duration: number,
   startsAt: number,
+  midiNum: number,
 }
 
 export type rectDimensions = {

@@ -1,24 +1,46 @@
-const uuid = require('uuid4');
+var shortid = require('shortid');
 
-export function createNoteFrame(type, midiNum, initiatorId) {
-  return {
-    id: uuid(),
+function createNoteFrame(type, midiNum, initiatorId) {
+  const noteFrame = {
     midiNum,
     type,
-    initiatorId: type === 'INITIATOR' ? null : initiatorId,
+  }
+
+  if (type === 'INITIATOR'){
+    noteFrame.id = shortid.generate()
+  } else {
+    noteFrame.initiatorId = type === 'INITIATOR' ? null : initiatorId
+  }
+
+  return noteFrame;
+}
+
+function createNoteFrameArrayAtFrameIfNone(timeline, frame) {
+  // Ensures the note-frame array exists at that frame
+  if (!Array.isArray(timeline[frame])) {
+    timeline[frame] = [];
   }
 }
 
-export function createNoteFrameArray(midiNum, duration) {
-  const noteFrameArray = [];
+export function insertNoteFramesToTimeline(timeline, noteOptions) {
+  const {
+    duration,
+    startsAt,
+    midiNum,
+  } = noteOptions;
 
+  createNoteFrameArrayAtFrameIfNone(timeline, startsAt);
   const initiator = createNoteFrame('INITIATOR', midiNum);
+  timeline[startsAt].push(initiator);
 
-  noteFrameArray.push(initiator);
-
-  for (let i = 1; i < duration; i++) {
-    noteFrameArray.push(createNoteFrame('CONTINUATION', midiNum, initiator.id));
+  for (let i = startsAt + 1; i < duration; i++) {
+    createNoteFrameArrayAtFrameIfNone(timeline, i);
+    const noteFrame = createNoteFrame('CONTINUATION', midiNum, initiator.id);
+    timeline[i].push(noteFrame);
   }
 
-  return noteFrameArray;
+  // Need a STOPPER note ?
+
+  // return noteFrameArray;
+  return timeline;
 }

@@ -46,8 +46,9 @@ class TrackOptions extends React.Component<Props, State> {
           onClick={() => {
             this.props.createNote({
               trackIndex: 0,
-              duration: 16,
+              duration: 4096,
               startsAt: 0,
+              midiNum: 24,
             })
           }}
         >
