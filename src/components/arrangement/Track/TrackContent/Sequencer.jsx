@@ -38,6 +38,8 @@ class Sequencer extends React.Component<Props, State> {
         <BarBackdrops
           containerHeight={containerHeight}
           containerWidth={containerWidth}
+          gridHSpacing={hSpacing}
+          gridVSpacing={vSpacing}
         />
 
         <GridLines
