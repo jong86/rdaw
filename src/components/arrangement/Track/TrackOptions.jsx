@@ -54,6 +54,21 @@ class TrackOptions extends React.Component<Props, State> {
         >
           test make note
         </div>
+        <div
+          style={{
+            border: '1px solid green'
+          }}
+          onClick={() => {
+            this.props.createNote({
+              trackIndex: 0,
+              duration: 4096,
+              startsAt: 2,
+              midiNum: 24,
+            })
+          }}
+        >
+          test make note 2
+        </div>
       </div>
     );
   }
