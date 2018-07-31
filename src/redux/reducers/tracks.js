@@ -8,7 +8,7 @@ export default (state: Object = initialState.tracks, action: Object): Object => 
     case 'CREATE_NOTE':
       let { trackIndex }: note = action.options;
 
-      const noteMaker = new NoteMaker(
+      const noteMaker: Object = new NoteMaker(
         state.list[trackIndex].timeline,
         action.options,
       );
