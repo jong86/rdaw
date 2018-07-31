@@ -2,10 +2,10 @@
 import React from 'react';
 import Konva from "konva";
 import { connect } from 'react-redux';
-import { Stage, Layer, Image, Rect } from "react-konva";
+import { Stage } from "react-konva";
 import GridLines from './GridLines.jsx';
 import Notes from './Notes.jsx';
-import { arrayFrom } from '../../../../util/arrays';
+import BarBackdrops from './BarBackdrops.jsx';
 
 type Props = {
   containerWidth: number,
@@ -35,6 +35,11 @@ class Sequencer extends React.Component<Props, State> {
         width={containerWidth}
         height={containerHeight}
       >
+        <BarBackdrops
+          containerHeight={containerHeight}
+          containerWidth={containerWidth}
+        />
+
         <GridLines
           horizontal
           hStart={0}

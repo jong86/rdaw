@@ -15,18 +15,22 @@ class Notes extends React.Component<Props, State> {
   render() {
     const { timeline, gridHSpacing, gridVSpacing } = this.props
 
+    const Note = () => (
+      <Rect
+        height={gridVSpacing - 1}
+        width={(gridHSpacing * 1) - 1}
+        x={1}
+        y={0}
+        fill="#a00"
+        stroke="#333"
+        strokeWidth={0}
+        opacity={1}
+      />
+    )
+
     return (
       <Layer>
-        <Rect
-          height={gridVSpacing - 1}
-          width={(gridHSpacing * 1) - 1}
-          x={1}
-          y={0}
-          fill="#a00"
-          stroke="#333"
-          strokeWidth={0}
-          opacity={1}
-        />
+        <Note />
       </Layer>
     );
   }

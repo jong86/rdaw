@@ -13,7 +13,7 @@ const styles: Object = {
     paddingLeft: props => props.track.gui.optionsWidth + 1,
     position: 'relative',
     margin: 8,
-    borderRadius: 16,
+    borderRadius: props => props.global.theme.borderRadius,
   },
 }
 
@@ -22,6 +22,7 @@ type Props = {
   children: Object,
   track: Object,
   trackIndex: number,
+  global: Object,
 };
 
 type State = {};
@@ -29,7 +30,7 @@ type State = {};
 
 class Track extends React.Component<Props, State> {
   render() {
-    const { classes, trackIndex, track } = this.props;
+    const { classes, trackIndex, track, global } = this.props;
 
     return (
       <div className={classes.container}>
@@ -55,6 +56,6 @@ const mapStateToProps = state => {
 }
 
 
-Track = connect(mapStateToProps)(Track);
 Track = injectSheet(styles)(Track);
+Track = connect(mapStateToProps)(Track);
 export default Track;
