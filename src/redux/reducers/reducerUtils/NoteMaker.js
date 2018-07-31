@@ -31,7 +31,8 @@ class NoteMaker {
   }
 
   deleteNoteFrameIfSameExistsAtFrame(frame) {
-    // if (timeline[frame].)
+    // Deletes same notes if overwritten (only one note of midiNum and position allowed)
+
   }
 
   createNoteFrameArrayAtFrameIfNone(frame) {
