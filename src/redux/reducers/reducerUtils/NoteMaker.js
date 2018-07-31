@@ -1,6 +1,15 @@
 var shortid = require('shortid');
 
 class NoteMaker {
+  /*
+    Definitions:
+    'noteFrames' are the smallest elements
+    'frames' have multiple 'noteFrames'
+    'timeline' has multiple 'frames'
+    => A collection of connected noteFrames across multiple subsequent frames,
+    are what make up notes
+  */
+
   constructor(timeline, noteOptions) {
     this.timeline = timeline;
     this.noteOptions = noteOptions;
