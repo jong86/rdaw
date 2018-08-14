@@ -68,7 +68,7 @@ class Sequencer extends React.Component<Props, State> {
 }
 
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
     numNotes: state.global.constants.numNotes,
   }

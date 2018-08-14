@@ -4,6 +4,8 @@ import injectSheet from 'react-jss';
 import { connect } from 'react-redux';
 import TrackOptions from './TrackOptions.jsx';
 import TrackContent from './TrackContent/TrackContent.jsx';
+const TrackContext = React.createContext();
+
 
 const styles: Object = {
   container: {
@@ -33,18 +35,20 @@ class Track extends React.Component<Props, State> {
     const { classes, trackIndex, track, global } = this.props;
 
     return (
-      <div className={classes.container}>
-        <TrackOptions
-          width={track.gui.optionsWidth}
-          name={track.name}
-          trackIndex={trackIndex}
-        />
-        <TrackContent
-          type={track.type}
-          instrument={track.instrument}
-          timeline={track.timeline}
-        />
-      </div>
+      <TrackContext.Provider value={track}>
+        <div className={classes.container}>
+          <TrackOptions
+            width={track.gui.optionsWidth}
+            name={track.name}
+            trackIndex={trackIndex}
+          />
+          <TrackContent
+            type={track.type}
+            instrument={track.instrument}
+            timeline={track.timeline}
+          />
+        </div>
+      </TrackContext.Provider>
     );
   }
 }
