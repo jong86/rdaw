@@ -6,6 +6,7 @@ import { Stage } from "react-konva";
 import GridLines from './GridLines.jsx';
 import Notes from './Notes.jsx';
 import BarBackdrops from './BarBackdrops.jsx';
+import { TrackContext } from '../Track.jsx';
 
 type Props = {
   containerWidth: number,
@@ -31,38 +32,42 @@ class Sequencer extends React.Component<Props, State> {
     const vSpacing = (containerHeight / numNotes[instrument]);
 
     return (
-      <Stage
-        width={containerWidth}
-        height={containerHeight}
-      >
-        <BarBackdrops
-          containerHeight={containerHeight}
-          containerWidth={containerWidth}
-          gridHSpacing={hSpacing}
-          gridVSpacing={vSpacing}
-        />
+      <TrackContext.Consumer>
+        {track =>
+          <Stage
+            width={containerWidth}
+            height={containerHeight}
+          >
+            <BarBackdrops
+              containerHeight={containerHeight}
+              containerWidth={containerWidth}
+              gridHSpacing={hSpacing}
+              gridVSpacing={vSpacing}
+            />
 
-        <GridLines
-          horizontal
-          hStart={0}
-          hEnd={containerHeight}
-          hLength={containerWidth}
-          hSpacing={hSpacing}
-          hColor='#666'
-          vertical
-          vStart={0}
-          vEnd={containerWidth}
-          vLength={containerHeight}
-          vSpacing={vSpacing}
-          vColor='#555'
-        />
+            <GridLines
+              horizontal
+              hStart={0}
+              hEnd={containerHeight}
+              hLength={containerWidth}
+              hSpacing={hSpacing}
+              hColor='#666'
+              vertical
+              vStart={0}
+              vEnd={containerWidth}
+              vLength={containerHeight}
+              vSpacing={vSpacing}
+              vColor='#555'
+            />
 
-        <Notes
-          timeline={timeline}
-          gridHSpacing={hSpacing}
-          gridVSpacing={vSpacing}
-        />
-      </Stage>
+            <Notes
+              timeline={timeline}
+              gridHSpacing={hSpacing}
+              gridVSpacing={vSpacing}
+            />
+          </Stage>
+        }
+      </TrackContext.Consumer>
     );
   }
 }

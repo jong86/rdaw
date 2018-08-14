@@ -2,10 +2,8 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import { connect } from 'react-redux';
-
 import Text from '../../generic/Text.jsx';
 import { bindActionCreators } from '../../../../node_modules/redux';
-
 import { TrackContext } from './Track.jsx';
 
 const styles: Object =  {

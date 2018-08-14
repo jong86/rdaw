@@ -33,7 +33,6 @@ export type appState = {
 }
 
 export type note = {
-  trackIndex: number,
   duration: number,
   startsAt: number,
   midiNum: number,
