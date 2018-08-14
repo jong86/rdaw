@@ -1,4 +1,4 @@
-var shortid = require('shortid');
+const shortid = require('shortid');
 
 class NoteMaker {
   /*

@@ -41,20 +41,18 @@ const initialState: appState = {
     swing: 0.0,
   },
 
-  tracks: {
-    list: [{
-      id: 0,
-      name: 'Drums',
-      type: 'MIDI',
-      instrument: 'DRUMS',
-      isArmed: true,
-      timeline: [],
-      gui: {
-        height: 192,
-        optionsWidth: 128,
-      }
-    }]
-  },
+  tracks: [{
+    id: 0,
+    name: 'Drums',
+    type: 'MIDI',
+    instrument: 'DRUMS',
+    isArmed: true,
+    timeline: [],
+    gui: {
+      height: 192,
+      optionsWidth: 128,
+    }
+  }],
 }
 
 export default initialState;

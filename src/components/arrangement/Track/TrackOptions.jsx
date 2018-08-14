@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import Text from '../../generic/Text.jsx';
 import { bindActionCreators } from '../../../../node_modules/redux';
 
+import { TrackContext } from './Track.jsx';
+
 const styles: Object =  {
   container: {
     height: '100%',
@@ -20,7 +22,6 @@ const styles: Object =  {
 type Props = {
   classes: Object,
   name: string,
-  trackIndex: number,
   createNote: Function,
 };
 
@@ -28,48 +29,52 @@ type State = {};
 
 class TrackOptions extends React.Component<Props, State> {
   render() {
-    const { classes, name, trackIndex } = this.props
+    const { classes, name } = this.props
 
     return (
-      <div className={classes.container}>
-        <Text
-          style={{
-            margin: 16,
-          }}
-        >
-          {name}
-        </Text>
-        <div
-          style={{
-            border: '1px solid grey'
-          }}
-          onClick={() => {
-            this.props.createNote({
-              trackIndex: 0,
-              duration: 4096,
-              startsAt: 0,
-              midiNum: 24,
-            })
-          }}
-        >
-          test make note
-        </div>
-        <div
-          style={{
-            border: '1px solid green'
-          }}
-          onClick={() => {
-            this.props.createNote({
-              trackIndex: 0,
-              duration: 4096,
-              startsAt: 2,
-              midiNum: 24,
-            })
-          }}
-        >
-          test make note 2
-        </div>
-      </div>
+      <TrackContext.Consumer>
+        {track =>
+          <div className={classes.container}>
+            <Text
+              style={{
+                margin: 16,
+              }}
+            >
+              {name}
+            </Text>
+            <div
+              style={{
+                border: '1px solid grey'
+              }}
+              onClick={() => {
+                this.props.createNote({
+                  trackId: track.id,
+                  duration: 4096,
+                  startsAt: 0,
+                  midiNum: 24,
+                })
+              }}
+            >
+              test make note
+            </div>
+            <div
+              style={{
+                border: '1px solid green'
+              }}
+              onClick={() => {
+                this.props.createNote({
+                  trackId: track.id,
+                  duration: 4096,
+                  startsAt: 2,
+                  midiNum: 24,
+                })
+              }}
+            >
+              test make note 2
+            </div>
+          </div>
+        }
+      </TrackContext.Consumer>
     );
   }
 }

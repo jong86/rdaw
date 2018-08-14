@@ -34,7 +34,7 @@ class Arrangement extends React.Component<Props, State> {
   render() {
     const { classes, tracks } = this.props
 
-    const renderTracks = tracks.list.map((track, index) => {
+    const renderTracks = tracks.map((track, index) => {
       return <Track key={index} trackIndex={index} track={track} />
     })
 

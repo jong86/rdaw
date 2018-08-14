@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 import { connect } from 'react-redux';
 import TrackOptions from './TrackOptions.jsx';
 import TrackContent from './TrackContent/TrackContent.jsx';
-const TrackContext = React.createContext();
+export const TrackContext = React.createContext();
 
 
 const styles: Object = {
