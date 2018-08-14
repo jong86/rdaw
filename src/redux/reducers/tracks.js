@@ -6,11 +6,14 @@ import NoteMaker from './reducerUtils/NoteMaker';
 export default (state: Object = initialState.tracks, action: Object): Object => {
   switch (action.type) {
     case 'CREATE_NOTE': {
-      const { trackId } = action.options;
-      const trackIndex = state.findIndex(element => element.id === trackId)
+      const {
+        trackIndex,
+      } = action.options;
+
+      const timelineCopy = state[trackIndex].timeline.slice()
 
       const noteMaker: Object = new NoteMaker(
-        state[trackIndex].timeline,
+        timelineCopy,
         action.options,
       );
 

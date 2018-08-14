@@ -5,6 +5,7 @@ import injectSheet from 'react-jss';
 import type { rectDimensions } from '../../../../defs/defs.js.flow';
 import { TrackContext } from '../Track.jsx';
 import Sequencer from './Sequencer.jsx';
+import { connect } from 'react-redux';
 
 const styles: Object = {
   container: {
@@ -29,39 +30,41 @@ class TrackContent extends React.Component<Props, State> {
   node: Object = React.createRef();
 
   render() {
-    const { classes } = this.props
+    const { classes, instrument, trackIndex } = this.props
 
     return (
-      <TrackContext.Consumer>
-        {track =>
-          <Measure
-            bounds
-          >
-            {({ measureRef, contentRect }) => {
-              const { width, height } = contentRect.bounds;
+      <Measure
+        bounds
+      >
+        {({ measureRef, contentRect }) => {
+          const { width, height } = contentRect.bounds;
 
-              return (
-                <div
-                  className={classes.container}
-                  ref={measureRef}
-                >
-                  {track.instrument === "DRUMS" &&
-                    <Sequencer
-                      containerWidth={width}
-                      containerHeight={height}
-                      timeline={track.timeline}
-                      instrument={track.instrument}
-                    />
-                  }
-                </div>
-              )
-            }}
-          </Measure>
-        }
-      </TrackContext.Consumer>
+          return (
+            <div
+              className={classes.container}
+              ref={measureRef}
+            >
+              {instrument === "DRUMS" &&
+                <Sequencer
+                  trackIndex={trackIndex}
+                  containerWidth={width}
+                  containerHeight={height}
+                />
+              }
+            </div>
+          )
+        }}
+      </Measure>
     );
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    instrument: state.tracks[ownProps.trackIndex].instrument,
+  }
+}
+
+TrackContent = connect(mapStateToProps)(TrackContent);
 TrackContent = injectSheet(styles)(TrackContent);
 export default TrackContent;
