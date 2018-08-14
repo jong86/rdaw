@@ -19,6 +19,20 @@ type Props = {
 type State = {};
 
 class Sequencer extends React.Component<Props, State> {
+  handleClick(event, hSpacing, vSpacing, trackIndex) {
+    const { offsetX, offsetY } = event.evt;
+    const row = Math.floor(offsetY / vSpacing);
+    const noteFrame = offsetX / hSpacing * 4096;
+    console.log('row, noteFrame', row, noteFrame);
+
+    this.props.createNote({
+      trackIndex: trackIndex,
+      duration: 4096,
+      startsAt: Math.floor(noteFrame / 4096) * 4096,
+      midiNum: row + 21,
+    })
+  }
+
   render() {
     const {
       containerWidth,
@@ -35,6 +49,7 @@ class Sequencer extends React.Component<Props, State> {
       <Stage
         width={containerWidth}
         height={containerHeight}
+        onClick={event => this.handleClick(event, hSpacing, vSpacing, trackIndex)}
       >
         <BarBackdrops
           containerHeight={containerHeight}
@@ -76,5 +91,12 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-Sequencer = connect(mapStateToProps)(Sequencer);
+const mapDispatchToProps = dispatch => ({
+  createNote: options => dispatch({
+    type: 'CREATE_NOTE',
+    options,
+  })
+})
+
+Sequencer = connect(mapStateToProps, mapDispatchToProps)(Sequencer);
 export default Sequencer;
