@@ -23,23 +23,30 @@ class NoteMaker {
       midiNum,
     } = this.noteOptions;
 
-    this.insertAndOverwriteNoteFrameAtFrame(startsAt, 'INITIATOR');
+    this._insertAndOverwriteNoteFrameAtFrame(startsAt, 'INITIATOR');
 
     for (let i = startsAt + 1; i < (startsAt + duration); i++) {
-      this.insertAndOverwriteNoteFrameAtFrame(i, 'CONTINUATION');
+      this._insertAndOverwriteNoteFrameAtFrame(i, 'CONTINUATION');
     }
 
     return this.timeline;
   }
 
-  insertAndOverwriteNoteFrameAtFrame(frame, noteFrameType) {
-    this.createNoteFrameArrayAtFrameIfNone(frame);
-    this.deleteNoteFrameIfSameExistsAtFrame(frame);
-    const noteFrame = this.createNoteFrame(noteFrameType);
+  _insertAndOverwriteNoteFrameAtFrame(frame, noteFrameType) {
+    this._createNoteFrameArrayAtFrameIfNone(frame);
+    this._deleteNoteFrameIfSameExistsAtFrame(frame);
+    const noteFrame = this._createNoteFrame(noteFrameType);
     this.timeline[frame].push(noteFrame);
   }
 
-  deleteNoteFrameIfSameExistsAtFrame(frame) {
+  _createNoteFrameArrayAtFrameIfNone(frame) {
+    // Ensures the note-frame array exists at that frame
+    if (!Array.isArray(this.timeline[frame])) {
+      this.timeline[frame] = [];
+    }
+  }
+
+  _deleteNoteFrameIfSameExistsAtFrame(frame) {
     // Deletes same notes if overwritten (only one note of midiNum and position allowed)
     this.timeline[frame].forEach((noteFrame, index) => {
       if (noteFrame.midiNote === this.noteOptions.midiNote) {
@@ -48,14 +55,7 @@ class NoteMaker {
     })
   }
 
-  createNoteFrameArrayAtFrameIfNone(frame) {
-    // Ensures the note-frame array exists at that frame
-    if (!Array.isArray(this.timeline[frame])) {
-      this.timeline[frame] = [];
-    }
-  }
-
-  createNoteFrame(type) {
+  _createNoteFrame(type) {
     const noteFrame = {
       type: type,
       midiNum: this.noteOptions.midiNum,
