@@ -41,7 +41,7 @@ describe('NoteMaker class', () => {
     const timeline2 = new NoteMaker(timeline, note2).getNewTimeline()
 
     expect(timeline2[note2.startsAt].length).toEqual(2)
-    expect(timeline2[note2.startsAt + note2.duration].length).toEqual(2)
+    expect(timeline2[note2.startsAt + note2.duration - 1].length).toEqual(2)
   })
 })
 
