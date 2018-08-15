@@ -18,7 +18,7 @@ type Props = {
 
 type State = {};
 
-class Sequencer extends React.Component<Props, State> {
+export class Sequencer extends React.Component<Props, State> {
   handleClick(event, hSpacing, vSpacing, trackIndex) {
     const { offsetX, offsetY } = event.evt;
     const row = Math.floor(offsetY / vSpacing);
@@ -98,5 +98,4 @@ const mapDispatchToProps = dispatch => ({
   })
 })
 
-Sequencer = connect(mapStateToProps, mapDispatchToProps)(Sequencer);
-export default Sequencer;
+export default connect(mapStateToProps, mapDispatchToProps)(Sequencer);
