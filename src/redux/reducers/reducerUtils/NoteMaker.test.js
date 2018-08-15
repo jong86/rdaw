@@ -31,7 +31,7 @@ describe('NoteMaker class', () => {
     expect(filteredTimeline.length).toEqual(1024 - 1);
   })
 
-  test('multiple notes of different midiNums can exist at the same time (polyphonic)', () => {
+  test('multiple notes of different midiNums can exist at the same time', () => {
     const note2 = {
       duration: note.duration,
       startsAt: note.startsAt,
@@ -42,6 +42,7 @@ describe('NoteMaker class', () => {
 
     expect(timeline2[note2.startsAt].length).toEqual(2)
     expect(timeline2[note2.startsAt + note2.duration - 1].length).toEqual(2)
+    expect(timeline2[note2.startsAt][0].midiNum).not.toEqual(timeline2[note2.startsAt][1].midiNum)
   })
 })
 

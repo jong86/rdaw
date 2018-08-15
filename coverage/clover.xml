@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1534302700801" clover="3.2.0">
-  <project timestamp="1534302700801" name="All files">
+<coverage generated="1534302849654" clover="3.2.0">
+  <project timestamp="1534302849655" name="All files">
     <metrics statements="21" coveredstatements="20" conditionals="8" coveredconditionals="6" methods="7" coveredmethods="7" elements="36" coveredelements="33" complexity="0" loc="21" ncloc="21" packages="1" files="1" classes="1">
       <file name="NoteMaker.js" path="/Users/jon/coding/webaudioproj/proj/src/redux/reducers/reducerUtils/NoteMaker.js">
         <metrics statements="21" coveredstatements="20" conditionals="8" coveredconditionals="6" methods="7" coveredmethods="7"/>
