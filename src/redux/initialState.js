@@ -3,20 +3,6 @@ import type { appState } from '../defs/defs.js.flow';
 
 const initialState: appState = {
   global: {
-    view: {
-      zoom: 1.0,
-      left: 0.0,
-      grid: {
-        numerator: 1, // max 8
-        denominator: 4, // max 1024
-      },
-    },
-    theme: {
-      borderRadius: 4,
-      paddingSm: [6, 4],
-      paddingMd: [12, 8],
-      paddingLg: [16, 10],
-    },
     DeviceBar: {
       height: 192,
     },
@@ -39,6 +25,25 @@ const initialState: appState = {
       denominator: 4,
     },
     swing: 0.0,
+    swingNote: {
+      numerator: 1,
+      denominator: 8,
+    },
+
+    isPlaying: false,
+    isRecording: false,
+    isLoopEnabled: false,
+    playheadPosition: 0,
+
+    view: {
+      zoom: 1.0,
+      left: 0.0,
+    },
+
+    grid: {
+      numerator: 1, // max 8
+      denominator: 4, // max 1024
+    },
   },
 
   tracks: [{

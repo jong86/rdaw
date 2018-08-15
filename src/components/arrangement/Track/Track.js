@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import TrackOptions from './TrackOptions.js';
 import TrackContent from './TrackContent/TrackContent.js';
 
-const styles: Object = {
+const styles = theme => ({
   container: {
     backgroundColor: '#95a5a6',
     height: props => props.track.gui.height,
@@ -13,9 +13,9 @@ const styles: Object = {
     paddingLeft: props => props.track.gui.optionsWidth + 1,
     position: 'relative',
     margin: 8,
-    borderRadius: props => props.global.theme.borderRadius,
+    borderRadius: theme.borderRadius,
   },
-}
+})
 
 type Props = {
   classes: Object,
@@ -47,6 +47,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-Track = injectSheet(styles)(Track);
+Track = injectSheet(styles, { withTheme: true })(Track);
 Track = connect(mapStateToProps)(Track);
 export default Track;

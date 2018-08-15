@@ -3,13 +3,14 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import { connect } from 'react-redux';
 
-const styles: Object = {
+const styles = theme => ({
   container: {
     backgroundColor: 'tomato',
     height: 16,
     width: 16,
+    marginTop: 0,
   }
-}
+})
 
 type Props = {
   classes: Object,
@@ -17,7 +18,7 @@ type Props = {
 
 type State = {};
 
-class Default extends React.Component<Props, State> {
+class Transport extends React.Component<Props, State> {
   render() {
     const { classes } = this.props
 
@@ -40,6 +41,6 @@ const mapDispatchToProps = (state, ownProps) => {
   }
 }
 
-Default = injectSheet(styles)(Default);
-Default = connect(mapStateToProps, mapDispatchToProps)(Default);
-export default Default;
+Transport = injectSheet(styles, { withTheme: true })(Transport);
+Transport = connect(mapStateToProps, mapDispatchToProps)(Transport);
+export default Transport;

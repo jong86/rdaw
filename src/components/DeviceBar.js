@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import MonoSynth from './devices/instruments/MonoSynth.js';
 
-const styles: Object = {
+const styles = theme => ({
   container: {
     backgroundColor: '#2d3436',
     position: 'fixed',
@@ -13,12 +13,12 @@ const styles: Object = {
     left: 0,
     height: props => props.global.DeviceBar.height,
     width: '100%',
-    padding: props => props.global.theme.paddingMd,
+    padding: theme.paddingMd,
     display: 'flex',
     alignItems: 'flex-start',
     zIndex: 1,
   }
-}
+})
 
 type Props = {
   classes: Object,
@@ -47,5 +47,5 @@ const mapStateToProps = state => {
 }
 
 DeviceBar = connect(mapStateToProps)(DeviceBar);
-DeviceBar = injectSheet(styles)(DeviceBar);
+DeviceBar = injectSheet(styles, { withTheme: true })(DeviceBar);
 export default DeviceBar;

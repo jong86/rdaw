@@ -88,7 +88,7 @@ class BarBackdrops extends React.Component<Props, State> {
 
 const mapStateToProps = state => {
   return {
-    grid: state.global.view.grid,
+    grid: state.project.grid,
   }
 }
 
