@@ -3,6 +3,7 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import { ThemeProvider } from 'react-jss'
 import theme from './theme';
+import { connect } from 'react-redux';
 
 import TitleBar from './TitleBar';
 import DeviceBar from './DeviceBar';
@@ -24,7 +25,12 @@ const styles: Object = {
       userSelect: 'none',
       cursor: 'default',
     },
-  }
+  },
+
+  container: {
+    width: '100%',
+    marginTop: props => props.global.TitleBar.height + props.global.Transport.height,
+  },
 };
 
 type Props = {
@@ -33,7 +39,7 @@ type Props = {
 
 type State = {};
 
-class App extends React.Component<Props, State> {
+export class App extends React.Component<Props, State> {
   render() {
     const { classes } = this.props;
 
@@ -50,5 +56,14 @@ class App extends React.Component<Props, State> {
   }
 };
 
-App = injectSheet(styles)(App);
-export default App;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    global: state.global,
+  }
+}
+
+export default (
+  connect(mapStateToProps)(
+  injectSheet(styles, { withTheme: true })(
+  App))
+);

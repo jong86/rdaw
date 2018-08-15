@@ -10,7 +10,7 @@ import Track from './arrangement/Track/Track.js';
 const styles: Object = {
   container: {
     backgroundColor: '#222',
-    position: 'fixed',
+    position: 'relative',
     top: state.global.TitleBar.height,
     left: 0,
     width: '100%',

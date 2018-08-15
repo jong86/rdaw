@@ -9,6 +9,9 @@ const initialState: appState = {
     TitleBar: {
       height: 22,
     },
+    Transport: {
+      height: 48,
+    },
     constants: {
       numNotes: {
         DRUMS: 16,
