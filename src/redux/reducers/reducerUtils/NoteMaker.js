@@ -1,4 +1,6 @@
-const shortid = require('shortid');
+// @flow
+import shortid from 'shortid';
+import type { note } from '../../../defs/defs.js.flow';
 
 class NoteMaker {
   /*
@@ -10,13 +12,13 @@ class NoteMaker {
     are what make up notes
   */
 
-  constructor(timeline, noteOptions) {
+  constructor(timeline: Array<Array<Object>>, noteOptions: Object): void {
     this.timeline = timeline;
     this.noteOptions = noteOptions;
     this.initiatorId = shortid.generate();
   }
 
-  getNewTimeline() {
+  getNewTimeline(): Array<Array<Object>> {
     const {
       duration,
       startsAt,
@@ -32,21 +34,20 @@ class NoteMaker {
     return this.timeline;
   }
 
-  _insertAndOverwriteNoteFrameAtFrame(frame, noteFrameType) {
+  _insertAndOverwriteNoteFrameAtFrame(frame: Object, noteFrameType: string): void {
     this._createNoteFrameArrayAtFrameIfNone(frame);
     this._deleteNoteFrameIfSameExistsAtFrame(frame);
-    const noteFrame = this._createNoteFrame(noteFrameType);
-    this.timeline[frame].push(noteFrame);
+    this.timeline[frame].push(this._createNoteFrame(noteFrameType));
   }
 
-  _createNoteFrameArrayAtFrameIfNone(frame) {
+  _createNoteFrameArrayAtFrameIfNone(frame: Object): void {
     // Ensures the note-frame array exists at that frame
     if (!Array.isArray(this.timeline[frame])) {
       this.timeline[frame] = [];
     }
   }
 
-  _deleteNoteFrameIfSameExistsAtFrame(frame) {
+  _deleteNoteFrameIfSameExistsAtFrame(frame: Object): void {
     // Deletes same notes if overwritten (only one note of midiNum and position allowed)
     this.timeline[frame].forEach((noteFrame, index) => {
       if (noteFrame.midiNote === this.noteOptions.midiNote) {
@@ -55,7 +56,7 @@ class NoteMaker {
     })
   }
 
-  _createNoteFrame(type) {
+  _createNoteFrame(type: string): Object {
     const noteFrame = {
       type: type,
       midiNum: this.noteOptions.midiNum,
