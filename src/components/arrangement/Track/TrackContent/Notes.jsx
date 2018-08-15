@@ -27,7 +27,7 @@ class Notes extends React.Component<Props, State> {
           height={gridVSpacing - 2}
           x={(gridHSpacing * xPosMultiplier) + 1}
           y={(gridVSpacing * yPosMultiplier) + 1}
-          fill="#a00"
+          fill="tomato"
           stroke="#a00"
           strokeWidth={0}
           opacity={1}
