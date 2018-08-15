@@ -12,7 +12,7 @@ const OUTPUT_DIR = path.resolve(__dirname, 'dist');
 const defaultInclude = [SRC_DIR];
 
 module.exports = {
-  entry: SRC_DIR + '/index.jsx',
+  entry: SRC_DIR + '/index.js',
   output: {
     path: OUTPUT_DIR,
     publicPath: './',
@@ -29,7 +29,7 @@ module.exports = {
         include: defaultInclude
       },
       {
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         use: [{ loader: 'babel-loader' }],
         include: defaultInclude
       },

@@ -1,1 +1,1 @@
-export { default as Knob } from './Knob.jsx';
+export { default as Knob } from './Knob.js';

@@ -3,7 +3,7 @@ import initialState from '../initialState';
 import type { note } from '../../defs/defs.js.flow';
 import NoteMaker from './reducerUtils/NoteMaker';
 
-export default (state: Object = initialState.tracks, action: Object): Object => {
+export default (state: Array<Object> = initialState.tracks, action: Object): Array<Object> => {
   switch (action.type) {
     case 'CREATE_NOTE': {
       const {

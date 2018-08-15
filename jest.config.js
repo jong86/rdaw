@@ -14,5 +14,9 @@ module.exports = {
     "node_modules",
     "src/frontend",
     "src/shared"
-  ]
+  ],
+  globals: {
+    "window": true,
+  },
+  setupTestFrameworkScriptFile: "<rootDir>/setupTests.js",
 }
