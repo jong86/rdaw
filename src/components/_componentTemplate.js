@@ -17,7 +17,7 @@ type Props = {
 
 type State = {};
 
-class Default extends React.Component<Props, State> {
+export class Default extends React.Component<Props, State> {
   render() {
     const { classes } = this.props
 
@@ -29,17 +29,18 @@ class Default extends React.Component<Props, State> {
   }
 }
 
-
 const mapStateToProps = (state, ownProps) => {
   return {
   }
 }
 
-const mapDispatchToProps = (state, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
   }
 }
 
-Default = injectSheet(styles)(Default);
-Default = connect(mapStateToProps, mapDispatchToProps)(Default);
-export default Default;
+export default (
+  connect(mapStateToProps, mapDispatchToProps)(
+  injectSheet(styles, { withTheme: true })(
+  Default))
+);

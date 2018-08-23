@@ -26,8 +26,14 @@ type Props = {
 type State = {};
 
 export class Transport extends React.Component<Props, State> {
-  handlePlay() {
-    console.log("Playing...")
+  handlePlay = () => {
+    console.log("You pressed play")
+    this.props.transportPlay()
+  }
+
+  handleStop = () => {
+    console.log("You pressed stop")
+    this.props.transportStop()
   }
 
   render() {
@@ -58,8 +64,14 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = (state, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
+    transportPlay: () => dispatch({
+      type: 'TRANSPORT_PLAY',
+    }),
+    transportStop: () => dispatch({
+      type: 'TRANSPORT_STOP',
+    }),
   }
 }
 
