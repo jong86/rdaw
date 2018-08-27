@@ -69,10 +69,12 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     transportPlay: () => dispatch({
-      type: 'TRANSPORT_PLAY',
+      type: 'SET_IS_PLAYING',
+      isPlaying: true,
     }),
     transportStop: () => dispatch({
-      type: 'TRANSPORT_STOP',
+      type: 'SET_IS_PLAYING',
+      isPlaying: false,
     }),
   }
 }

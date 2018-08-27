@@ -3,10 +3,10 @@ import initialState from '../initialState';
 
 export default (state: Object = initialState.project, action: Object): Object => {
   switch (action.type) {
-    case 'DO_SOMETHING':
+    case 'SET_IS_PLAYING':
       return {
         ...state,
-        key: action.value
+        isPlaying: action.isPlaying
       }
 
     default:

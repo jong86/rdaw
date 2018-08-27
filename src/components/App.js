@@ -58,7 +58,7 @@ console.log('window', window);
           <Stage
             style={{
               position: 'absolute',
-              zIndex: 30,
+              zIndex: 3,
               top: 0,
               left: 0,
             }}

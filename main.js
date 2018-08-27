@@ -49,7 +49,7 @@ function createWindow() {
     mainWindow.show();
     // Open the DevTools automatically if developing
     if (dev) {
-      BrowserWindow.addDevToolsExtension('/Users/jon/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.2.4_0');
+      BrowserWindow.addDevToolsExtension('/Users/jon/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/3.3.0_0');
       BrowserWindow.addDevToolsExtension('/Users/jon/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.15.3_0');
       mainWindow.webContents.openDevTools();
     }
