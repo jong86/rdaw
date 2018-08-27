@@ -19,13 +19,14 @@ class Playhead extends React.Component<Props, State> {
 
     const xPos = global.gui.optionsWidth + 1;
     const yPos = TitleBar.height + Transport.height;
+    const height = tracks.reduce((accumulator, track) => accumulator + track.gui.height, 0)
 
     return (
       <Rect
         x={xPos}
         y={yPos}
         width={1}
-        height={100}
+        height={height}
         fill={'#0f0'}
       />
     );
