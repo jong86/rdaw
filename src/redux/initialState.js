@@ -3,6 +3,9 @@ import type { appState } from '../defs/defs.js.flow';
 
 const initialState: appState = {
   global: {
+    gui: {
+      optionsWidth: 128,
+    },
     DeviceBar: {
       height: 192,
     },
@@ -58,7 +61,6 @@ const initialState: appState = {
     timeline: [],
     gui: {
       height: 192,
-      optionsWidth: 128,
     }
   }],
 }

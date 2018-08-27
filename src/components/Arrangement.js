@@ -11,8 +11,6 @@ const styles: Object = {
   container: {
     backgroundColor: '#222',
     position: 'relative',
-    top: state.global.TitleBar.height,
-    left: 0,
     width: '100%',
     height: '100%',
     display: 'flex',

@@ -10,12 +10,15 @@ import TitleBar from './TitleBar';
 import DeviceBar from './DeviceBar';
 import Arrangement from './Arrangement';
 import Transport from './Transport';
+import Playhead from './Playhead';
 
 const styles: Object = {
   '@global': {
     body: {
       fontFamily: 'Arial',
       backgroundColor: '#34495e',
+      padding: 0,
+      margin: 0,
     },
 
     div: {
@@ -44,15 +47,17 @@ export class App extends React.Component<Props, State> {
   render() {
     const { classes } = this.props;
 
+console.log('window', window);
+
     return (
       <ThemeProvider theme={theme}>
         <div className={classes.container}>
           <TitleBar />
           <Transport />
           <Arrangement />
-          <Stage>
+          <Stage style={{position: 'absolute', zIndex: 3}} width={window.innerWidth} height={window.innerHeight}>
             <Layer>
-              
+              <Playhead />
             </Layer>
           </Stage>
         </div>

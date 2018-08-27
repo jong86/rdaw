@@ -1,20 +1,8 @@
 // @flow
 import React from 'react';
 import injectSheet from 'react-jss';
+import { Layer, Rect } from "react-konva";
 import { connect } from 'react-redux';
-
-const styles: Object = {
-  container: {
-    backgroundColor: '#2d3436',
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    height: props => props.TitleBar.height,
-    width: '100%',
-    '-webkit-app-region': 'drag',
-    zIndex: 5,
-  }
-}
 
 type Props = {
   classes: Object,
@@ -29,8 +17,13 @@ class Playhead extends React.Component<Props, State> {
     const { classes } = this.props
 
     return (
-      <div className={classes.container}>
-      </div>
+      <Rect
+        x={100}
+        y={300}
+        width={100}
+        height={100}
+        fill={'#0f0'}
+      />
     );
   }
 }
@@ -42,6 +35,5 @@ const mapStateToProps = state => {
   }
 }
 
-Playhead = injectSheet(styles)(Playhead);
 Playhead = connect(mapStateToProps)(Playhead);
 export default Playhead;

@@ -14,7 +14,7 @@ const styles = theme => ({
     height: 16,
     width: '100%',
     top: props => props.global.TitleBar.height,
-    zIndex: 3,
+    zIndex: 4,
     height: props => props.global.Transport.height,
   },
 })
