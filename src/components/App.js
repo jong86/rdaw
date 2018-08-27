@@ -55,7 +55,16 @@ console.log('window', window);
           <TitleBar />
           <Transport />
           <Arrangement />
-          <Stage style={{position: 'absolute', zIndex: 3}} width={window.innerWidth} height={window.innerHeight}>
+          <Stage
+            style={{
+              position: 'absolute',
+              zIndex: 30,
+              top: 0,
+              left: 0,
+            }}
+            width={window.innerWidth}
+            height={window.innerHeight}
+          >
             <Layer>
               <Playhead />
             </Layer>

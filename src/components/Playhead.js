@@ -14,13 +14,17 @@ type State = {};
 
 class Playhead extends React.Component<Props, State> {
   render() {
-    const { classes } = this.props
+    const { classes, tracks, Playhead, global } = this.props;
+    const { TitleBar, Transport } = global;
+
+    const xPos = global.gui.optionsWidth + 1;
+    const yPos = TitleBar.height + Transport.height;
 
     return (
       <Rect
-        x={100}
-        y={300}
-        width={100}
+        x={xPos}
+        y={yPos}
+        width={1}
         height={100}
         fill={'#0f0'}
       />
@@ -32,6 +36,7 @@ const mapStateToProps = state => {
   return {
     tracks: state.tracks,
     Playhead: state.global.Playhead,
+    global: state.global,
   }
 }
 
