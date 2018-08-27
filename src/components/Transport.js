@@ -21,6 +21,8 @@ const styles = theme => ({
 
 type Props = {
   classes: Object,
+  transportPlay: Function,
+  transportStop: Function,
 };
 
 type State = {};

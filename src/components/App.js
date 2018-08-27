@@ -4,6 +4,7 @@ import injectSheet from 'react-jss';
 import { ThemeProvider } from 'react-jss'
 import theme from './theme';
 import { connect } from 'react-redux';
+import { Stage, Layer, Rect } from "react-konva";
 
 import TitleBar from './TitleBar';
 import DeviceBar from './DeviceBar';
@@ -49,7 +50,11 @@ export class App extends React.Component<Props, State> {
           <TitleBar />
           <Transport />
           <Arrangement />
-          {/* <DeviceBar /> */}
+          <Stage>
+            <Layer>
+              
+            </Layer>
+          </Stage>
         </div>
       </ThemeProvider>
     );

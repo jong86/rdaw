@@ -19,7 +19,7 @@ type Props = {
 type State = {};
 
 export class Sequencer extends React.Component<Props, State> {
-  handleClick(event, hSpacing, vSpacing, trackIndex) {
+  handleClick(event: Object, hSpacing: number, vSpacing: number, trackIndex: number): void {
     const { offsetX, offsetY } = event.evt;
     const row = Math.floor(offsetY / vSpacing);
     const noteFrame = offsetX / hSpacing * 4096;
@@ -33,7 +33,7 @@ export class Sequencer extends React.Component<Props, State> {
     })
   }
 
-  render() {
+  render(): Object {
     const {
       containerWidth,
       containerHeight,

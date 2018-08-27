@@ -1,16 +1,6 @@
 // @flow
 export type appState = {
   global: {
-    view: {
-      zoom: number,
-      left: number,
-    },
-    theme: {
-      borderRadius: number,
-      paddingSm: [number, number],
-      paddingMd: [number, number],
-      paddingLg: [number, number],
-    },
     DeviceBar: {
       height: number,
     },
@@ -27,6 +17,10 @@ export type appState = {
       denominator: number,
     },
     swing: number,
+    view: {
+      zoom: number,
+      left: number,
+    },
   },
 
   tracks: Array<Object>,
