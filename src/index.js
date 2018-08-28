@@ -7,6 +7,9 @@ import App from './components/App.js';
 import keyboardControls from './util/keyboardControls';
 keyboardControls();
 
+import playheadHandler from './music/PlayheadHandler';
+
+
 let root = document.createElement('div');
 root.id = "root";
 document.body.appendChild( root );

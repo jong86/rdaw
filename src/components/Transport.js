@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { FaPlay, FaStop } from 'react-icons/fa';
 import Button from './generic/Button';
 
+import playheadHandler from '../music/PlayheadHandler';
+
 const styles = theme => ({
   container: {
     flexDirection: 'row',
@@ -30,12 +32,12 @@ type State = {};
 export class Transport extends React.Component<Props, State> {
   handlePlay = () => {
     console.log("You pressed play")
-    this.props.transportPlay()
+    playheadHandler.startPlaying();
   }
 
   handleStop = () => {
     console.log("You pressed stop")
-    this.props.transportStop()
+    playheadHandler.stopPlaying();
   }
 
   render() {

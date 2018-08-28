@@ -47,7 +47,7 @@ export class App extends React.Component<Props, State> {
   render() {
     const { classes } = this.props;
 
-console.log('window', window);
+    console.log('window', window);
 
     return (
       <ThemeProvider theme={theme}>
@@ -55,20 +55,7 @@ console.log('window', window);
           <TitleBar />
           <Transport />
           <Arrangement />
-          <Stage
-            style={{
-              position: 'absolute',
-              zIndex: 3,
-              top: 0,
-              left: 0,
-            }}
-            width={window.innerWidth}
-            height={window.innerHeight}
-          >
-            <Layer>
-              <Playhead />
-            </Layer>
-          </Stage>
+          <Playhead />
         </div>
       </ThemeProvider>
     );

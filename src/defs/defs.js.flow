@@ -11,7 +11,7 @@ export type appState = {
 
   project: {
     title: string,
-    tempo: number,
+    bpm: number,
     timeSignature: {
       numerator: number,
       denominator: number,
