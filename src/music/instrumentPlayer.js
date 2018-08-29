@@ -8,14 +8,12 @@ const drums = new Drums();
 
 export default {
   play: (midiNote: number, instrumentId: number): void => {
-    // convert keyCode to frequency in hz
-    // Is connected to redux
-    // Finds out which instrument is armed, then plays it
+    // Should be connected to redux -- finds out which instrument is armed, then plays it
     // monoSynth.overdrive().play(midiNote);
 
     drums.play(midiNote);
 
-    // desired code:
+    // desired code here:
     // getInstrumentById(instrumentId).play();
   },
 

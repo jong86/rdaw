@@ -20,6 +20,7 @@ const initialState: appState = {
         DRUMS: 16,
         SYNTH: 127,
       },
+      NOTE_FRAMES_PER_BAR: 4096,
     },
   },
 

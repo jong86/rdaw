@@ -10,14 +10,19 @@ function updatePlayheadAnimation(barNum, barWidth, duration) {
   })
 }
 
-class Player {
+function scheduleNotes(timePerBar, tracks) {
+  console.log(tracks)
+
+}
+
+class PlayHandler {
   constructor() {
-    if (!Player.instance) {
-      Player.instance = this
+    if (!PlayHandler.instance) {
+      PlayHandler.instance = this
       this.interval = null
     }
 
-    return Player.instance
+    return PlayHandler.instance
   }
 
   startPlaying() {
@@ -32,7 +37,8 @@ class Player {
 
     if (!this.interval) {
       this.interval = setInterval(() => {
-        const { bpm, barWidth } = store.getState().project
+        const { project, tracks } = store.getState();
+        const { bpm, barWidth } = project
         const timePerBar = 1 / (bpm / 240)
 
         const currentBar = Math.floor((audioContext.currentTime - playStartTime) / timePerBar)
@@ -46,7 +52,9 @@ class Player {
 
         console.log('elapsedTimeInBar:', elapsedTimeInBar, 'barNum:', barNum);
 
-      }, 10)
+        scheduleNotes(timePerBar, tracks);
+
+      }, 50)
     }
   }
 
@@ -58,6 +66,5 @@ class Player {
   }
 }
 
-const instance = new Player();
-
+const instance = new PlayHandler();
 export default instance;

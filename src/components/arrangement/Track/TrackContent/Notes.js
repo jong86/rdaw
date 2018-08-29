@@ -18,12 +18,12 @@ class Notes extends React.Component<Props, State> {
     const { timeline, gridHSpacing, gridVSpacing } = this.props
 
     const Note = ({ midiNum, startsAt, length }) => {
-      const xPosMultiplier = startsAt / 4096;
+      const xPosMultiplier = startsAt / 1024;
       const yPosMultiplier = midiNum - 21;
 
       return (
         <Rect
-          width={(gridHSpacing * (length / 1024) - 2)}
+          width={(length / gridHSpacing) - 2}
           height={gridVSpacing - 2}
           x={(gridHSpacing * xPosMultiplier) + 1}
           y={(gridVSpacing * yPosMultiplier) + 1}
@@ -35,9 +35,6 @@ class Notes extends React.Component<Props, State> {
       )
     }
 
-    // -Need to create array of notes from all initiator note frames
-    // -Measure length from all the continuation note frames
-    // -Remember, this is just for display purposes, the actual audio engine will read directly from the timeline state
     const notes = []
 
     timeline.forEach((division, index) => {
@@ -58,7 +55,14 @@ class Notes extends React.Component<Props, State> {
 
     return (
       <Layer>
-        {notes.map(note => <Note key={note.id} midiNum={note.midiNum} startsAt={note.startsAt} length={note.length}/>)}
+        {notes.map(note => (
+          <Note
+            key={note.id}
+            midiNum={note.midiNum}
+            startsAt={note.startsAt}
+            length={note.length}
+          />
+        ))}
       </Layer>
     );
   }
