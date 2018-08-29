@@ -23,8 +23,7 @@ const styles = theme => ({
 
 type Props = {
   classes: Object,
-  transportPlay: Function,
-  transportStop: Function,
+  project: Object,
 };
 
 type State = {};
@@ -67,21 +66,8 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    transportPlay: () => dispatch({
-      type: 'SET_IS_PLAYING',
-      isPlaying: true,
-    }),
-    transportStop: () => dispatch({
-      type: 'SET_IS_PLAYING',
-      isPlaying: false,
-    }),
-  }
-}
-
 export default (
-  connect(mapStateToProps, mapDispatchToProps)(
+  connect(mapStateToProps)(
   injectSheet(styles, { withTheme: true })(
   Transport))
 );

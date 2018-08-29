@@ -12,6 +12,7 @@ function updatePlayheadAnimation(barNum, barWidth, duration) {
 }
 
 let lastFrameSeen = 0;
+const scheduledNoteIds = [];
 function scheduleNotes(timePerBar, tracks) {
   const msPerFrame = timePerBar / 4096 * 1000;
   const lookaheadMs = 100;
@@ -19,11 +20,12 @@ function scheduleNotes(timePerBar, tracks) {
 
   tracks.forEach(({ timeline }) => {
     timeline.slice(lastFrameSeen, framesPerLookahead).forEach(frame => {
-      frame.forEach(noteFrame => {
+      frame.forEach((noteFrame, i) => {
         console.log(noteFrame);
-        if (noteFrame.type === 'INITIATOR') {
-          instrumentPlayer.play(60, null, 0)
+        if (noteFrame.type === 'INITIATOR' && scheduledNoteIds.indexOf(noteFrame.id) === -1) {
+          instrumentPlayer.play(60, i * msPerFrame)
           instrumentPlayer.stop()
+          scheduledNoteIds.push(noteFrame.id)
         }
       })
     })

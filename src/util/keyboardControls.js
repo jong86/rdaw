@@ -57,11 +57,6 @@ const convertKeyCodeToMIDINote = (keyCode: number): number => {
 }
 
 
-const getArmedInstrumentId = (): number => {
-  return 1;
-}
-
-
 export default () => {
   return (
     window.addEventListener('keydown', event => {
@@ -69,7 +64,7 @@ export default () => {
       const midiNote = convertKeyCodeToMIDINote(keyCode);
 
       if (keyCode >= 65 && keyCode <= 90) {
-        return instrumentPlayer.play(midiNote, 1);
+        return instrumentPlayer.play(midiNote);
       }
     }),
 

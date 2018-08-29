@@ -14,6 +14,10 @@ type Props = {
   numNotes: Object,
   createNote: Function,
   trackIndex: number,
+  FRAMES_PER_BAR: number,
+  grid: Object,
+  view: Object,
+  barWidth: number,
 };
 
 type State = {};

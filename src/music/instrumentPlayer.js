@@ -7,7 +7,7 @@ const drums = new Drums();
 
 
 export default {
-  play: (midiNote: number, instrumentId: number, delay: number): void => {
+  play: (midiNote: number, delay: number): void => {
     // Should be connected to redux -- finds out which instrument is armed, then plays it
     // monoSynth.overdrive().play(midiNote);
     drums.play(midiNote, delay);
