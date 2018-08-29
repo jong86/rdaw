@@ -11,11 +11,11 @@ class Player {
 
   constructor() {
     if (!Player.instance) {
-      Player.instance = this;
-      this.interval = null;
+      Player.instance = this
+      this.interval = null
     }
 
-    return Player.instance;
+    return Player.instance
   }
 
   startPlaying() {
@@ -23,24 +23,27 @@ class Player {
 
     let time1 = audioContext.currentTime
 
-    this.interval = setInterval(() => {
-      const { bpm } = store.getState().project;
+    if (!this.interval) {
+      this.interval = setInterval(() => {
+        const { bpm } = store.getState().project
 
-      let time2 = audioContext.currentTime
+        let time2 = audioContext.currentTime
 
-      let timePerBar = 1 / (bpm / 240);
+        let timePerBar = 1 / (bpm / 240)
 
-      if (time2 - time1 > timePerBar - 0.1) {
-        const timeTillNextBar = timePerBar - (time2 - time1)
-        console.log("Time to run note scheduler", audioContext.currentTime, timeTillNextBar)
-        time1 = time2
-      }
-    }, 10)
+        if (time2 - time1 > timePerBar - 0.1) {
+          const timeTillNextBar = timePerBar - (time2 - time1)
+          console.log("Time to run note scheduler", audioContext.currentTime, timeTillNextBar)
+          time1 = time2
+        }
+      }, 10)
+    }
   }
 
   stopPlaying() {
     store.dispatch({ type: 'SET_IS_PLAYING', isPlaying: false })
     clearInterval(this.interval)
+    this.interval = null
   }
 }
 
