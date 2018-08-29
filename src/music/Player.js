@@ -5,10 +5,6 @@ import Worker from './playhead.worker.js';
 
 
 class Player {
-  // subscribes to isPlaying state
-
-  // if isPlaying === true: increase the playhead position every x milliseconds (depending on bpm)
-
   constructor() {
     if (!Player.instance) {
       Player.instance = this
