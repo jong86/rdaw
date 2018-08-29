@@ -5,7 +5,12 @@ export default {
   paddingLg: [16, 10],
 
   colors: {
-    success: '#0f0',
-    danger: '#f00',
+    'success': '#0f0',
+    'success-dark': '#060',
+    'danger': '#f00',
+    'danger-dark': '#600',
+
+    'neutral': '#aaa',
+    'neutral-dark': '#666',
   }
 }

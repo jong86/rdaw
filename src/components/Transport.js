@@ -31,29 +31,27 @@ type State = {};
 
 export class Transport extends React.Component<Props, State> {
   handlePlay = () => {
-    console.log("You pressed play")
     player.startPlaying();
   }
 
   handleStop = () => {
-    console.log("You pressed stop")
     player.stopPlaying();
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, project } = this.props
 
     return (
       <div className={classes.container}>
         <Button
           onClick={this.handlePlay}
-          color='success'
+          color={project.isPlaying ? 'neutral' : 'neutral-dark'}
         >
           <FaPlay />
         </Button>
         <Button
           onClick={this.handleStop}
-          color='danger'
+          color={'neutral-dark'}
         >
           <FaStop />
         </Button>
@@ -65,6 +63,7 @@ export class Transport extends React.Component<Props, State> {
 const mapStateToProps = (state, ownProps) => {
   return {
     global: state.global,
+    project: state.project,
   }
 }
 
