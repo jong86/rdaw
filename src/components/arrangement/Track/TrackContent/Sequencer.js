@@ -20,16 +20,16 @@ type State = {};
 
 export class Sequencer extends React.Component<Props, State> {
   handleClick(event: Object, hSpacing: number, vSpacing: number, trackIndex: number): void {
-    const { NOTE_FRAMES_PER_BAR, grid } = this.props;
+    const { FRAMES_PER_BAR, grid } = this.props;
     const { offsetX, offsetY } = event.evt;
     const row = Math.floor(offsetY / vSpacing);
-    const noteFrame = offsetX / hSpacing * NOTE_FRAMES_PER_BAR;
-    const noteLength = NOTE_FRAMES_PER_BAR * (grid.numerator / grid.denominator)
+    const noteFrame = offsetX / hSpacing * FRAMES_PER_BAR;
+    const noteLength = FRAMES_PER_BAR * (grid.numerator / grid.denominator)
 
     this.props.createNote({
       trackIndex: trackIndex,
       duration: noteLength,
-      startsAt: Math.floor(noteFrame / NOTE_FRAMES_PER_BAR) * noteLength,
+      startsAt: Math.floor(noteFrame / FRAMES_PER_BAR) * noteLength,
       midiNum: row + 21,
     })
   }
@@ -95,7 +95,7 @@ const mapStateToProps = (state, ownProps) => {
     view: state.project.view,
     grid: state.project.grid,
     barWidth: state.project.barWidth,
-    NOTE_FRAMES_PER_BAR: state.global.constants.NOTE_FRAMES_PER_BAR,
+    FRAMES_PER_BAR: state.global.constants.FRAMES_PER_BAR,
   }
 }
 
