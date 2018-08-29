@@ -11,7 +11,7 @@ import playheadHandler from '../music/PlayheadHandler';
 const styles = theme => ({
   container: {
     flexDirection: 'row',
-    backgroundColor: 'silver',
+    backgroundColor: '#333',
     position: 'fixed',
     height: 16,
     width: '100%',

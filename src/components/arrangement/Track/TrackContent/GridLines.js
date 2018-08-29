@@ -35,18 +35,25 @@ function lines({ direction, start, end, length, spacing, color}: lineOptions): A
   let i, x1, y1, x2, y2;
 
   for (i = start; i < end; i += spacing) {
-
     if (direction === 'horizontal') {
       x1 = 0;
       y1 = i;
       x2 = length;
       y2 = i;
-
     } else if (direction === 'vertical') {
       x1 = i;
       y1 = 0;
       x2 = i;
       y2 = length;
+    }
+
+    const strokeWidth = () => {
+      console.log('i', i);
+      if (direction === 'horizontal') {
+        return 1;
+      } else {
+        return i / spacing % 4 === 0 || i === 0 ? 2 : 1;
+      }
     }
 
     array.push(
@@ -55,6 +62,8 @@ function lines({ direction, start, end, length, spacing, color}: lineOptions): A
         points={[x1, y1, x2, y2]}
         stroke={color}
         strokeWidth={1}
+        opacity={0.1}
+        strokeWidth={strokeWidth()}
       />
     )
   }

@@ -3,8 +3,6 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux'
 import { store } from './redux/store';
 import App from './components/App.js';
-// import { Provider as ProviderMobX } from 'mobx-react';
-// import appState from './music/appState';
 
 import keyboardControls from './util/keyboardControls';
 keyboardControls();
@@ -15,9 +13,7 @@ document.body.appendChild(root);
 
 render(
   <Provider store={store}>
-    {/* <ProviderMobX store={appState}> */}
-      <App />
-    {/* </ProviderMobX> */}
+    <App />
   </Provider>,
   document.getElementById('root')
 );

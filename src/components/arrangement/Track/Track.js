@@ -7,7 +7,7 @@ import TrackContent from './TrackContent/TrackContent.js';
 
 const styles = theme => ({
   container: {
-    backgroundColor: '#95a5a6',
+    backgroundColor: '#ccc',
     height: props => props.track.gui.height,
     width: props => `calc(100% - ${props.global.gui.optionsWidth}px)`,
     paddingLeft: props => props.global.gui.optionsWidth + 1,

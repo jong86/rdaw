@@ -27,6 +27,7 @@ class PlayheadHandler {
       const { bpm } = store.getState().project;
 
       let time2 = audioContext.currentTime
+
       let timePerBar = 1 / (bpm / 240);
 
       if (time2 - time1 > timePerBar - 0.1) {

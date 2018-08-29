@@ -5,7 +5,6 @@ import { ThemeProvider } from 'react-jss'
 import theme from './theme';
 import { connect } from 'react-redux';
 import { Stage, Layer, Rect } from "react-konva";
-import DevTools from 'mobx-react-devtools'
 
 import TitleBar from './TitleBar';
 import DeviceBar from './DeviceBar';
@@ -51,8 +50,6 @@ export class App extends React.Component<Props, State> {
   render() {
     const { classes } = this.props;
 
-    console.log('window', window);
-
     return (
       <ThemeProvider theme={theme}>
         <div className={classes.container}>
@@ -60,8 +57,6 @@ export class App extends React.Component<Props, State> {
           <Transport />
           <Arrangement />
           <Playhead />
-
-          {/* <DevTools /> */}
         </div>
       </ThemeProvider>
     );

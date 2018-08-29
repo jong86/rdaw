@@ -25,17 +25,36 @@ class BarBackdrops extends React.Component<Props, State> {
     } = this.props;
 
     // Render beat columns all along the sequencer, alternating opacity every time
-    // const DarkenedBeatColumn = () => {
-    //   <Rect
-    //     key={index}
-    //     height={containerHeight}
-    //     width={gridHSpacing * grid.denominator}
-    //     x={0 + xOffset}
-    //     y={0}
-    //     fill={color}
-    //     opacity={0.2}
-    //   />
-    // }
+    const DarkenedBeatColumn = ({ index, xOffset }) => {
+      return (
+        <Rect
+          key={index}
+          height={containerHeight}
+          width={gridHSpacing}
+          x={xOffset}
+          y={0}
+          fill={'#666'}
+          opacity={0.05}
+        />
+      )
+    }
+
+    const RenderDarkenedBeatColumns = () => {
+      const darkenedBeatColumns = [];
+
+      for (let i = 0; i < (containerWidth / gridHSpacing); i++) {
+        if (i % 2 === 0) {
+          darkenedBeatColumns.push(
+            <DarkenedBeatColumn
+              key={i}
+              index={i}
+              xOffset={i * gridHSpacing}
+            />
+          )
+        }
+      }
+      return darkenedBeatColumns;
+    }
 
     const BarBackdrop = ({ xOffset, index, color }) => (
       <Rect
@@ -45,7 +64,7 @@ class BarBackdrops extends React.Component<Props, State> {
         x={0 + xOffset}
         y={0}
         fill={color}
-        opacity={0.2}
+        opacity={0.1}
       />
     )
 
@@ -61,8 +80,8 @@ class BarBackdrops extends React.Component<Props, State> {
         -add to a variable every time, when this var. equals barWidth, place another BarBackDrop, then reset to zero
         -place a DarkenedBeatColumn every other beat to indicate 1/4 notes
       */
-      for (let i = containerWidth; i > 0; i -= barWidth) {
-        let color = index % 2 === 0 ? '#777' : '#222';
+      for (let i = 0; i < containerWidth; i += barWidth) {
+        let color = index % 2 === 0 ? '#333' : '#777';
 
         barBackdrops.push(
           <BarBackdrop
@@ -81,6 +100,7 @@ class BarBackdrops extends React.Component<Props, State> {
     return (
       <Layer>
         <RenderBarBackDrops />
+        <RenderDarkenedBeatColumns />
       </Layer>
     );
   }
