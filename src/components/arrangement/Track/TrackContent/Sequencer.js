@@ -24,9 +24,9 @@ type State = {};
 
 export class Sequencer extends React.Component<Props, State> {
   handleClick(event: Object, hSpacing: number, vSpacing: number, trackIndex: number): void {
-    const { FRAMES_PER_BAR, grid } = this.props;
+    const { FRAMES_PER_BAR, grid, containerHeight } = this.props;
     const { offsetX, offsetY } = event.evt;
-    const row = Math.floor(offsetY / vSpacing);
+    const row = (containerHeight / vSpacing) - Math.ceil(offsetY / vSpacing);
     const noteFrame = offsetX / hSpacing * FRAMES_PER_BAR;
     const noteLength = FRAMES_PER_BAR * (grid.numerator / grid.denominator)
 

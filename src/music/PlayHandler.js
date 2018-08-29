@@ -17,14 +17,14 @@ function scheduleNotes(timePerBar, tracks) {
   const msPerFrame = timePerBar / 4096 * 1000;
   const lookaheadMs = 100;
   const framesPerLookahead = msPerFrame * lookaheadMs;
+  console.log("Scheduling...")
 
   tracks.forEach(({ timeline }) => {
     timeline.slice(lastFrameSeen, framesPerLookahead).forEach(frame => {
       frame.forEach((noteFrame, i) => {
-        console.log(noteFrame);
         if (noteFrame.type === 'INITIATOR' && scheduledNoteIds.indexOf(noteFrame.id) === -1) {
+          console.log(noteFrame.id);
           instrumentPlayer.play(60, i * msPerFrame)
-          instrumentPlayer.stop()
           scheduledNoteIds.push(noteFrame.id)
         }
       })
