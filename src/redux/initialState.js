@@ -26,7 +26,7 @@ const initialState: appState = {
 
   project: {
     title: '',
-    bpm: 120,
+    bpm: 160,
     timeSignature: {
       numerator: 4,
       denominator: 4,

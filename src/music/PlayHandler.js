@@ -11,42 +11,28 @@ function updatePlayheadAnimation(barNum, barWidth, duration) {
   })
 }
 
-let lastFrameSeen = 0;
-const scheduledNoteIds = [];
-function scheduleNotes(timePerBar, tracks) {
-  const msPerFrame = timePerBar / 4096 * 1000;
-  const lookaheadMs = 100;
-  const framesPerLookahead = msPerFrame * lookaheadMs;
-  console.log("Scheduling...")
-
-  tracks.forEach(({ timeline }) => {
-    timeline.slice(lastFrameSeen, framesPerLookahead).forEach(frame => {
-      frame.forEach((noteFrame, i) => {
-        if (noteFrame.type === 'INITIATOR' && scheduledNoteIds.indexOf(noteFrame.id) === -1) {
-          console.log(noteFrame.id);
-          instrumentPlayer.play(60, i * msPerFrame)
-          scheduledNoteIds.push(noteFrame.id)
-        }
-      })
-    })
-  })
-
-  lastFrameSeen += framesPerLookahead;
+function setIsPlaying(isPlaying) {
+  store.dispatch({ type: 'SET_IS_PLAYING', isPlaying: isPlaying })
 }
+
 
 class PlayHandler {
   constructor() {
+    this.schedulerState = {
+      lastFrameSeen: 0,
+      scheduledNoteIds: [],
+    }
+
     // Make this class a singleton
     if (!PlayHandler.instance) {
       PlayHandler.instance = this
-      this.interval = null
     }
 
     return PlayHandler.instance
   }
 
   startPlaying() {
-    store.dispatch({ type: 'SET_IS_PLAYING', isPlaying: true })
+    setIsPlaying(true)
 
     const playStartTime = audioContext.currentTime
     let totalElapsedTime = 0;
@@ -74,17 +60,45 @@ class PlayHandler {
 
         totalElapsedTime = currentTime - playStartTime;
 
-        scheduleNotes(timePerBar, tracks);
+        this.scheduleNotes(timePerBar, tracks);
 
       }, 10)
     }
   }
 
   stopPlaying() {
-    store.dispatch({ type: 'SET_IS_PLAYING', isPlaying: false })
+    setIsPlaying(false)
     clearInterval(this.interval)
     this.interval = null
     updatePlayheadAnimation(0, 0, 0);
+
+    this.schedulerState = {
+      lastFrameSeen: 0,
+      scheduledNoteIds: [],
+    }
+  }
+
+  scheduleNotes(timePerBar, tracks) {
+    let { lastFrameSeen, scheduledNoteIds } = this.schedulerState;
+
+    const msPerFrame = timePerBar / 4096 * 1000;
+    const lookaheadMs = 100;
+    const framesPerLookahead = msPerFrame * lookaheadMs;
+    console.log("Scheduling...")
+
+    tracks.forEach(({ timeline }) => {
+      timeline.slice(lastFrameSeen, framesPerLookahead).forEach(frame => {
+        frame.forEach((noteFrame, i) => {
+          if (noteFrame.type === 'INITIATOR' && scheduledNoteIds.indexOf(noteFrame.id) === -1) {
+            console.log(noteFrame.id);
+            instrumentPlayer.play(60, i * msPerFrame)
+            scheduledNoteIds.push(noteFrame.id)
+          }
+        })
+      })
+    })
+
+    lastFrameSeen += framesPerLookahead;
   }
 }
 
