@@ -1,8 +1,14 @@
 import { store } from '../redux/store';
 import audioContext from './audioContext';
-const tellReactToUpdatePlayhead = new Event('reactUpdatePlayhead');
-import Worker from './playhead.worker.js';
 
+function updatePlayheadAnimation(barNum, barWidth, duration) {
+  store.dispatch({
+    type: 'UPDATE_PLAYHEAD_ANIMATION',
+    from: barNum * barWidth,
+    to: (barNum * barWidth) + barWidth - 1,
+    duration: duration * 1000,
+  })
+}
 
 class Player {
   constructor() {
@@ -17,21 +23,29 @@ class Player {
   startPlaying() {
     store.dispatch({ type: 'SET_IS_PLAYING', isPlaying: true })
 
-    let time1 = audioContext.currentTime
+    const playStartTime = audioContext.currentTime
+    let barNum = 0;
+
+    const { bpm, barWidth } = store.getState().project
+    const timePerBar = 1 / (bpm / 240)
+    updatePlayheadAnimation(barNum, store.getState().project.barWidth, timePerBar);
 
     if (!this.interval) {
       this.interval = setInterval(() => {
-        const { bpm } = store.getState().project
+        const { bpm, barWidth } = store.getState().project
+        const timePerBar = 1 / (bpm / 240)
 
-        let time2 = audioContext.currentTime
-
-        let timePerBar = 1 / (bpm / 240)
-
-        if (time2 - time1 > timePerBar - 0.1) {
-          const timeTillNextBar = timePerBar - (time2 - time1)
-          console.log("Time to run note scheduler", audioContext.currentTime, timeTillNextBar)
-          time1 = time2
+        const currentBar = Math.floor((audioContext.currentTime - playStartTime) / timePerBar)
+        if (currentBar !== barNum) {
+          barNum = currentBar
+          updatePlayheadAnimation(barNum, barWidth, timePerBar);
         }
+
+        const elapsedTimeInBar = audioContext.currentTime - playStartTime - (barNum * timePerBar)
+        const timeUntilNextBar = timePerBar - elapsedTimeInBar // useful for note scheduling?
+
+        console.log('elapsedTimeInBar:', elapsedTimeInBar, 'barNum:', barNum);
+
       }, 10)
     }
   }

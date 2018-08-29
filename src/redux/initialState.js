@@ -39,7 +39,16 @@ const initialState: appState = {
     isPlaying: false,
     isRecording: false,
     isLoopEnabled: false,
+
     playheadPosition: 0,
+    playheadAnimation: {
+      from: 0,
+      to: 0,
+      duration: 0,
+    },
+
+    barNum: 0,
+    barWidth: 128,
 
     view: {
       zoom: 1.0,

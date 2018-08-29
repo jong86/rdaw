@@ -10,10 +10,14 @@ export default (state: Object = initialState.project, action: Object): Object =>
       }
     }
 
-    case 'CHANGE_PLAYHEAD_POSITION': {
+    case 'UPDATE_PLAYHEAD_ANIMATION': {
       return {
         ...state,
-        playheadPosition: state.playheadPosition + action.amount,
+        playheadAnimation: {
+          from: action.from,
+          to: action.to,
+          duration: action.duration,
+        },
       }
     }
 

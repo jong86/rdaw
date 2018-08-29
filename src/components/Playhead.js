@@ -3,7 +3,7 @@ import React from 'react';
 import { Stage, Layer, Rect } from "react-konva";
 import { connect } from 'react-redux';
 import { Spring, animated } from 'react-spring/dist/konva';
-import { TimingAnimation } from 'react-spring/dist/addons'
+import { TimingAnimation, Easing } from 'react-spring/dist/addons'
 
 
 type Props = {
@@ -13,17 +13,28 @@ type Props = {
   global: Object,
 };
 
-type State = {
-  playheadPosition: number,
-};
+type State = {};
 
 class Playhead extends React.Component<Props, State> {
   render = () => {
-    const { classes, tracks, project, global } = this.props;
-    const { TitleBar, Transport } = global;
-    const { isPlaying, playheadPosition } = project
+    const {
+      classes,
+      tracks,
+      project,
+      global
+    } = this.props;
 
-    const xPosStart = global.gui.optionsWidth + 1 + playheadPosition;
+    const {
+      TitleBar,
+      Transport,
+    } = global;
+
+    const {
+      isPlaying,
+      playheadAnimation,
+    } = project
+
+    const xOrigin = global.gui.optionsWidth + 1;
     const yPos = TitleBar.height + Transport.height;
     const height = tracks.reduce((accumulator, track) => accumulator + track.gui.height, 0)
 
@@ -40,32 +51,23 @@ class Playhead extends React.Component<Props, State> {
         height={window.innerHeight}
       >
         <Layer>
-          {/* <Rect
-            ref={node => {
-              this.rect = node;
-            }}
-            x={xPos}
-            y={yPos}
-            width={1}
-            height={height}
-            fill={'#0f0'}
-          /> */}
           <Spring
             native
             from={{
-              x: xPosStart,
+              x: isPlaying ? xOrigin + playheadAnimation.from : xOrigin,
               shadowBlur: 0,
               fill: 'rgb(10,50,19)'
             }}
             to={{
-              x: isPlaying ? xPosStart + 1000 : xPosStart,
+              x: isPlaying ? xOrigin + playheadAnimation.to : xOrigin,
               fill: '#00f',
               width: 1,
               height: height,
             }}
             impl={TimingAnimation}
             config={{
-              duration: 1000,
+              duration: playheadAnimation.duration,
+              easing: Easing.linear
             }}
           >
             {props => (

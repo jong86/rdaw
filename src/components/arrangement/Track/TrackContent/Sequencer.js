@@ -41,9 +41,11 @@ export class Sequencer extends React.Component<Props, State> {
       instrument,
       trackIndex,
       view,
+      grid,
+      barWidth,
     } = this.props;
 
-    const hSpacing = 32 * view.zoom;
+    const hSpacing = barWidth * (grid.numerator / grid.denominator) * view.zoom;
     const vSpacing = (containerHeight / numNotes[instrument]);
 
     return (
@@ -90,6 +92,8 @@ const mapStateToProps = (state, ownProps) => {
     numNotes: state.global.constants.numNotes,
     instrument: state.tracks[ownProps.trackIndex].instrument,
     view: state.project.view,
+    grid: state.project.grid,
+    barWidth: state.project.barWidth,
   }
 }
 

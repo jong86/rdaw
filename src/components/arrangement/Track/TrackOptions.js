@@ -38,36 +38,6 @@ class TrackOptions extends React.Component<Props, State> {
         >
           {name}
         </Text>
-        <div
-          style={{
-            border: '1px solid grey'
-          }}
-          onClick={() => {
-            this.props.createNote({
-              trackIndex: trackIndex,
-              duration: 4096,
-              startsAt: 0,
-              midiNum: 24,
-            })
-          }}
-        >
-          test make note
-        </div>
-        <div
-          style={{
-            border: '1px solid green'
-          }}
-          onClick={() => {
-            this.props.createNote({
-              trackIndex: trackIndex,
-              duration: 4096,
-              startsAt: 4096,
-              midiNum: 26,
-            })
-          }}
-        >
-          test make note 2
-        </div>
       </div>
     );
   }
