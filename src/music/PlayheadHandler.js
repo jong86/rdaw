@@ -1,5 +1,4 @@
 import { store } from '../redux/store';
-import audioState from './audioState';
 import audioContext from './audioContext';
 const tellReactToUpdatePlayhead = new Event('reactUpdatePlayhead');
 import Worker from './playhead.worker.js';
@@ -13,57 +12,37 @@ class PlayheadHandler {
   constructor() {
     if (!PlayheadHandler.instance) {
       PlayheadHandler.instance = this;
+      this.interval = null;
     }
 
     return PlayheadHandler.instance;
   }
 
-  // _updatePlayheadPosition() {
-  //   let time1 = audioContext.currentTime;
-
-  //   function step(timestamp) {
-  //     if (audioState.isPlaying) {
-  //       let time2 = audioContext.currentTime;
-  //       const secsPerNoteFrame = 1 / 2.048;
-
-  //       // while(time2 - time1 < secsPerNoteFrame) {
-  //       //   console.log('time2 - time1, secsPerNoteFrame', time2 - time1, secsPerNoteFrame);
-  //       //   console.log("*")
-  //       //   time2 = audioContext.currentTime;
-  //       // }
-
-  //       time1 = time2;
-  //       audioState.playheadPosition += 1;
-  //       console.log('audioState.playheadPosition', audioState.playheadPosition);
-  //       document.dispatchEvent(tellReactToUpdatePlayhead)
-
-  //       window.requestAnimationFrame(step);
-  //     }
-  //   }
-
-  //   window.requestAnimationFrame(step);
-  // }
-
   startPlaying() {
-    audioState.isPlaying = true;
-    console.log('audioState.isPlaying', audioState.isPlaying);
-    const worker = new Worker();
-    worker.postMessage({ type: 'START' });
-    worker.onmessage = e => {
-      console.log("hi")
-      audioState.playheadPosition += 1;
-      console.log('audioState.playheadPosition', audioState.playheadPosition);
-      document.dispatchEvent(tellReactToUpdatePlayhead);
-    };
+    store.dispatch({ type: 'SET_IS_PLAYING', isPlaying: true })
+
+    let time1 = audioContext.currentTime
+
+    this.interval = setInterval(() => {
+      const { bpm } = store.getState().project;
+
+      let time2 = audioContext.currentTime
+      let timePerBar = 1 / (bpm / 240);
+
+      if (time2 - time1 > timePerBar - 0.1) {
+        const timeTillNextBar = timePerBar - (time2 - time1)
+        console.log("Time to run note scheduler", audioContext.currentTime, timeTillNextBar)
+        time1 = time2
+      }
+    }, 10)
   }
 
   stopPlaying() {
-    audioState.isPlaying = false;
-    console.log('audioState.isPlaying', audioState.isPlaying);
+    store.dispatch({ type: 'SET_IS_PLAYING', isPlaying: false })
+    clearInterval(this.interval)
   }
 }
 
 const instance = new PlayheadHandler();
-Object.freeze(instance);
 
 export default instance;

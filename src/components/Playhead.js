@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
-import injectSheet from 'react-jss';
 import { Stage, Layer, Rect } from "react-konva";
 import { connect } from 'react-redux';
-import audioState from '../music/audioState';
+import { Spring, animated } from 'react-spring/dist/konva';
+import { TimingAnimation } from 'react-spring/dist/addons'
+
 
 type Props = {
   classes: Object,
@@ -17,24 +18,12 @@ type State = {
 };
 
 class Playhead extends React.Component<Props, State> {
-  state = {
-    playheadPosition: audioState.playheadPosition,
-  }
-
-  componentDidMount() {
-    document.addEventListener('reactUpdatePlayhead', () => {
-      console.log("event received")
-      this.setState({
-        playheadPosition: audioState.playheadPosition,
-      })
-    })
-  }
-
-  render() {
+  render = () => {
     const { classes, tracks, project, global } = this.props;
     const { TitleBar, Transport } = global;
+    const { isPlaying, playheadPosition } = project
 
-    const xPos = global.gui.optionsWidth + 1 + (audioState.playheadPosition / 8);
+    const xPosStart = global.gui.optionsWidth + 1 + playheadPosition;
     const yPos = TitleBar.height + Transport.height;
     const height = tracks.reduce((accumulator, track) => accumulator + track.gui.height, 0)
 
@@ -51,13 +40,41 @@ class Playhead extends React.Component<Props, State> {
         height={window.innerHeight}
       >
         <Layer>
-          <Rect
+          {/* <Rect
+            ref={node => {
+              this.rect = node;
+            }}
             x={xPos}
             y={yPos}
             width={1}
             height={height}
             fill={'#0f0'}
-          />
+          /> */}
+          <Spring
+            native
+            from={{
+              x: xPosStart,
+              shadowBlur: 0,
+              fill: 'rgb(10,50,19)'
+            }}
+            to={{
+              x: isPlaying ? xPosStart + 1000 : xPosStart,
+              fill: '#0f0',
+              width: 1,
+              height: height,
+            }}
+            impl={TimingAnimation}
+            config={{
+              duration: 1000,
+            }}
+          >
+            {props => (
+              <animated.Rect
+                {...props}
+                y={yPos}
+              />
+            )}
+          </Spring>
         </Layer>
       </Stage>
     );

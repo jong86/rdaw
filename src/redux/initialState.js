@@ -25,7 +25,7 @@ const initialState: appState = {
 
   project: {
     title: '',
-    bpm: 140,
+    bpm: 120,
     timeSignature: {
       numerator: 4,
       denominator: 4,
@@ -50,6 +50,8 @@ const initialState: appState = {
       numerator: 1, // max 8
       denominator: 4, // max 1024
     },
+
+    length: 0,
   },
 
   tracks: [{

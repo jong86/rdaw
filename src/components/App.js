@@ -5,12 +5,16 @@ import { ThemeProvider } from 'react-jss'
 import theme from './theme';
 import { connect } from 'react-redux';
 import { Stage, Layer, Rect } from "react-konva";
+import DevTools from 'mobx-react-devtools'
 
 import TitleBar from './TitleBar';
 import DeviceBar from './DeviceBar';
 import Arrangement from './Arrangement';
 import Transport from './Transport';
 import Playhead from './Playhead';
+
+// import store from '../music/appState';
+
 
 const styles: Object = {
   '@global': {
@@ -56,6 +60,8 @@ export class App extends React.Component<Props, State> {
           <Transport />
           <Arrangement />
           <Playhead />
+
+          {/* <DevTools /> */}
         </div>
       </ThemeProvider>
     );

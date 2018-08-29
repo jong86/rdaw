@@ -2,7 +2,8 @@
   "presets": [
     "react",
     "flow",
-    "babel-preset-stage-2"
+    "babel-preset-stage-2",
+    "mobx"
   ],
   "env": {
     "test": {

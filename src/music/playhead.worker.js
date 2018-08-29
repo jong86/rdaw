@@ -1,15 +1,14 @@
-import audioState from './audioState';
-let position;
-const secsPerNoteFrame = 1 / 2.048 / 1000;
+let barStartTime;
 
 onmessage = e => {
   switch(e.data.type) {
     case 'START': {
-      let x = 0;
-      console.log('audioState from worker', audioState);
-      while (x < 1000) {
-        postMessage({ type: 'UPDATE_PLAYHEAD_POSITION' })
-        x += 1;
+      barStartTime = e.data.barStartTime
+      let currentTime = barStartTime
+      console.log('currentTime - barStartTime', currentTime - barStartTime);
+      while (currentTime - barStartTime < 10) {
+        currentTime = performance.now()
+        postMessage({ type: 'SCHEDULE_NEXT_BAR' })
       }
     }
   }
