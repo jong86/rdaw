@@ -23,7 +23,7 @@ class Notes extends React.Component<Props, State> {
 
       return (
         <Rect
-          width={(gridHSpacing * (length / 4096) - 2)}
+          width={(gridHSpacing * (length / 1024) - 2)}
           height={gridVSpacing - 2}
           x={(gridHSpacing * xPosMultiplier) + 1}
           y={(gridVSpacing * yPosMultiplier) + 1}

@@ -27,7 +27,7 @@ export class Sequencer extends React.Component<Props, State> {
 
     this.props.createNote({
       trackIndex: trackIndex,
-      duration: 4096,
+      duration: 1024,
       startsAt: Math.floor(noteFrame / 4096) * 4096,
       midiNum: row + 21,
     })
@@ -40,9 +40,10 @@ export class Sequencer extends React.Component<Props, State> {
       numNotes,
       instrument,
       trackIndex,
+      view,
     } = this.props;
 
-    const hSpacing = 32;
+    const hSpacing = 32 * view.zoom;
     const vSpacing = (containerHeight / numNotes[instrument]);
 
     return (
@@ -88,6 +89,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     numNotes: state.global.constants.numNotes,
     instrument: state.tracks[ownProps.trackIndex].instrument,
+    view: state.project.view,
   }
 }
 

@@ -4,18 +4,18 @@ const tellReactToUpdatePlayhead = new Event('reactUpdatePlayhead');
 import Worker from './playhead.worker.js';
 
 
-class PlayheadHandler {
+class Player {
   // subscribes to isPlaying state
 
   // if isPlaying === true: increase the playhead position every x milliseconds (depending on bpm)
 
   constructor() {
-    if (!PlayheadHandler.instance) {
-      PlayheadHandler.instance = this;
+    if (!Player.instance) {
+      Player.instance = this;
       this.interval = null;
     }
 
-    return PlayheadHandler.instance;
+    return Player.instance;
   }
 
   startPlaying() {
@@ -44,6 +44,6 @@ class PlayheadHandler {
   }
 }
 
-const instance = new PlayheadHandler();
+const instance = new Player();
 
 export default instance;

@@ -59,7 +59,7 @@ class Playhead extends React.Component<Props, State> {
             }}
             to={{
               x: isPlaying ? xPosStart + 1000 : xPosStart,
-              fill: '#0f0',
+              fill: '#00f',
               width: 1,
               height: height,
             }}
