@@ -54,6 +54,7 @@ class Player {
     store.dispatch({ type: 'SET_IS_PLAYING', isPlaying: false })
     clearInterval(this.interval)
     this.interval = null
+    updatePlayheadAnimation(0, 0, 0);
   }
 }
 

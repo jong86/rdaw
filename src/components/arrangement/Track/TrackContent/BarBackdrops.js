@@ -99,7 +99,7 @@ class BarBackdrops extends React.Component<Props, State> {
 
     return (
       <Layer>
-        <RenderBarBackDrops />
+        {/* <RenderBarBackDrops /> */}
         <RenderDarkenedBeatColumns />
       </Layer>
     );

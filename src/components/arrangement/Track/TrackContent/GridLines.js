@@ -47,23 +47,15 @@ function lines({ direction, start, end, length, spacing, color}: lineOptions): A
       y2 = length;
     }
 
-    const strokeWidth = () => {
-      console.log('i', i);
-      if (direction === 'horizontal') {
-        return 1;
-      } else {
-        return i / spacing % 4 === 0 || i === 0 ? 2 : 1;
-      }
-    }
+    const isStartOfBar = (i === start || i / spacing % 4 === 0) && direction === 'vertical'
 
     array.push(
       <Line
         key={i}
         points={[x1, y1, x2, y2]}
         stroke={color}
-        strokeWidth={1}
-        opacity={0.1}
-        strokeWidth={strokeWidth()}
+        opacity={isStartOfBar ? 0.3 : 0.1}
+        strokeWidth={isStartOfBar ? 2 : 1}
       />
     )
   }
