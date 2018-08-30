@@ -29,13 +29,16 @@ export class PlayHandler {
     if (!isPlaying) {
       setIsPlaying(true)
 
-      const playStartTime = currentTime();
       let barNum: number = 0;
-
       const timePerBar: number = getTimePerBar(bpm)
+
+      // Playhead visual display for first bar
       updatePlayheadAnimation(barNum, barWidth, timePerBar);
 
+      // Schedule first notes right away
       this.scheduleNotes(timePerBar, tracks, 0);
+
+      const playStartTime = currentTime();
 
       if (!this.interval) {
         this.interval = setInterval(() => {
@@ -43,12 +46,14 @@ export class PlayHandler {
           const { bpm, barWidth } = project;
           const timePerBar: number = getTimePerBar(bpm);
 
+          // For playhead visual display
           const currentBar = Math.floor(currentTime() - playStartTime) / timePerBar
           if (currentBar !== barNum) {
             barNum = currentBar
             updatePlayheadAnimation(barNum, barWidth, timePerBar);
           }
 
+          // Actual scheduling of the notes
           this.scheduleNotes(timePerBar, tracks, currentTime() - playStartTime);
         }, 50)
       }
@@ -57,6 +62,7 @@ export class PlayHandler {
 
   stopPlaying(): void {
     setIsPlaying(false)
+
     updatePlayheadAnimation(0, 0, 0);
 
     clearInterval(this.interval)
@@ -77,7 +83,9 @@ export class PlayHandler {
         frame.forEach(noteFrame => {
           if (noteFrame.type === 'INITIATOR' && !this.scheduledNoteIds.includes(noteFrame.id)) {
             const timeUntilNoteStarts: number = frameIndex * timePerFrame
+            // Schedule notes in advance
             instrumentPlayer.play(noteFrame.midiNum, currentTime() + timeUntilNoteStarts)
+            // Keep track of note IDs so they aren't rescheduled
             this.scheduledNoteIds.push(noteFrame.id)
           }
         })
