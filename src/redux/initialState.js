@@ -27,6 +27,7 @@ const initialState: appState = {
 
   project: {
     title: '',
+
     bpm: 170,
     timeSignature: {
       numerator: 4,
@@ -42,7 +43,6 @@ const initialState: appState = {
     isRecording: false,
     isLoopEnabled: false,
 
-    playheadPosition: 0,
     playheadAnimation: {
       from: 0,
       to: 0,

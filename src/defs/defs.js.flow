@@ -1,29 +1,65 @@
 // @flow
 export type appState = {
   global: {
+    gui: {
+      optionsWidth: number,
+    },
     DeviceBar: {
       height: number,
     },
     TitleBar: {
       height: number,
     },
+    Transport: {
+      height: number,
+    },
+    constants: {
+      numNotes: {
+        DRUMS: number,
+        SYNTH: number,
+      },
+      FRAMES_PER_BAR: number,
+      SCHEDULER_LOOKAHEAD: number, // time in seconds
+    },
   },
 
   project: {
     title: string,
+
     bpm: number,
     timeSignature: {
       numerator: number,
       denominator: number,
     },
     swing: number,
+
+    isPlaying: boolean,
+    isRecording: boolean,
+    isLoopEnabled: boolean,
+
+    playheadAnimation: {
+      from: number,
+      to: number,
+      duration: number,
+    },
+
+    barNum: number,
+    barWidth: number,
+
     view: {
       zoom: number,
       left: number,
     },
+
+    grid: {
+      numerator: number,
+      denominator: number,
+    },
+
+    length: number,
   },
 
-  tracks: Array<Object>,
+  tracks: Array<track>,
 }
 
 export type note = {
@@ -39,8 +75,13 @@ export type rectDimensions = {
 
 export type track = {
   id: number,
+  name: string,
   type: string,
   instrument: string,
   isArmed: boolean,
+  timeline: Array<Object>,
+  gui: {
+    height: number,
+  }
 }
 
