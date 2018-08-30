@@ -4,7 +4,7 @@ module.exports = {
     "^.+\\.js$": "babel-jest"
   },
   globals: {
-    NODE_ENV: "test"
+    'process.env.NODE_ENV': "test"
   },
   moduleFileExtensions: [
     "js",

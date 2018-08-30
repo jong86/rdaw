@@ -43,10 +43,6 @@ module.exports = {
         use: [{ loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' }],
         include: defaultInclude
       },
-      {
-        test: /\.worker\.js$/,
-        use: { loader: 'worker-loader' }
-      },
     ]
   },
   target: 'electron-renderer',

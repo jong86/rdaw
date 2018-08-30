@@ -9,8 +9,20 @@ describe('Sequencer component', () => {
   beforeEach(() => {
     props = {
       createNote: jest.fn(),
+      containerWidth: 800,
+      containerHeight: 600,
       numNotes: 16,
-      intrument: "DRUMS"
+      instrument: "DRUMS",
+      trackIndex: 0,
+      view: {
+        zoom: 1.0,
+        left: 0.0,
+      },
+      grid: {
+        numerator: 1,
+        denominator: 4,
+      },
+      barWidth: 32,
     }
 
     mockEvent = {
