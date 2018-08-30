@@ -6,7 +6,7 @@ function updatePlayheadAnimation(barNum, barWidth, duration) {
   store.dispatch({
     type: 'UPDATE_PLAYHEAD_ANIMATION',
     from: barNum * barWidth,
-    to: (barNum * barWidth) + barWidth - 1,
+    to: (barNum * barWidth) + barWidth,
     duration: duration * 1000,
   })
 }
@@ -15,13 +15,19 @@ function setIsPlaying(isPlaying) {
   store.dispatch({ type: 'SET_IS_PLAYING', isPlaying: isPlaying })
 }
 
+function getTimePerBar(bpm) {
+  return 1 / (bpm / 240)
+}
+
+function currentTime() {
+  return audioContext.currentTime;
+}
+
 
 class PlayHandler {
   constructor() {
-    this.schedulerState = {
-      lastFrameSeen: 0,
-      scheduledNoteIds: [],
-    }
+    this.lastFrameInLastSchedulerRun = 0
+    this.scheduledNoteIds = []
 
     // Make this class a singleton
     if (!PlayHandler.instance) {
@@ -32,73 +38,64 @@ class PlayHandler {
   }
 
   startPlaying() {
-    setIsPlaying(true)
+    if (!store.getState().project.isPlaying) {
+      setIsPlaying(true)
 
-    const playStartTime = audioContext.currentTime
-    let totalElapsedTime = 0;
-    let barNum = 0;
+      const playStartTime = currentTime();
+      let barNum = 0;
 
-    const { bpm, barWidth } = store.getState().project
-    const timePerBar = 1 / (bpm / 240)
-    updatePlayheadAnimation(barNum, store.getState().project.barWidth, timePerBar);
+      const { bpm, barWidth } = store.getState().project
+      const timePerBar = getTimePerBar(bpm)
+      updatePlayheadAnimation(barNum, barWidth, timePerBar);
 
-    if (!this.interval) {
-      this.interval = setInterval(() => {
-        const { project, tracks } = store.getState();
-        const { bpm, barWidth } = project;
-        const { currentTime } = audioContext;
-        const timePerBar = 1 / (bpm / 240);
+      if (!this.interval) {
+        this.interval = setInterval(() => {
+          const { project, tracks } = store.getState();
+          const { bpm, barWidth } = project;
+          const timePerBar = getTimePerBar(bpm);
 
-        const currentBar = Math.floor((currentTime - playStartTime) / timePerBar)
-        if (currentBar !== barNum) {
-          barNum = currentBar
-          updatePlayheadAnimation(barNum, barWidth, timePerBar);
-        }
+          const currentBar = Math.floor((currentTime() - playStartTime) / timePerBar)
+          if (currentBar !== barNum) {
+            barNum = currentBar
+            updatePlayheadAnimation(barNum, barWidth, timePerBar);
+          }
 
-        const elapsedTimeInBar = audioContext.currentTime - playStartTime - (barNum * timePerBar)
-        const timeUntilNextBar = timePerBar - elapsedTimeInBar // useful for note scheduling?
-
-        totalElapsedTime = currentTime - playStartTime;
-
-        this.scheduleNotes(timePerBar, tracks);
-
-      }, 10)
+          this.scheduleNotes(timePerBar, tracks, currentTime() - playStartTime);
+        }, 50)
+      }
     }
   }
 
   stopPlaying() {
     setIsPlaying(false)
-    clearInterval(this.interval)
-    this.interval = null
     updatePlayheadAnimation(0, 0, 0);
 
-    this.schedulerState = {
-      lastFrameSeen: 0,
-      scheduledNoteIds: [],
-    }
+    clearInterval(this.interval)
+    this.interval = null
+
+    this.lastFrameInLastSchedulerRun = 0
+    this.scheduledNoteIds = []
   }
 
-  scheduleNotes(timePerBar, tracks) {
-    let { lastFrameSeen, scheduledNoteIds } = this.schedulerState;
-
-    const msPerFrame = timePerBar / 4096 * 1000;
-    const lookaheadMs = 100;
-    const framesPerLookahead = msPerFrame * lookaheadMs;
-    console.log("Scheduling...")
+  scheduleNotes(timePerBar, tracks, elapsedTime) {
+    const timePerFrame = timePerBar / 4096;
+    const lookaheadTime = 0.25;
+    const framesPerLookahead = Math.floor(lookaheadTime / timePerFrame);
+    const startFrame = Math.floor(elapsedTime / timePerFrame)
+    // debugger
+    console.log('startFrame, startFrame + framesPerLookahead', startFrame, startFrame + framesPerLookahead);
 
     tracks.forEach(({ timeline }) => {
-      timeline.slice(lastFrameSeen, framesPerLookahead).forEach(frame => {
-        frame.forEach((noteFrame, i) => {
-          if (noteFrame.type === 'INITIATOR' && scheduledNoteIds.indexOf(noteFrame.id) === -1) {
-            console.log(noteFrame.id);
-            instrumentPlayer.play(60, i * msPerFrame)
-            scheduledNoteIds.push(noteFrame.id)
+      const slice = timeline.slice(startFrame, startFrame + framesPerLookahead);
+      slice.forEach((frame, frameIndex) => {
+        frame.forEach(noteFrame => {
+          if (noteFrame.type === 'INITIATOR' && this.scheduledNoteIds.indexOf(noteFrame.id) === -1) {
+            instrumentPlayer.play(60, (frameIndex+2) * timePerFrame)
+            this.scheduledNoteIds.push(noteFrame.id)
           }
         })
       })
     })
-
-    lastFrameSeen += framesPerLookahead;
   }
 }
 
