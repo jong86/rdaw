@@ -48,7 +48,7 @@ class Playhead extends React.Component<Props, State> {
           pointerEvents: 'none',
         }}
         width={window.innerWidth}
-        height={window.innerHeight}
+        height={window.innerHeight || 0}
       >
         <Layer>
           <Spring

@@ -83,7 +83,7 @@ export class Sequencer extends React.Component<Props, State> {
     return (
       <Stage
         width={containerWidth}
-        height={containerHeight}
+        height={containerHeight || 0}
         onClick={event => this.handleClick(event, hSpacing, vSpacing, trackIndex)}
       >
         <BarBackdrops

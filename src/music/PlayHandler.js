@@ -43,7 +43,8 @@ class PlayHandler {
   }
 
   startPlaying() {
-    const { isPlaying, bpm, barWidth } = store.getState().project
+    const { project, tracks } = store.getState()
+    const { isPlaying, bpm, barWidth } = project
 
     if (!isPlaying) {
       setIsPlaying(true)
@@ -54,6 +55,8 @@ class PlayHandler {
       const timePerBar = getTimePerBar(bpm)
       updatePlayheadAnimation(barNum, barWidth, timePerBar);
 
+      this.scheduleNotes(timePerBar, tracks, 0);
+
       if (!this.interval) {
         this.interval = setInterval(() => {
           const { project, tracks } = store.getState();
@@ -63,7 +66,6 @@ class PlayHandler {
           const currentBar = Math.floor((currentTime() - playStartTime) / timePerBar)
           if (currentBar !== barNum) {
             barNum = currentBar
-            console.log("new bar")
             updatePlayheadAnimation(barNum, barWidth, timePerBar);
           }
 
@@ -88,7 +90,7 @@ class PlayHandler {
     const timePerFrame = timePerBar / FRAMES_PER_BAR;
     const framesPerLookahead = Math.floor(SCHEDULER_LOOKAHEAD / timePerFrame);
     const startFrame = Math.floor(elapsedTime / timePerFrame)
-
+    // debugger
     tracks.forEach(({ timeline }) => {
       const slice = timeline.slice(startFrame, startFrame + framesPerLookahead);
       slice.forEach((frame, frameIndex) => {
