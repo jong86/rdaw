@@ -62,14 +62,15 @@ class PlayHandler {
           const { project, tracks } = store.getState();
           const { bpm, barWidth } = project;
           const timePerBar = getTimePerBar(bpm);
+          const timeNow = currentTime();
 
-          const currentBar = Math.floor((currentTime() - playStartTime) / timePerBar)
+          const currentBar = Math.floor(timeNow - playStartTime) / timePerBar
           if (currentBar !== barNum) {
             barNum = currentBar
             updatePlayheadAnimation(barNum, barWidth, timePerBar);
           }
 
-          this.scheduleNotes(timePerBar, tracks, currentTime() - playStartTime);
+          this.scheduleNotes(timePerBar, tracks, timeNow - playStartTime);
         }, 10)
       }
     }
@@ -96,7 +97,9 @@ class PlayHandler {
       slice.forEach((frame, frameIndex) => {
         frame.forEach(noteFrame => {
           if (noteFrame.type === 'INITIATOR' && this.scheduledNoteIds.indexOf(noteFrame.id) === -1) {
-            instrumentPlayer.play(noteFrame.midiNum, currentTime() + (frameIndex * timePerFrame))
+            const timeNow = currentTime();
+            const timeUntilNoteStarts = frameIndex * timePerFrame
+            instrumentPlayer.play(noteFrame.midiNum, timeNow + timeUntilNoteStarts)
             this.scheduledNoteIds.push(noteFrame.id)
           }
         })

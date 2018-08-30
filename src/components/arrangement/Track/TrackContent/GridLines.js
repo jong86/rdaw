@@ -54,8 +54,8 @@ function lines({ direction, start, end, length, spacing, color}: lineOptions): A
         key={i}
         points={[x1, y1, x2, y2]}
         stroke={color}
-        opacity={isStartOfBar ? 0.3 : 0.1}
-        strokeWidth={isStartOfBar ? 2 : 1}
+        opacity={isStartOfBar ? 0.35 : 0.1}
+        strokeWidth={1}
       />
     )
   }

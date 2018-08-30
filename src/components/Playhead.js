@@ -34,7 +34,7 @@ class Playhead extends React.Component<Props, State> {
       playheadAnimation,
     } = project
 
-    const xOrigin = global.gui.optionsWidth + 1;
+    const xOrigin = global.gui.optionsWidth;
     const yPos = TitleBar.height + Transport.height;
     const height = tracks.reduce((accumulator, track) => accumulator + track.gui.height, 0)
 

@@ -29,7 +29,7 @@ class BarBackdrops extends React.Component<Props, State> {
       return (
         <Rect
           key={index}
-          height={containerHeight}
+          height={containerHeight || 0}
           width={gridHSpacing}
           x={xOffset}
           y={0}
