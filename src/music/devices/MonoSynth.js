@@ -7,8 +7,8 @@ export default class extends MIDIDevice {
     super();
   }
 
-  play(midiNote: number): void {
-    const freq = this.convertMIDINoteToFreq(midiNote);
+  play(midiNum: number): void {
+    const freq = this.convertMIDINoteToFreq(midiNum);
 
     if (!this.isPlaying) {
       this.isPlaying = true;

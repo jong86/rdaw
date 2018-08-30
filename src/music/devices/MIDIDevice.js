@@ -13,7 +13,7 @@ const freq = (function midiFreq(tuning, midi) {
 
 
 export default class extends BaseDevice {
-  convertMIDINoteToFreq(midiNote): number {
-    return freq(midiNote);
+  convertMIDINoteToFreq(midiNum): number {
+    return freq(midiNum);
   }
 }

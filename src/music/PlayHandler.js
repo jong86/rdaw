@@ -63,6 +63,7 @@ class PlayHandler {
           const currentBar = Math.floor((currentTime() - playStartTime) / timePerBar)
           if (currentBar !== barNum) {
             barNum = currentBar
+            console.log("new bar")
             updatePlayheadAnimation(barNum, barWidth, timePerBar);
           }
 

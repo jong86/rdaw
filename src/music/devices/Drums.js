@@ -20,10 +20,10 @@ export default class extends MIDIDevice {
     this.delay = 0;
   }
 
-  play(midiNote: number, delay: number): void {
+  play(midiNum: number, delay: number): void {
     this.delay = delay || 0;
 
-    switch (midiNote) {
+    switch (midiNum) {
       case 21:
         this.kick();
         break;
