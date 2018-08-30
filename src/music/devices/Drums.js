@@ -2,6 +2,8 @@
 import audioContext from '../audioContext'
 import MIDIDevice from './MIDIDevice'
 
+let lastNoteTime = 0;
+
 function createNoiseBuffer() {
   const bufferSize = 2 * audioContext.sampleRate; // Creates noise buffer to use for percussion
   const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
@@ -15,13 +17,14 @@ function createNoiseBuffer() {
 const noiseBuffer = createNoiseBuffer();
 
 export default class extends MIDIDevice {
-  constructor(): void {
-    super();
-    this.delay = 0;
-  }
+  startTime: number
 
-  play(midiNum: number, delay: number): void {
-    this.delay = delay || 0;
+  play(midiNum: number, startTime: number): void {
+    this.startTime = startTime || audioContext.currentTime;
+
+    const currentTime = audioContext.currentTime
+    console.log("Time since last note:", currentTime - lastNoteTime)
+    lastNoteTime = currentTime;
 
     switch (midiNum) {
       case 21:
@@ -42,9 +45,10 @@ export default class extends MIDIDevice {
   }
 
   kick(): void {
+    const { startTime } = this;
+
     // Kick osc part:
     const osc = audioContext.createOscillator(); // Create oscillator (i.e. 'bass guitar')
-    const startTime = audioContext.currentTime + this.delay
 
     osc.type = "triangle";
     osc.frequency.value = 120;
@@ -57,7 +61,7 @@ export default class extends MIDIDevice {
     osc.connect(oscGain); // Connect osc to gain pedal
     oscGain.connect(audioContext.destination); // Connect gain pedal to speakers (just like a device chain)
 
-    osc.start(); // Generate sound instantly
+    osc.start(startTime); // Generate sound instantly
     osc.stop(startTime);
 
     // Kick noise part:
@@ -80,28 +84,30 @@ export default class extends MIDIDevice {
     noiseFilter.connect(noiseGain);
     noiseGain.connect(audioContext.destination);
 
-    noise.start();
+    noise.start(startTime);
     noise.stop(startTime + 0.1);
   }
 
   snare(): void {
+    const { startTime } = this;
+
     // Snare osc part:
     var osc = audioContext.createOscillator(); // Create oscillator (i.e. 'bass guitar')
 
     osc.type = "triangle";
     osc.frequency.value = 300;
-    osc.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.1);
+    osc.frequency.exponentialRampToValueAtTime(200, startTime + 0.1);
 
     var oscGain = audioContext.createGain(); // Create gain node (i.e. 'gain pedal')
     //oscGain.gain.value = 0.5; // set gain node to 30%
-    oscGain.gain.setValueAtTime(0.1, audioContext.currentTime);
-    oscGain.gain.exponentialRampToValueAtTime(0.4, audioContext.currentTime + 0.1);
+    oscGain.gain.setValueAtTime(0.1, 0);
+    oscGain.gain.exponentialRampToValueAtTime(0.4, startTime  + 0.1);
 
     osc.connect(oscGain); // Connect osc to gain pedal
     oscGain.connect(audioContext.destination); // Connect gain pedal to speakers (just like a device chain)
 
-    osc.start(); // Generate sound instantly
-    osc.stop(audioContext.currentTime + 0.07);
+    osc.start(startTime); // Generate sound instantly
+    osc.stop(startTime + 0.07);
 
     // Snare noise part:
     var noise = audioContext.createBufferSource();
@@ -112,8 +118,8 @@ export default class extends MIDIDevice {
     var noiseFilter = audioContext.createBiquadFilter();
     noiseFilter.type = "lowpass";
 
-    noiseFilter.frequency.setValueAtTime(12000, audioContext.currentTime);
-    noiseFilter.frequency.exponentialRampToValueAtTime(220, audioContext.currentTime + 0.1);
+    noiseFilter.frequency.setValueAtTime(12000, startTime);
+    noiseFilter.frequency.exponentialRampToValueAtTime(220, startTime + 0.1);
 
     var noiseGain = audioContext.createGain();
     noiseGain.gain.value = 0.2;
@@ -122,11 +128,13 @@ export default class extends MIDIDevice {
     noiseFilter.connect(noiseGain);
     noiseGain.connect(audioContext.destination);
 
-    noise.start();
-    noise.stop(audioContext.currentTime + 0.1);
+    noise.start(startTime);
+    noise.stop(startTime + 0.1);
   }
 
   closedHat(): void {
+    const { startTime } = this;
+
     var noise = audioContext.createBufferSource();
 
     noise.buffer = noiseBuffer;
@@ -135,8 +143,8 @@ export default class extends MIDIDevice {
     var noiseFilter = audioContext.createBiquadFilter();
     noiseFilter.type = "highpass";
 
-    noiseFilter.frequency.setValueAtTime(1000, audioContext.currentTime);
-    noiseFilter.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.1);
+    noiseFilter.frequency.setValueAtTime(1000, startTime);
+    noiseFilter.frequency.exponentialRampToValueAtTime(80, startTime + 0.1);
 
     var noiseGain = audioContext.createGain();
     noiseGain.gain.value = 0.2;
@@ -145,11 +153,13 @@ export default class extends MIDIDevice {
     noiseFilter.connect(noiseGain);
     noiseGain.connect(audioContext.destination);
 
-    noise.start();
-    noise.stop(audioContext.currentTime + 0.03);
+    noise.start(startTime);
+    noise.stop(startTime + 0.03);
   }
 
   openHat(): void {
+    const { startTime } = this;
+
     var noise = audioContext.createBufferSource();
 
     noise.buffer = noiseBuffer;
@@ -158,23 +168,25 @@ export default class extends MIDIDevice {
     var noiseFilter = audioContext.createBiquadFilter();
     noiseFilter.type = "highpass";
 
-    noiseFilter.frequency.setValueAtTime(1000, audioContext.currentTime);
-    noiseFilter.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.1);
+    noiseFilter.frequency.setValueAtTime(1000, startTime);
+    noiseFilter.frequency.exponentialRampToValueAtTime(80, startTime + 0.1);
 
     var noiseGain = audioContext.createGain();
     noiseGain.gain.value = 0.2;
-    noiseGain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.3);
+    noiseGain.gain.linearRampToValueAtTime(0, startTime + 0.3);
 
     noise.connect(noiseFilter);
     noiseFilter.connect(noiseGain);
     noiseGain.connect(audioContext.destination);
 
-    noise.start();
-    noise.stop(audioContext.currentTime + 2);
+    noise.start(startTime);
+    noise.stop(startTime + 2);
   }
 
 
   cymbal(): void {
+    const { startTime } = this;
+
     var noise = audioContext.createBufferSource();
 
     noise.buffer = noiseBuffer;
@@ -183,22 +195,24 @@ export default class extends MIDIDevice {
     var noiseFilter = audioContext.createBiquadFilter();
     noiseFilter.type = "highpass";
 
-    noiseFilter.frequency.setValueAtTime(1000, audioContext.currentTime);
-    noiseFilter.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.1);
+    noiseFilter.frequency.setValueAtTime(1000, startTime);
+    noiseFilter.frequency.exponentialRampToValueAtTime(80, startTime + 0.1);
 
     var noiseGain = audioContext.createGain();
     noiseGain.gain.value = 0.2;
-    noiseGain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.3);
+    noiseGain.gain.linearRampToValueAtTime(0, startTime + 0.3);
 
     noise.connect(noiseFilter);
     noiseFilter.connect(noiseGain);
     noiseGain.connect(audioContext.destination);
 
-    noise.start();
-    noise.stop(audioContext.currentTime + 0.03);
+    noise.start(startTime);
+    noise.stop(startTime + 0.03);
   }
 
   cowbell(): void {
+    const { startTime } = this;
+
     var noise = audioContext.createBufferSource();
 
     noise.buffer = noiseBuffer;
@@ -207,18 +221,18 @@ export default class extends MIDIDevice {
     var noiseFilter = audioContext.createBiquadFilter();
     noiseFilter.type = "highpass";
 
-    noiseFilter.frequency.setValueAtTime(1000, audioContext.currentTime);
-    noiseFilter.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.1);
+    noiseFilter.frequency.setValueAtTime(1000, startTime);
+    noiseFilter.frequency.exponentialRampToValueAtTime(80, startTime + 0.1);
 
     var noiseGain = audioContext.createGain();
     noiseGain.gain.value = 0.2;
-    noiseGain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.3);
+    noiseGain.gain.linearRampToValueAtTime(0, startTime + 0.3);
 
     noise.connect(noiseFilter);
     noiseFilter.connect(noiseGain);
     noiseGain.connect(audioContext.destination);
 
-    noise.start();
-    noise.stop(audioContext.currentTime + 0.03);
+    noise.start(startTime);
+    noise.stop(startTime + 0.03);
   }
 }

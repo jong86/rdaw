@@ -7,10 +7,10 @@ const drums = new Drums();
 
 
 export default {
-  play: (midiNum: number, delay: number): void => {
+  play: (midiNum: number, startTime: number): void => {
     // Should be connected to redux -- finds out which instrument is armed, then plays it
     // monoSynth.overdrive().play(midiNum);
-    drums.play(midiNum, delay);
+    drums.play(midiNum, startTime);
 
     // desired code here:
     // getInstrumentById(instrumentId).play();

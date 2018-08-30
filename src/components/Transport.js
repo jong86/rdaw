@@ -50,7 +50,7 @@ export class Transport extends React.Component<Props, State> {
         </Button>
         <Button
           onClick={this.handleStop}
-          color={'neutral-dark'}
+          color={!project.isPlaying ? 'neutral' : 'neutral-dark'}
         >
           <FaStop />
         </Button>

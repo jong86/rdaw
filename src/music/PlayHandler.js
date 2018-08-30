@@ -68,7 +68,7 @@ class PlayHandler {
           }
 
           this.scheduleNotes(timePerBar, tracks, currentTime() - playStartTime);
-        }, 50)
+        }, 10)
       }
     }
   }
@@ -89,14 +89,12 @@ class PlayHandler {
     const framesPerLookahead = Math.floor(SCHEDULER_LOOKAHEAD / timePerFrame);
     const startFrame = Math.floor(elapsedTime / timePerFrame)
 
-    // debugger
-
     tracks.forEach(({ timeline }) => {
       const slice = timeline.slice(startFrame, startFrame + framesPerLookahead);
       slice.forEach((frame, frameIndex) => {
         frame.forEach(noteFrame => {
           if (noteFrame.type === 'INITIATOR' && this.scheduledNoteIds.indexOf(noteFrame.id) === -1) {
-            instrumentPlayer.play(noteFrame.midiNum, frameIndex * timePerFrame)
+            instrumentPlayer.play(noteFrame.midiNum, currentTime() + (frameIndex * timePerFrame))
             this.scheduledNoteIds.push(noteFrame.id)
           }
         })
