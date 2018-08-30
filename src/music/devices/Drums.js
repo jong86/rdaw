@@ -22,10 +22,6 @@ export default class extends MIDIDevice {
   play(midiNum: number, startTime: number): void {
     this.startTime = startTime || audioContext.currentTime;
 
-    const currentTime = audioContext.currentTime
-    console.log("Time since last note:", currentTime - lastNoteTime)
-    lastNoteTime = currentTime;
-
     switch (midiNum) {
       case 21:
         this.kick();

@@ -21,7 +21,7 @@ const initialState: appState = {
         SYNTH: 127,
       },
       FRAMES_PER_BAR: 4096,
-      SCHEDULER_LOOKAHEAD: 0.1, // time in seconds
+      SCHEDULER_LOOKAHEAD: 0.25, // time in seconds
     },
   },
 

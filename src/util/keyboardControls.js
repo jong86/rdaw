@@ -64,7 +64,7 @@ export default () => {
       const midiNum = convertKeyCodeToMIDINote(keyCode);
 
       if (keyCode >= 65 && keyCode <= 90) {
-        return instrumentPlayer.play(midiNum);
+        return instrumentPlayer.play(midiNum, 0);
       }
     }),
 

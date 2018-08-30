@@ -71,7 +71,7 @@ class PlayHandler {
           }
 
           this.scheduleNotes(timePerBar, tracks, timeNow - playStartTime);
-        }, 10)
+        }, 50)
       }
     }
   }
