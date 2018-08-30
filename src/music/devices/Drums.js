@@ -24,16 +24,16 @@ export default class extends MIDIDevice {
     this.delay = delay || 0;
 
     switch (midiNote) {
-      case 60:
+      case 21:
         this.kick();
         break;
-      case 61:
+      case 22:
         this.snare();
         break;
-      case 62:
+      case 23:
         this.closedHat();
         break;
-      case 63:
+      case 24:
         this.openHat();
         break;
       default:

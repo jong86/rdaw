@@ -43,13 +43,14 @@ class PlayHandler {
   }
 
   startPlaying() {
-    if (!store.getState().project.isPlaying) {
+    const { isPlaying, bpm, barWidth } = store.getState().project
+
+    if (!isPlaying) {
       setIsPlaying(true)
 
       const playStartTime = currentTime();
       let barNum = 0;
 
-      const { bpm, barWidth } = store.getState().project
       const timePerBar = getTimePerBar(bpm)
       updatePlayheadAnimation(barNum, barWidth, timePerBar);
 
@@ -88,15 +89,13 @@ class PlayHandler {
     const startFrame = Math.floor(elapsedTime / timePerFrame)
 
     // debugger
-    console.log('startFrame, startFrame + framesPerLookahead', startFrame, startFrame + framesPerLookahead);
 
     tracks.forEach(({ timeline }) => {
       const slice = timeline.slice(startFrame, startFrame + framesPerLookahead);
       slice.forEach((frame, frameIndex) => {
         frame.forEach(noteFrame => {
           if (noteFrame.type === 'INITIATOR' && this.scheduledNoteIds.indexOf(noteFrame.id) === -1) {
-            debugger
-            instrumentPlayer.play(60, frameIndex * timePerFrame)
+            instrumentPlayer.play(noteFrame.midiNum, frameIndex * timePerFrame)
             this.scheduledNoteIds.push(noteFrame.id)
           }
         })
