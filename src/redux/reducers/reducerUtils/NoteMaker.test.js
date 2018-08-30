@@ -14,7 +14,7 @@ describe('NoteMaker class', () => {
   })
 
   test('creates correct amount of noteFrames in timeline array', () => {
-    expect(timeline.length).toEqual(3072);
+    expect(timeline.length).toEqual(note.startsAt + note.duration);
   })
 
   test('note begins at correct index', () => {

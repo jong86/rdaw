@@ -38,7 +38,7 @@ export class Sequencer extends React.Component<Props, State> {
     })
   }
 
-  componentDidMount = () => {
+  componentDidMount(): void {
     for (let i = 0; i < 33; i += 1) {
       this.props.createNote({
         trackIndex: 0,

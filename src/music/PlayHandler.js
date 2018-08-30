@@ -6,22 +6,17 @@ import {
   updatePlayheadAnimation,
   setIsPlaying,
 } from '../redux/reducers/project';
+import {
+  getTimePerBar,
+  currentTime,
+} from '../util/music';
 
 const {
   FRAMES_PER_BAR,
   SCHEDULER_LOOKAHEAD,
 } = store.getState().global.constants;
 
-
-function getTimePerBar(bpm: number): number {
-  return 1 / (bpm / 240)
-}
-
-function currentTime(): number {
-  return audioContext.currentTime;
-}
-
-class PlayHandler {
+export class PlayHandler {
   instance: Object
   lastFrameInLastSchedulerRun: number = 0
   scheduledNoteIds: Array<string> = []
@@ -35,9 +30,9 @@ class PlayHandler {
       setIsPlaying(true)
 
       const playStartTime = currentTime();
-      let barNum = 0;
+      let barNum: number = 0;
 
-      const timePerBar = getTimePerBar(bpm)
+      const timePerBar: number = getTimePerBar(bpm)
       updatePlayheadAnimation(barNum, barWidth, timePerBar);
 
       this.scheduleNotes(timePerBar, tracks, 0);
@@ -46,16 +41,15 @@ class PlayHandler {
         this.interval = setInterval(() => {
           const { project, tracks } = store.getState();
           const { bpm, barWidth } = project;
-          const timePerBar = getTimePerBar(bpm);
-          const timeNow = currentTime();
+          const timePerBar: number = getTimePerBar(bpm);
 
-          const currentBar = Math.floor(timeNow - playStartTime) / timePerBar
+          const currentBar = Math.floor(currentTime() - playStartTime) / timePerBar
           if (currentBar !== barNum) {
             barNum = currentBar
             updatePlayheadAnimation(barNum, barWidth, timePerBar);
           }
 
-          this.scheduleNotes(timePerBar, tracks, timeNow - playStartTime);
+          this.scheduleNotes(timePerBar, tracks, currentTime() - playStartTime);
         }, 50)
       }
     }
@@ -73,18 +67,17 @@ class PlayHandler {
   }
 
   scheduleNotes(timePerBar: number, tracks: Array<Object>, elapsedTime: number): void {
-    const timePerFrame = timePerBar / FRAMES_PER_BAR;
-    const framesPerLookahead = Math.floor(SCHEDULER_LOOKAHEAD / timePerFrame);
-    const startFrame = Math.floor(elapsedTime / timePerFrame)
+    const timePerFrame: number = timePerBar / FRAMES_PER_BAR;
+    const framesPerLookahead: number = Math.floor(SCHEDULER_LOOKAHEAD / timePerFrame);
+    const startFrame: number = Math.floor(elapsedTime / timePerFrame)
 
     tracks.forEach(({ timeline }) => {
       const slice = timeline.slice(startFrame, startFrame + framesPerLookahead);
       slice.forEach((frame, frameIndex) => {
         frame.forEach(noteFrame => {
-          if (noteFrame.type === 'INITIATOR' && this.scheduledNoteIds.indexOf(noteFrame.id) === -1) {
-            const timeNow = currentTime();
-            const timeUntilNoteStarts = frameIndex * timePerFrame
-            instrumentPlayer.play(noteFrame.midiNum, timeNow + timeUntilNoteStarts)
+          if (noteFrame.type === 'INITIATOR' && !this.scheduledNoteIds.includes(noteFrame.id)) {
+            const timeUntilNoteStarts: number = frameIndex * timePerFrame
+            instrumentPlayer.play(noteFrame.midiNum, currentTime() + timeUntilNoteStarts)
             this.scheduledNoteIds.push(noteFrame.id)
           }
         })
