@@ -2,6 +2,11 @@ import { store } from '../redux/store';
 import audioContext from './audioContext';
 import instrumentPlayer from './instrumentPlayer';
 
+const {
+  FRAMES_PER_BAR,
+  SCHEDULER_LOOKAHEAD,
+} = store.getState().global.constants;
+
 function updatePlayheadAnimation(barNum, barWidth, duration) {
   store.dispatch({
     type: 'UPDATE_PLAYHEAD_ANIMATION',
@@ -78,10 +83,10 @@ class PlayHandler {
   }
 
   scheduleNotes(timePerBar, tracks, elapsedTime) {
-    const timePerFrame = timePerBar / 4096;
-    const lookaheadTime = 0.25;
-    const framesPerLookahead = Math.floor(lookaheadTime / timePerFrame);
+    const timePerFrame = timePerBar / FRAMES_PER_BAR;
+    const framesPerLookahead = Math.floor(SCHEDULER_LOOKAHEAD / timePerFrame);
     const startFrame = Math.floor(elapsedTime / timePerFrame)
+
     // debugger
     console.log('startFrame, startFrame + framesPerLookahead', startFrame, startFrame + framesPerLookahead);
 
@@ -90,7 +95,8 @@ class PlayHandler {
       slice.forEach((frame, frameIndex) => {
         frame.forEach(noteFrame => {
           if (noteFrame.type === 'INITIATOR' && this.scheduledNoteIds.indexOf(noteFrame.id) === -1) {
-            instrumentPlayer.play(60, (frameIndex+2) * timePerFrame)
+            debugger
+            instrumentPlayer.play(60, frameIndex * timePerFrame)
             this.scheduledNoteIds.push(noteFrame.id)
           }
         })
