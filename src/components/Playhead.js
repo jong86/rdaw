@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Spring, animated } from 'react-spring/dist/konva';
 import { TimingAnimation, Easing } from 'react-spring/dist/addons'
 
-
 type Props = {
   classes: Object,
   tracks: Object,
@@ -42,7 +41,7 @@ class Playhead extends React.Component<Props, State> {
       <Stage
         style={{
           position: 'absolute',
-          zIndex: 3,
+          zIndex: 4,
           top: 0,
           left: 0,
           pointerEvents: 'none',
@@ -74,6 +73,7 @@ class Playhead extends React.Component<Props, State> {
               <animated.Rect
                 {...props}
                 y={yPos}
+                opacity={0.75}
               />
             )}
           </Spring>

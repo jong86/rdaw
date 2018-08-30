@@ -1,48 +1,33 @@
+// @flow
 import { store } from '../redux/store';
 import audioContext from './audioContext';
 import instrumentPlayer from './instrumentPlayer';
+import {
+  updatePlayheadAnimation,
+  setIsPlaying,
+} from '../redux/reducers/project';
 
 const {
   FRAMES_PER_BAR,
   SCHEDULER_LOOKAHEAD,
 } = store.getState().global.constants;
 
-function updatePlayheadAnimation(barNum, barWidth, duration) {
-  store.dispatch({
-    type: 'UPDATE_PLAYHEAD_ANIMATION',
-    from: barNum * barWidth,
-    to: (barNum * barWidth) + barWidth,
-    duration: duration * 1000,
-  })
-}
 
-function setIsPlaying(isPlaying) {
-  store.dispatch({ type: 'SET_IS_PLAYING', isPlaying: isPlaying })
-}
-
-function getTimePerBar(bpm) {
+function getTimePerBar(bpm: number): number {
   return 1 / (bpm / 240)
 }
 
-function currentTime() {
+function currentTime(): number {
   return audioContext.currentTime;
 }
 
-
 class PlayHandler {
-  constructor() {
-    this.lastFrameInLastSchedulerRun = 0
-    this.scheduledNoteIds = []
+  instance: Object
+  lastFrameInLastSchedulerRun: number = 0
+  scheduledNoteIds: Array<string> = []
+  interval: any
 
-    // Make this class a singleton
-    if (!PlayHandler.instance) {
-      PlayHandler.instance = this
-    }
-
-    return PlayHandler.instance
-  }
-
-  startPlaying() {
+  startPlaying(): void {
     const { project, tracks } = store.getState()
     const { isPlaying, bpm, barWidth } = project
 
@@ -76,7 +61,7 @@ class PlayHandler {
     }
   }
 
-  stopPlaying() {
+  stopPlaying(): void {
     setIsPlaying(false)
     updatePlayheadAnimation(0, 0, 0);
 
@@ -87,11 +72,11 @@ class PlayHandler {
     this.scheduledNoteIds = []
   }
 
-  scheduleNotes(timePerBar, tracks, elapsedTime) {
+  scheduleNotes(timePerBar: number, tracks: Array<Object>, elapsedTime: number): void {
     const timePerFrame = timePerBar / FRAMES_PER_BAR;
     const framesPerLookahead = Math.floor(SCHEDULER_LOOKAHEAD / timePerFrame);
     const startFrame = Math.floor(elapsedTime / timePerFrame)
-    // debugger
+
     tracks.forEach(({ timeline }) => {
       const slice = timeline.slice(startFrame, startFrame + framesPerLookahead);
       slice.forEach((frame, frameIndex) => {
@@ -108,5 +93,5 @@ class PlayHandler {
   }
 }
 
-const instance = new PlayHandler();
+const instance: Object = new PlayHandler();
 export default instance;
