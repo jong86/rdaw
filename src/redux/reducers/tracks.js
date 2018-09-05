@@ -1,26 +1,35 @@
 // @flow
 import initialState from '../initialState';
 import type { note } from '../../defs/defs.js.flow';
-import NoteMaker from './reducerUtils/NoteMaker';
+import shortid from 'shortid';
+
+function newNote(duration, midiNum) {
+  return {
+    id: shortid.generate(),
+    duration: duration,
+    midiNum: midiNum,
+  }
+}
 
 export default (state: Array<Object> = initialState.tracks, action: Object): Array<Object> => {
   switch (action.type) {
     case 'CREATE_NOTE': {
       const {
         trackIndex,
+        startsAt,
+        duration,
+        midiNum,
       } = action.options;
 
-      const timelineCopy = state[trackIndex].timeline.slice()
+      const timeline = state[trackIndex].timeline.slice()
 
-      const noteMaker: Object = new NoteMaker(
-        timelineCopy,
-        action.options,
-      );
+      if (!Array.isArray(timeline[startsAt])) {
+        timeline[startsAt] = [];
+      }
 
-      state[trackIndex] = {
-        ...state[trackIndex],
-        timeline: noteMaker.getNewTimeline(),
-      };
+      timeline[startsAt] = timeline[startsAt].concat([newNote(duration, midiNum)])
+
+      state[trackIndex].timeline = timeline
 
       return state;
     }

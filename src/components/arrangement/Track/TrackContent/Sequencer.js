@@ -39,9 +39,9 @@ export class Sequencer extends React.Component<Props, State> {
   }
 
   componentDidMount(): void {
-    const amt = 33
+    const amt = 1
 
-    for (let i = 0; i < amt; i += 1) {
+    for (let i = 0; i <= amt; i += 1) {
       this.props.createNote({
         trackIndex: 0,
         duration: 1024,
@@ -49,22 +49,22 @@ export class Sequencer extends React.Component<Props, State> {
         midiNum: 21,
       })
     }
-    for (let i = 2; i < amt; i += 4) {
-      this.props.createNote({
-        trackIndex: 0,
-        duration: 1024,
-        startsAt: i * 1024,
-        midiNum: 22,
-      })
-    }
-    for (let i = 1; i < amt; i += 2) {
-      this.props.createNote({
-        trackIndex: 0,
-        duration: 1024,
-        startsAt: i * 1024,
-        midiNum: 23,
-      })
-    }
+    // for (let i = 2; i < amt; i += 4) {
+    //   this.props.createNote({
+    //     trackIndex: 0,
+    //     duration: 1024,
+    //     startsAt: i * 1024,
+    //     midiNum: 22,
+    //   })
+    // }
+    // for (let i = 1; i < amt; i += 2) {
+    //   this.props.createNote({
+    //     trackIndex: 0,
+    //     duration: 1024,
+    //     startsAt: i * 1024,
+    //     midiNum: 23,
+    //   })
+    // }
   }
 
   render(): Object {

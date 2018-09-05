@@ -31,10 +31,6 @@ class NoteMaker {
 
     this._insertAndOverwriteNoteFrameAtFrame(startsAt, 'INITIATOR');
 
-    for (let i: number = startsAt + 1; i < (startsAt + duration); i++) {
-      this._insertAndOverwriteNoteFrameAtFrame(i, 'CONTINUATION');
-    }
-
     return this.timeline;
   }
 
