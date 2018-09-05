@@ -81,7 +81,7 @@ export class PlayHandler {
       const slice = timeline.slice(startFrame, startFrame + framesPerLookahead);
       slice.forEach((frame, frameIndex) => {
         frame.forEach(noteFrame => {
-          if (noteFrame.type === 'INITIATOR' && !this.scheduledNoteIds.includes(noteFrame.id)) {
+          if (!this.scheduledNoteIds.includes(noteFrame.id)) {
             const timeUntilNoteStarts: number = frameIndex * timePerFrame
             // Schedule notes in advance
             instrumentPlayer.play(noteFrame.midiNum, currentTime() + timeUntilNoteStarts)
