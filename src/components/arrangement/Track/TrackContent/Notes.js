@@ -17,13 +17,13 @@ class Notes extends React.Component<Props, State> {
   render() {
     const { timeline, gridHSpacing, gridVSpacing } = this.props
 
-    const Note = ({ midiNum, startsAt, length }) => {
+    const Note = ({ midiNum, startsAt, duration }) => {
       const xPosMultiplier = startsAt / 1024;
       const yPosMultiplier = midiNum - 21;
 
       return (
         <Rect
-          width={(length / gridHSpacing)}
+          width={(duration / gridHSpacing)}
           height={gridVSpacing || 0}
           x={(gridHSpacing * xPosMultiplier) || 0}
           y={(15 * gridVSpacing) - (gridVSpacing * yPosMultiplier) || 0}
@@ -35,34 +35,18 @@ class Notes extends React.Component<Props, State> {
       )
     }
 
-    const notes = []
-
-    timeline.forEach((division, index) => {
-      division.forEach(noteFrame => {
-        if (noteFrame.type === 'INITIATOR') {
-          notes.push({
-            id: noteFrame.id,
-            midiNum: noteFrame.midiNum,
-            startsAt: index,
-            length: 1,
-          })
-        } else if (noteFrame.type === 'CONTINUATION') {
-          const index = notes.findIndex(element => element.id === noteFrame.initiatorId)
-          notes[index].length += 1
-        }
-      })
-    })
-
     return (
       <Layer>
-        {notes.map(note => (
-          <Note
-            key={note.id}
-            midiNum={note.midiNum}
-            startsAt={note.startsAt}
-            length={note.length}
-          />
-        ))}
+        {timeline.map((division, index) =>
+          division.map(note =>
+            <Note
+              key={note.id}
+              midiNum={note.midiNum}
+              startsAt={index}
+              duration={note.duration}
+            />
+          )
+        )}
       </Layer>
     );
   }
