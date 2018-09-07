@@ -1,13 +1,47 @@
 // @flow
 import initialState from '../initialState';
 import { store } from '../store';
+import { getTimePerTimelineDivision } from '../../util/music';
 
-export function updatePlayheadAnimation(barNum: number, barWidth: number, duration: number): void {
+export function startPlayheadAnimation(project: Object, tracks: Object): void {
+  if (project.isLooping) {
+    const { barWidth, bpm } = project
+    setLoopingPlayheadAnimation(bpm, barWidth, tracks)
+  } else {
+    setContinuousPlayheadAnimation()
+  }
+}
+
+function setLoopingPlayheadAnimation(bpm: number, barWidth: number, tracks: Object): void {
+  const pixelsPerTimelineDivision = barWidth / 4096
+
+  // Get starting playhead position (just use 0 for now) to use for 'from'
+  const timelineStart: number = 0 * barWidth;
+
+  // Get length of longest track, and the last item's duration to use for 'to'
+  const timelineFinish: number = tracks[0].timeline.length + tracks[0].timeline.slice(-1)[0][0].duration
+
+  // Get bpm, and using the length calculate animation duration
+  const duration: number = (timelineFinish - timelineStart) * getTimePerTimelineDivision(bpm) * 1000
+
   store.dispatch({
     type: 'UPDATE_PLAYHEAD_ANIMATION',
-    from: barNum * barWidth,
-    to: (barNum * barWidth) + barWidth,
-    duration: duration * 1000,
+    from: timelineStart * pixelsPerTimelineDivision,
+    to: timelineFinish * pixelsPerTimelineDivision,
+    duration: duration, // in ms
+  })
+}
+
+function setContinuousPlayheadAnimation() {
+
+}
+
+export function stopPlayheadAnimation(): void {
+  store.dispatch({
+    type: 'UPDATE_PLAYHEAD_ANIMATION',
+    from: 0,
+    to: 0,
+    duration: 0,
   })
 }
 

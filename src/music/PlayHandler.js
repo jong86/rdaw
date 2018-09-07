@@ -3,7 +3,8 @@ import { store } from '../redux/store';
 import audioContext from './audioContext';
 import instrumentPlayer from './instrumentPlayer';
 import {
-  updatePlayheadAnimation,
+  startPlayheadAnimation,
+  stopPlayheadAnimation,
   setIsPlaying,
 } from '../redux/reducers/project';
 import {
@@ -32,8 +33,8 @@ export class PlayHandler {
       let barNum: number = 0;
       const timePerBar: number = getTimePerBar(bpm)
 
-      // Playhead visual display for first bar
-      updatePlayheadAnimation(barNum, barWidth, timePerBar);
+      // Set playhead animation to play from start to finish of song
+      startPlayheadAnimation(project, tracks);
 
       // Schedule first notes right away
       this.scheduleNotes(timePerBar, tracks, 0);
@@ -43,15 +44,8 @@ export class PlayHandler {
       if (!this.interval) {
         this.interval = setInterval(() => {
           const { project, tracks } = store.getState();
-          const { bpm, barWidth } = project;
+          const { bpm } = project;
           const timePerBar: number = getTimePerBar(bpm);
-
-          // For playhead visual display
-          const currentBar = Math.floor(currentTime() - playStartTime) / timePerBar
-          if (currentBar !== barNum) {
-            barNum = currentBar
-            updatePlayheadAnimation(barNum, barWidth, timePerBar);
-          }
 
           // Actual scheduling of the notes
           this.scheduleNotes(timePerBar, tracks, currentTime() - playStartTime);
@@ -63,7 +57,7 @@ export class PlayHandler {
   stopPlaying(): void {
     setIsPlaying(false)
 
-    updatePlayheadAnimation(0, 0, 0);
+    stopPlayheadAnimation();
 
     clearInterval(this.interval)
     this.interval = null

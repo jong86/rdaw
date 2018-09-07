@@ -41,7 +41,7 @@ const initialState: appState = {
 
     isPlaying: false,
     isRecording: false,
-    isLoopEnabled: false,
+    isLooping: true,
 
     playheadAnimation: {
       from: 0,

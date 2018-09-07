@@ -39,7 +39,7 @@ export class Sequencer extends React.Component<Props, State> {
   }
 
   componentDidMount(): void {
-    const amt = 33
+    const amt = 330
 
     for (let i = 0; i <= amt; i += 1) {
       this.props.createNote({
