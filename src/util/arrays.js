@@ -11,13 +11,25 @@ export function arrayFrom(a: number, b: number): Array<number> {
 }
 
 export function getIndexOfLongestSubArray(array: Array<Array>): number {
-  let longestFound: number = 0;
+  let longestIndex: number = 0;
 
-  array.forEach((subArray, i) => {
-    if (i > 0 && subArray.length > array[longestFound].length) {
-      longestFound = i
+  for (let i: number = 1; i < array.length; i++) {
+    if (i > 0 && array[i].length > array[longestIndex].length) {
+      longestIndex = i
     }
-  })
+  }
 
-  return longestFound
+  return longestIndex
+}
+
+export function getLengthOfLongestSubArray(array: Array<Array>): number {
+  let longestLengthFound: number = array[0].length;
+
+  for (let i: number = 1; i < array.length; i++) {
+    if (array[i].length > longestLengthFound) {
+      longestLengthFound = array[i].length
+    }
+  }
+
+  return longestLengthFound
 }
