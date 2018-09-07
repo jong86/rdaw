@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 const styles: Object = {
   container: {
     height: '100%',
-    width: '100%',
+    width: '250%',
     display: 'flex',
     alignItems: 'flex-end',
     position: 'relative',

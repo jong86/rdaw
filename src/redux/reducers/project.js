@@ -2,6 +2,7 @@
 import initialState from '../initialState';
 import { store } from '../store';
 import { getTimePerTimelineDivision } from '../../util/music';
+import { getIndexOfLongestSubArray } from '../../util/arrays';
 
 export function startPlayheadAnimation(project: Object, tracks: Object): void {
   if (project.isLooping) {
@@ -19,7 +20,8 @@ function setLoopingPlayheadAnimation(bpm: number, barWidth: number, tracks: Obje
   const timelineStart: number = 0 * barWidth;
 
   // Get length of longest track, and the last item's duration to use for 'to'
-  const timelineFinish: number = tracks[0].timeline.length + tracks[0].timeline.slice(-1)[0][0].duration
+  const i: number = getIndexOfLongestSubArray(tracks.map(track => track.timeline))
+  const timelineFinish: number = tracks[i].timeline.length + tracks[i].timeline.slice(-1)[0][0].duration
 
   // Get bpm, and using the length calculate animation duration
   const duration: number = (timelineFinish - timelineStart) * getTimePerTimelineDivision(bpm) * 1000

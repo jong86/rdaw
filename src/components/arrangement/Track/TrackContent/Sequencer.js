@@ -14,7 +14,7 @@ type Props = {
   numNotes: Object,
   createNote: Function,
   trackIndex: number,
-  FRAMES_PER_BAR: number,
+  DIVISIONS_PER_BAR: number,
   grid: Object,
   view: Object,
   barWidth: number,
@@ -24,16 +24,16 @@ type State = {};
 
 export class Sequencer extends React.Component<Props, State> {
   handleClick(event: Object, hSpacing: number, vSpacing: number, trackIndex: number): void {
-    const { FRAMES_PER_BAR, grid, containerHeight } = this.props;
+    const { DIVISIONS_PER_BAR, grid, containerHeight } = this.props;
     const { offsetX, offsetY } = event.evt;
     const row = (containerHeight / vSpacing) - Math.ceil(offsetY / vSpacing);
-    const noteFrame = offsetX / hSpacing * FRAMES_PER_BAR;
-    const noteLength = FRAMES_PER_BAR * (grid.numerator / grid.denominator)
+    const noteFrame = offsetX / hSpacing * DIVISIONS_PER_BAR;
+    const noteLength = DIVISIONS_PER_BAR * (grid.numerator / grid.denominator)
 
     this.props.createNote({
       trackIndex: trackIndex,
       duration: noteLength,
-      startsAt: Math.floor(noteFrame / FRAMES_PER_BAR) * noteLength,
+      startsAt: Math.floor(noteFrame / DIVISIONS_PER_BAR) * noteLength,
       midiNum: row + 21,
     })
   }
@@ -65,6 +65,10 @@ export class Sequencer extends React.Component<Props, State> {
         midiNum: 23,
       })
     }
+  }
+
+  getPixelWidthOfArrangement(): number {
+    
   }
 
   render(): Object {
@@ -128,7 +132,7 @@ const mapStateToProps = (state, ownProps) => {
     view: state.project.view,
     grid: state.project.grid,
     barWidth: state.project.barWidth,
-    FRAMES_PER_BAR: state.global.constants.FRAMES_PER_BAR,
+    DIVISIONS_PER_BAR: state.global.constants.DIVISIONS_PER_BAR,
   }
 }
 

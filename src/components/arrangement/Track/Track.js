@@ -12,6 +12,7 @@ const styles = theme => ({
     width: props => `calc(100% - ${props.global.gui.optionsWidth}px)`,
     paddingLeft: props => props.global.gui.optionsWidth,
     position: 'relative',
+    alignItems: 'flex-start',
   },
 })
 

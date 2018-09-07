@@ -13,7 +13,7 @@ import {
 } from '../util/music';
 
 const {
-  FRAMES_PER_BAR,
+  DIVISIONS_PER_BAR,
   SCHEDULER_LOOKAHEAD,
 } = store.getState().global.constants;
 
@@ -67,7 +67,7 @@ export class PlayHandler {
   }
 
   scheduleNotes(timePerBar: number, tracks: Array<Object>, elapsedTime: number): void {
-    const timePerFrame: number = timePerBar / FRAMES_PER_BAR;
+    const timePerFrame: number = timePerBar / DIVISIONS_PER_BAR;
     const framesPerLookahead: number = Math.floor(SCHEDULER_LOOKAHEAD / timePerFrame);
     const startFrame: number = Math.floor(elapsedTime / timePerFrame)
 
