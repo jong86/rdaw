@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { Stage, Layer, Rect } from "react-konva"
+import { Stage, Layer, Rect } from 'react-konva'
 import { connect } from 'react-redux'
 import { Spring, animated } from 'react-spring/dist/konva'
 import { TimingAnimation, Easing } from 'react-spring/dist/addons'
@@ -29,15 +29,19 @@ class Playhead extends React.Component<Props, State> {
       Transport,
     } = global
 
+    const { DIVISIONS_PER_BAR } = global.constants
+
     const {
       isPlaying,
       playheadAnimation,
+      barWidth,
     } = project
 
     const xOrigin = global.gui.optionsWidth
     const yPos = TitleBar.height + Transport.height
     const height = tracks.reduce((accumulator, track) => accumulator + track.gui.height, 0)
     const { timelineFinish } = getLongestTrackInfo(tracks)
+    const pixelWidth = timelineFinish / DIVISIONS_PER_BAR * barWidth
 
     return (
       <Stage
@@ -48,8 +52,8 @@ class Playhead extends React.Component<Props, State> {
           left: 0,
           pointerEvents: 'none',
         }}
-        width={window.innerWidth}
-        height={window.innerHeight || 0}
+        width={pixelWidth}
+        height={height}
       >
         <Layer>
           <Spring
@@ -57,7 +61,8 @@ class Playhead extends React.Component<Props, State> {
             from={{
               x: isPlaying ? xOrigin + playheadAnimation.from : xOrigin,
               shadowBlur: 0,
-              fill: 'rgb(10,50,19)'
+              fill: 'rgb(10,50,19)',
+              height: height,
             }}
             to={{
               x: isPlaying ? xOrigin + playheadAnimation.to : xOrigin,
