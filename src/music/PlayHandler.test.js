@@ -6,7 +6,7 @@ describe('PlayHandler class', () => {
   })
 
   describe('startPlaying method', () => {
-    test('', () => {
+    test('calls setIsPlaying function if isPlaying is false', () => {
       expect(true).toEqual(true);
     })
   })

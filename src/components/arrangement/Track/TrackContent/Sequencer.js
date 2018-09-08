@@ -15,7 +15,7 @@ type Props = {
   numNotes: Object,
   createNote: Function,
   trackIndex: number,
-  DIVISIONS_PER_BAR: number,
+  FRAMES_PER_BAR: number,
   grid: Object,
   view: Object,
   barWidth: number,
@@ -26,16 +26,16 @@ type State = {};
 
 export class Sequencer extends React.Component<Props, State> {
   handleClick(event: Object, hSpacing: number, vSpacing: number, trackIndex: number): void {
-    const { DIVISIONS_PER_BAR, grid, trackHeight } = this.props;
+    const { FRAMES_PER_BAR, grid, trackHeight } = this.props;
     const { offsetX, offsetY } = event.evt;
     const row = (trackHeight / vSpacing) - Math.ceil(offsetY / vSpacing);
-    const noteFrame = offsetX / hSpacing * DIVISIONS_PER_BAR;
-    const noteLength = DIVISIONS_PER_BAR * (grid.numerator / grid.denominator)
+    const noteFrame = offsetX / hSpacing * FRAMES_PER_BAR;
+    const noteLength = FRAMES_PER_BAR * (grid.numerator / grid.denominator)
 
     this.props.createNote({
       trackIndex: trackIndex,
       duration: noteLength,
-      startsAt: Math.floor(noteFrame / DIVISIONS_PER_BAR) * noteLength,
+      startsAt: Math.floor(noteFrame / FRAMES_PER_BAR) * noteLength,
       midiNum: row + 21,
     })
   }
@@ -70,9 +70,9 @@ export class Sequencer extends React.Component<Props, State> {
   }
 
   getPixelWidthOfArrangement(): number {
-    const { barWidth, tracks, DIVISIONS_PER_BAR } = this.props
+    const { barWidth, tracks, FRAMES_PER_BAR } = this.props
     const { timelineFinish } = getLongestTrackInfo(tracks)
-    const pixelWidth = timelineFinish / DIVISIONS_PER_BAR * barWidth
+    const pixelWidth = timelineFinish / FRAMES_PER_BAR * barWidth
     return pixelWidth
   }
 
@@ -140,7 +140,7 @@ const mapStateToProps = (state, ownProps) => {
     grid: state.project.grid,
     barWidth: state.project.barWidth,
     trackHeight: state.tracks[ownProps.trackIndex].gui.height,
-    DIVISIONS_PER_BAR: state.global.constants.DIVISIONS_PER_BAR,
+    FRAMES_PER_BAR: state.global.constants.FRAMES_PER_BAR,
     tracks: state.tracks,
   }
 }

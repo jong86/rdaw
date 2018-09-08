@@ -18,7 +18,7 @@ export type appState = {
         DRUMS: number,
         SYNTH: number,
       },
-      DIVISIONS_PER_BAR: number,
+      FRAMES_PER_BAR: number,
       SCHEDULER_LOOKAHEAD: number, // time in seconds
     },
   },

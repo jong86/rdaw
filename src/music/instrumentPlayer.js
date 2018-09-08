@@ -12,12 +12,12 @@ export default {
     // monoSynth.overdrive().play(midiNum);
     drums.play(midiNum, startTime);
 
-    // desired code here:
+    // Desired code below:
     // getInstrumentById(instrumentId).play();
   },
 
   stop: (): void => {
-    // Find armed instrument... (right now just monoSynth)
+    // This is just for testing stuff out:
     monoSynth.stop();
   },
 }

@@ -13,11 +13,11 @@ import {
 } from '../util/music';
 
 const {
-  DIVISIONS_PER_BAR,
+  FRAMES_PER_BAR,
   SCHEDULER_LOOKAHEAD,
 } = store.getState().global.constants;
 
-export class PlayHandler {
+class PlayHandler {
   instance: Object
   lastFrameInLastSchedulerRun: number = 0
   scheduledNoteIds: Array<string> = []
@@ -25,31 +25,27 @@ export class PlayHandler {
 
   startPlaying(): void {
     const { project, tracks } = store.getState()
-    const { isPlaying, bpm, barWidth } = project
+    const { isPlaying, bpm } = project
 
     if (!isPlaying) {
       setIsPlaying(true)
-
-      let barNum: number = 0;
-      const timePerBar: number = getTimePerBar(bpm)
 
       // Set playhead animation to play from start to finish of song
       startPlayheadAnimation(project, tracks);
 
       // Schedule first notes right away
-      this.scheduleNotes(timePerBar, tracks, 0);
+      const timePerBar: number = getTimePerBar(bpm)
+      this._scheduleNotes(timePerBar, tracks, 0);
 
-      const playStartTime = currentTime();
+      const playStartTime: number = currentTime();
 
       if (!this.interval) {
         this.interval = setInterval(() => {
           const { project, tracks } = store.getState();
           const { bpm } = project;
           const timePerBar: number = getTimePerBar(bpm);
-
-          // Actual scheduling of the notes
-          this.scheduleNotes(timePerBar, tracks, currentTime() - playStartTime);
-        }, 50)
+          this._scheduleNotes(timePerBar, tracks, currentTime() - playStartTime);
+        }, 20)
       }
     }
   }
@@ -66,8 +62,8 @@ export class PlayHandler {
     this.scheduledNoteIds = []
   }
 
-  scheduleNotes(timePerBar: number, tracks: Array<Object>, elapsedTime: number): void {
-    const timePerFrame: number = timePerBar / DIVISIONS_PER_BAR;
+  _scheduleNotes(timePerBar: number, tracks: Array<Object>, elapsedTime: number): void {
+    const timePerFrame: number = timePerBar / FRAMES_PER_BAR;
     const framesPerLookahead: number = Math.floor(SCHEDULER_LOOKAHEAD / timePerFrame);
     const startFrame: number = Math.floor(elapsedTime / timePerFrame)
 

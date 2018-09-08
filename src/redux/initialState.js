@@ -20,7 +20,7 @@ const initialState: appState = {
         DRUMS: 16,
         SYNTH: 127,
       },
-      DIVISIONS_PER_BAR: 4096,
+      FRAMES_PER_BAR: 4096,
       SCHEDULER_LOOKAHEAD: 0.15, // time in seconds
     },
   },

@@ -29,7 +29,7 @@ class Playhead extends React.Component<Props, State> {
       Transport,
     } = global
 
-    const { DIVISIONS_PER_BAR } = global.constants
+    const { FRAMES_PER_BAR } = global.constants
 
     const {
       isPlaying,
@@ -43,7 +43,7 @@ class Playhead extends React.Component<Props, State> {
 
     // This is duplicated in Sequencer so maybe can use some DRYing:
     const { timelineFinish } = getLongestTrackInfo(tracks)
-    const pixelWidth = timelineFinish / DIVISIONS_PER_BAR * barWidth
+    const pixelWidth = timelineFinish / FRAMES_PER_BAR * barWidth
 
     return (
       <Stage
