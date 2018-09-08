@@ -11,8 +11,8 @@ const styles: Object = {
   container: {
     backgroundColor: '#222',
     position: 'absolute',
-    top: 100,
     left: 0,
+    top: props => props.topOffset,
     width: 'fit-content',
     height: '100%',
     display: 'flex',
@@ -48,9 +48,10 @@ class Arrangement extends React.Component<Props, State> {
 const mapStateToProps = state => {
   return {
     tracks: state.tracks,
+    topOffset: state.global.TitleBar.height + state.global.Transport.height,
   }
 }
 
-Arrangement = connect(mapStateToProps)(Arrangement);
 Arrangement = injectSheet(styles)(Arrangement);
+Arrangement = connect(mapStateToProps)(Arrangement);
 export default Arrangement;

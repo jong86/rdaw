@@ -1,18 +1,19 @@
 // @flow
-import React from 'react';
-import { Stage, Layer, Rect } from "react-konva";
-import { connect } from 'react-redux';
-import { Spring, animated } from 'react-spring/dist/konva';
+import React from 'react'
+import { Stage, Layer, Rect } from "react-konva"
+import { connect } from 'react-redux'
+import { Spring, animated } from 'react-spring/dist/konva'
 import { TimingAnimation, Easing } from 'react-spring/dist/addons'
+import { getLongestTrackInfo } from '../util/music'
 
 type Props = {
   classes: Object,
   tracks: Object,
   project: Object,
   global: Object,
-};
+}
 
-type State = {};
+type State = {}
 
 class Playhead extends React.Component<Props, State> {
   render = () => {
@@ -21,21 +22,22 @@ class Playhead extends React.Component<Props, State> {
       tracks,
       project,
       global
-    } = this.props;
+    } = this.props
 
     const {
       TitleBar,
       Transport,
-    } = global;
+    } = global
 
     const {
       isPlaying,
       playheadAnimation,
     } = project
 
-    const xOrigin = global.gui.optionsWidth;
-    const yPos = TitleBar.height + Transport.height;
+    const xOrigin = global.gui.optionsWidth
+    const yPos = TitleBar.height + Transport.height
     const height = tracks.reduce((accumulator, track) => accumulator + track.gui.height, 0)
+    const { timelineFinish } = getLongestTrackInfo(tracks)
 
     return (
       <Stage
@@ -79,7 +81,7 @@ class Playhead extends React.Component<Props, State> {
           </Spring>
         </Layer>
       </Stage>
-    );
+    )
   }
 }
 
@@ -91,5 +93,5 @@ const mapStateToProps = state => {
   }
 }
 
-Playhead = connect(mapStateToProps)(Playhead);
-export default Playhead;
+Playhead = connect(mapStateToProps)(Playhead)
+export default Playhead
