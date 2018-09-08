@@ -18,8 +18,6 @@ const {
 } = store.getState().global.constants;
 
 class PlayHandler {
-  instance: Object
-  lastFrameInLastSchedulerRun: number = 0
   scheduledNoteIds: Array<string> = []
   interval: any
 
@@ -29,8 +27,6 @@ class PlayHandler {
 
     if (!isPlaying) {
       setIsPlaying(true)
-
-      // Set playhead animation to play from start to finish of song
       startPlayheadAnimation(project, tracks);
 
       // Schedule first notes right away
@@ -52,13 +48,9 @@ class PlayHandler {
 
   stopPlaying(): void {
     setIsPlaying(false)
-
     stopPlayheadAnimation();
-
     clearInterval(this.interval)
     this.interval = null
-
-    this.lastFrameInLastSchedulerRun = 0
     this.scheduledNoteIds = []
   }
 
