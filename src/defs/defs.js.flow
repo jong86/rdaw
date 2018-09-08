@@ -35,7 +35,7 @@ export type appState = {
 
     isPlaying: boolean,
     isRecording: boolean,
-    isLoopEnabled: boolean,
+    isLooping: boolean,
 
     playheadAnimation: {
       from: number,

@@ -32,28 +32,28 @@ class TrackContent extends React.Component<Props, State> {
     const { classes, instrument, trackIndex } = this.props
 
     return (
-      <Measure
-        bounds
-      >
-        {({ measureRef, contentRect }) => {
-          const { width, height } = contentRect.bounds;
+      // <Measure
+      //   bounds
+      // >
+      //   {({ measureRef, contentRect }) => {
+      //     const { width, height } = contentRect.bounds;
 
-          return (
-            <div
-              className={classes.container}
-              ref={measureRef}
-            >
-              {instrument === "DRUMS" &&
+      //     return (
+      //       <div
+      //         className={classes.container}
+      //         ref={measureRef}
+      //       >
+      //         {instrument === "DRUMS" &&
                 <Sequencer
                   trackIndex={trackIndex}
-                  containerWidth={width}
-                  containerHeight={height}
+                  // containerWidth={width}
+                  // containerHeight={height}
                 />
-              }
-            </div>
-          )
-        }}
-      </Measure>
+      //         }
+      //       </div>
+      //     )
+      //   }}
+      // </Measure>
     );
   }
 }

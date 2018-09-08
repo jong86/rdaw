@@ -21,7 +21,9 @@ export default (state: Array<Object> = initialState.tracks, action: Object): Arr
         midiNum,
       } = action.options;
 
-      const timeline = state[trackIndex].timeline.slice()
+      const stateCopy = state.slice()
+
+      const timeline = stateCopy[trackIndex].timeline.slice()
 
       if (!Array.isArray(timeline[startsAt])) {
         timeline[startsAt] = [];
@@ -29,9 +31,9 @@ export default (state: Array<Object> = initialState.tracks, action: Object): Arr
 
       timeline[startsAt] = timeline[startsAt].concat([newNote(duration, midiNum)])
 
-      state[trackIndex].timeline = timeline
+      stateCopy[trackIndex].timeline = timeline
 
-      return state;
+      return stateCopy;
     }
 
     case 'DELETE_NOTE': {

@@ -6,6 +6,7 @@ import { Stage } from "react-konva";
 import GridLines from './GridLines.js';
 import Notes from './Notes.js';
 import BarBackdrops from './BarBackdrops.js';
+import { getLengthOfLongestTimeline } from '../../../../util/music'
 
 type Props = {
   containerWidth: number,
@@ -18,15 +19,16 @@ type Props = {
   grid: Object,
   view: Object,
   barWidth: number,
+  tracks: Array<Object>,
 };
 
 type State = {};
 
 export class Sequencer extends React.Component<Props, State> {
   handleClick(event: Object, hSpacing: number, vSpacing: number, trackIndex: number): void {
-    const { DIVISIONS_PER_BAR, grid, containerHeight } = this.props;
+    const { DIVISIONS_PER_BAR, grid, trackHeight } = this.props;
     const { offsetX, offsetY } = event.evt;
-    const row = (containerHeight / vSpacing) - Math.ceil(offsetY / vSpacing);
+    const row = (trackHeight / vSpacing) - Math.ceil(offsetY / vSpacing);
     const noteFrame = offsetX / hSpacing * DIVISIONS_PER_BAR;
     const noteLength = DIVISIONS_PER_BAR * (grid.numerator / grid.denominator)
 
@@ -39,7 +41,7 @@ export class Sequencer extends React.Component<Props, State> {
   }
 
   componentDidMount(): void {
-    const amt = 330
+    const amt = 33
 
     for (let i = 0; i <= amt; i += 1) {
       this.props.createNote({
@@ -68,13 +70,16 @@ export class Sequencer extends React.Component<Props, State> {
   }
 
   getPixelWidthOfArrangement(): number {
-    
+    const { barWidth, tracks, DIVISIONS_PER_BAR } = this.props
+    const timelineLength = getLengthOfLongestTimeline(tracks)
+    const pixelWidth = timelineLength / DIVISIONS_PER_BAR * barWidth
+    console.log('pixelWidth', pixelWidth);
+    return pixelWidth
   }
 
   render(): Object {
     const {
-      containerWidth,
-      containerHeight,
+      trackHeight,
       numNotes,
       instrument,
       trackIndex,
@@ -83,17 +88,21 @@ export class Sequencer extends React.Component<Props, State> {
       barWidth,
     } = this.props;
 
-    const hSpacing = barWidth * (grid.numerator / grid.denominator) * view.zoom;
-    const vSpacing = (containerHeight / numNotes[instrument]);
+    const hSpacing: number = barWidth * (grid.numerator / grid.denominator) * view.zoom;
+    const vSpacing: number = trackHeight / numNotes[instrument];
+    console.log("re-rendering");
+    const containerWidth: number = this.getPixelWidthOfArrangement();
 
     return (
       <Stage
         width={containerWidth}
-        height={containerHeight || 0}
+        height={trackHeight || 0}
+        x={0}
+        y={0}
         onClick={event => this.handleClick(event, hSpacing, vSpacing, trackIndex)}
       >
         <BarBackdrops
-          containerHeight={containerHeight}
+          containerHeight={trackHeight}
           containerWidth={containerWidth}
           gridHSpacing={hSpacing}
           gridVSpacing={vSpacing}
@@ -102,14 +111,14 @@ export class Sequencer extends React.Component<Props, State> {
         <GridLines
           horizontal
           hStart={0}
-          hEnd={containerHeight}
+          hEnd={trackHeight}
           hLength={containerWidth}
           hSpacing={hSpacing}
           hColor='#666'
           vertical
           vStart={0}
           vEnd={containerWidth}
-          vLength={containerHeight}
+          vLength={trackHeight}
           vSpacing={vSpacing}
           vColor='#555'
         />
@@ -132,7 +141,9 @@ const mapStateToProps = (state, ownProps) => {
     view: state.project.view,
     grid: state.project.grid,
     barWidth: state.project.barWidth,
+    trackHeight: state.tracks[ownProps.trackIndex].gui.height,
     DIVISIONS_PER_BAR: state.global.constants.DIVISIONS_PER_BAR,
+    tracks: state.tracks,
   }
 }
 
