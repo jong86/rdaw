@@ -39,7 +39,9 @@ class Playhead extends React.Component<Props, State> {
 
     const xOrigin = global.gui.optionsWidth
     const yPos = TitleBar.height + Transport.height
-    const height = tracks.reduce((accumulator, track) => accumulator + track.gui.height, 0)
+    const height = tracks.reduce((accumulator, track) => accumulator + track.gui.height, 0) + 72
+
+    // This is duplicated in Sequencer so maybe can use some DRYing:
     const { timelineFinish } = getLongestTrackInfo(tracks)
     const pixelWidth = timelineFinish / DIVISIONS_PER_BAR * barWidth
 

@@ -13,6 +13,7 @@ const styles = theme => ({
     paddingLeft: props => props.global.gui.optionsWidth,
     position: 'relative',
     alignItems: 'flex-start',
+    marginTop: '1px',
   },
 })
 
