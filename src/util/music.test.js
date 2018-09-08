@@ -1,7 +1,7 @@
 import {
   getTimePerBar,
   getTimePerTimelineDivision,
-  getLengthOfLongestTimeline,
+  getTrackWithLongestTimeline,
 } from './music'
 
 describe('getTimePerBar function', () => {
@@ -18,8 +18,8 @@ describe('getTimePerTimelineDivision function', () => {
   })
 })
 
-describe('getLengthOfLongestTimeline function', () => {
-  it('returns correct length (in timeline array indices) of longest timeline', () => {
+describe('getTrackWithLongestTimeline function', () => {
+  it('returns object with longest track and it\'s index', () => {
     const tracks = [
       {
         timeline: Array(10).fill([])
@@ -35,7 +35,8 @@ describe('getLengthOfLongestTimeline function', () => {
       },
     ]
 
-    const length = getLengthOfLongestTimeline(tracks)
-    expect(length).toEqual(30)
+    const { track, index } = getTrackWithLongestTimeline(tracks)
+    expect(track.timeline.length).toEqual(30)
+    expect(index).toEqual(2)
   })
 })

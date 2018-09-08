@@ -74,7 +74,7 @@ export class Sequencer extends React.Component<Props, State> {
     const timelineLength = getLengthOfLongestTimeline(tracks)
     const pixelWidth = timelineLength / DIVISIONS_PER_BAR * barWidth
     console.log('pixelWidth', pixelWidth);
-    return pixelWidth
+    return pixelWidth + barWidth
   }
 
   render(): Object {
@@ -90,7 +90,6 @@ export class Sequencer extends React.Component<Props, State> {
 
     const hSpacing: number = barWidth * (grid.numerator / grid.denominator) * view.zoom;
     const vSpacing: number = trackHeight / numNotes[instrument];
-    console.log("re-rendering");
     const containerWidth: number = this.getPixelWidthOfArrangement();
 
     return (

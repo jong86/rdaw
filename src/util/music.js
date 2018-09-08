@@ -1,6 +1,6 @@
 // @flow
 import audioContext from '../music/audioContext';
-import { getLengthOfLongestSubArray } from './arrays';
+import { getIndexOfLongestSubArray } from './arrays';
 
 export function getTimePerBar(bpm: number): number {
   return 1 / (bpm / 240)
@@ -14,6 +14,10 @@ export function currentTime(): number {
   return audioContext.currentTime
 }
 
-export function getLengthOfLongestTimeline(tracks: Array<Object>): number {
-  return getLengthOfLongestSubArray(tracks.map(track => track.timeline))
+export function getTrackWithLongestTimeline(tracks: Array<Object>): Object {
+  const index = getIndexOfLongestSubArray(tracks.map(track => track.timeline))
+  return {
+    track: tracks[index],
+    index: index,
+  }
 }
