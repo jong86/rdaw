@@ -16,5 +16,5 @@ let Text = ({ children, classes, style }) => {
   )
 }
 
-Text =  injectSheet(styles)(Text);
+Text = injectSheet(styles)(Text);
 export default Text;

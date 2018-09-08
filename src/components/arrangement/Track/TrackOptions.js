@@ -7,12 +7,13 @@ import { bindActionCreators } from '../../../../node_modules/redux';
 
 const styles: Object =  {
   container: {
+    backgroundColor: '#aaa',
     height: '100%',
-    width: props => props.width,
+    width: props => props.optionsWidth,
     position: 'absolute',
     left: 0,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 }
 
@@ -27,19 +28,27 @@ type State = {};
 
 class TrackOptions extends React.Component<Props, State> {
   render() {
-    const { classes, name, trackIndex } = this.props
+    const { classes, track } = this.props
 
     return (
       <div className={classes.container}>
         <Text
           style={{
             margin: 16,
+            width: '100%',
           }}
         >
-          {name}
+          {track.name}
         </Text>
       </div>
     );
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    track: state.tracks[ownProps.trackIndex],
+    optionsWidth: state.global.gui.optionsWidth,
   }
 }
 
@@ -51,6 +60,6 @@ const mapDispatchToProps = dispatch => ({
   })
 })
 
-TrackOptions = connect(null, mapDispatchToProps)(TrackOptions);
 TrackOptions = injectSheet(styles)(TrackOptions);
+TrackOptions = connect(mapStateToProps, mapDispatchToProps)(TrackOptions);
 export default TrackOptions;

@@ -65,17 +65,30 @@ const initialState: appState = {
     length: 0,
   },
 
-  tracks: [{
-    id: 0,
-    name: 'Drums',
-    type: 'MIDI',
-    instrument: 'DRUMS',
-    isArmed: true,
-    timeline: [],
-    gui: {
-      height: 192,
-    }
-  }],
+  tracks: [
+    {
+      id: 0,
+      name: 'Drums',
+      type: 'MIDI',
+      instrument: 'DRUMS',
+      isArmed: true,
+      timeline: [],
+      gui: {
+        height: 192,
+      }
+    },
+    {
+      id: 1,
+      name: 'Audio',
+      type: 'Audio',
+      instrument: 'AUDIO',
+      isArmed: true,
+      timeline: [],
+      gui: {
+        height: 192,
+      }
+    },
+  ],
 }
 
 export default initialState;

@@ -18,7 +18,6 @@ const styles: Object = {
 
 type Props = {
   classes: Object,
-  type: string,
   instrument: string,
   trackIndex: number,
 };
@@ -29,17 +28,20 @@ class TrackContent extends React.Component<Props, State> {
   node: Object = React.createRef();
 
   render() {
-    /*
-    Right this component is kind of useless, may be used for conditional rendering different types
-    of track content depending on track type
-    */
-
     const { classes, instrument, trackIndex } = this.props
 
     return (
-      <Sequencer
-        trackIndex={trackIndex}
-      />
+      <React.Fragment>
+        {instrument === 'DRUMS' &&
+          <Sequencer
+            trackIndex={trackIndex}
+          />
+        }
+        {instrument === 'AUDIO' &&
+          <div>
+          </div>
+        }
+      </React.Fragment>
     );
   }
 }
