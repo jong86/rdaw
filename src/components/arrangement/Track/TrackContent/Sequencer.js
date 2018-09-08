@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Stage } from "react-konva";
 import GridLines from './GridLines.js';
 import Notes from './Notes.js';
-import BarBackdrops from './BarBackdrops.js';
+import BeatDarkeners from './BeatDarkeners.js';
 import { getLongestTrackInfo } from '../../../../util/music'
 
 type Props = {
@@ -99,7 +99,7 @@ export class Sequencer extends React.Component<Props, State> {
         y={0}
         onClick={event => this.handleClick(event, hSpacing, vSpacing, trackIndex)}
       >
-        <BarBackdrops
+        <BeatDarkeners
           containerHeight={trackHeight}
           containerWidth={containerWidth}
           gridHSpacing={hSpacing}

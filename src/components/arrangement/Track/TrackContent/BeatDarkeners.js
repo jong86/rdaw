@@ -14,7 +14,7 @@ type Props = {
 
 type State = {};
 
-class BarBackdrops extends React.Component<Props, State> {
+class BeatDarkeners extends React.Component<Props, State> {
   render() {
     const {
       containerWidth,
@@ -112,5 +112,5 @@ const mapStateToProps = state => {
   }
 }
 
-BarBackdrops = connect(mapStateToProps)(BarBackdrops);
-export default BarBackdrops;
+BeatDarkeners = connect(mapStateToProps)(BeatDarkeners);
+export default BeatDarkeners;
