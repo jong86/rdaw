@@ -6,7 +6,7 @@ import { Stage } from "react-konva";
 import GridLines from './GridLines.js';
 import Notes from './Notes.js';
 import BarBackdrops from './BarBackdrops.js';
-import { getLengthOfLongestTimeline } from '../../../../util/music'
+import { getLongestTrackInfo } from '../../../../util/music'
 
 type Props = {
   containerWidth: number,
@@ -71,10 +71,9 @@ export class Sequencer extends React.Component<Props, State> {
 
   getPixelWidthOfArrangement(): number {
     const { barWidth, tracks, DIVISIONS_PER_BAR } = this.props
-    const timelineLength = getLengthOfLongestTimeline(tracks)
-    const pixelWidth = timelineLength / DIVISIONS_PER_BAR * barWidth
-    console.log('pixelWidth', pixelWidth);
-    return pixelWidth + barWidth
+    const { timelineFinish } = getLongestTrackInfo(tracks)
+    const pixelWidth = timelineFinish / DIVISIONS_PER_BAR * barWidth
+    return pixelWidth
   }
 
   render(): Object {

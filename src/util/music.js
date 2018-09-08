@@ -14,10 +14,18 @@ export function currentTime(): number {
   return audioContext.currentTime
 }
 
-export function getTrackWithLongestTimeline(tracks: Array<Object>): Object {
-  const index = getIndexOfLongestSubArray(tracks.map(track => track.timeline))
+export function getLongestTrackInfo(tracks: Array<Object>): Object {
+  const i = getIndexOfLongestSubArray(tracks.map(track => track.timeline))
+  const longestTrack = tracks[i]
+
+  let timelineFinish = 0
+  if (longestTrack.timeline.length > 0) {
+    timelineFinish = longestTrack.timeline.length + longestTrack.timeline.slice(-1)[0][0].duration
+  }
+
   return {
-    track: tracks[index],
-    index: index,
+    track: longestTrack,
+    index: i,
+    timelineFinish: timelineFinish,
   }
 }
