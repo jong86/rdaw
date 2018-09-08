@@ -10,8 +10,10 @@ import Track from './arrangement/Track/Track.js';
 const styles: Object = {
   container: {
     backgroundColor: '#222',
-    position: 'relative',
-    width: '100%',
+    position: 'absolute',
+    top: 100,
+    left: 0,
+    width: 'fit-content',
     height: '100%',
     display: 'flex',
     justifyContent: 'flex-start',

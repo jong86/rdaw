@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 const styles: Object = {
   container: {
     height: '100%',
-    width: '250%',
+    width: 'fit-content',
     display: 'flex',
     alignItems: 'flex-end',
     position: 'relative',
@@ -29,31 +29,17 @@ class TrackContent extends React.Component<Props, State> {
   node: Object = React.createRef();
 
   render() {
+    /*
+    Right this component is kind of useless, may be used for conditional rendering different types
+    of track content depending on track type
+    */
+
     const { classes, instrument, trackIndex } = this.props
 
     return (
-      // <Measure
-      //   bounds
-      // >
-      //   {({ measureRef, contentRect }) => {
-      //     const { width, height } = contentRect.bounds;
-
-      //     return (
-      //       <div
-      //         className={classes.container}
-      //         ref={measureRef}
-      //       >
-      //         {instrument === "DRUMS" &&
-                <Sequencer
-                  trackIndex={trackIndex}
-                  // containerWidth={width}
-                  // containerHeight={height}
-                />
-      //         }
-      //       </div>
-      //     )
-      //   }}
-      // </Measure>
+      <Sequencer
+        trackIndex={trackIndex}
+      />
     );
   }
 }
