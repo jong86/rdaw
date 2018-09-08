@@ -75,6 +75,13 @@ export default (state: Object = initialState.project, action: Object): Object =>
       }
     }
 
+    case 'SET_IS_RECORDING_ARMED': {
+      return {
+        ...state,
+        isRecordingArmed: action.isRecordingArmed,
+      }
+    }
+
 
     default: {
       return { ...state }

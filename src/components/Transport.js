@@ -3,7 +3,7 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import { connect } from 'react-redux';
 
-import { FaPlay, FaStop } from 'react-icons/fa';
+import { FaPlay, FaStop, FaCircle } from 'react-icons/fa';
 import Button from './generic/Button';
 
 import playHandler from '../music/PlayHandler';
@@ -16,7 +16,7 @@ const styles = theme => ({
     height: 16,
     width: '100%',
     top: props => props.global.TitleBar.height,
-    zIndex: 4,
+    zIndex: 5,
     height: props => props.global.Transport.height,
   },
 })
@@ -37,6 +37,10 @@ export class Transport extends React.Component<Props, State> {
     playHandler.stopPlaying();
   }
 
+  handleRecord = () => {
+    console.log("you pressed record")
+  }
+
   render() {
     const { classes, project } = this.props
 
@@ -53,6 +57,12 @@ export class Transport extends React.Component<Props, State> {
           color={!project.isPlaying ? 'neutral' : 'neutral-dark'}
         >
           <FaStop />
+        </Button>
+        <Button
+          onClick={this.handleRecord}
+          color={project.isRecordingArmed ? 'danger' : 'neutral-dark'}
+        >
+          <FaCircle />
         </Button>
       </div>
     );

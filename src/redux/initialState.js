@@ -40,7 +40,7 @@ const initialState: appState = {
     },
 
     isPlaying: false,
-    isRecording: false,
+    isRecordingArmed: false,
     isLooping: true,
 
     playheadAnimation: {
