@@ -39,7 +39,8 @@ export default (state: Array<Object> = initialState.tracks, action: Object): Arr
       const {
         trackIndex,
         timelineIndex,
-        id
+        id,
+        duration,
       } = action.options
 
       const stateCopy = state.slice()
@@ -49,8 +50,17 @@ export default (state: Array<Object> = initialState.tracks, action: Object): Arr
 
       timeline[timelineIndex].splice(indexInFrame, 1)
 
+      // Make timeline index null if the last note there was deleted
       if (Array.isArray(timeline[timelineIndex]) && timeline[timelineIndex].length === 0) {
         timeline[timelineIndex] = null
+      }
+// debugger
+      // Find last non-null timeline entry only keep it and everything before it
+      for (let i = timeline.length - 1; i >= 0; i--) {
+        if (Array.isArray(timeline[i])) {
+          timeline = timeline.slice(0, i + 1)
+          break
+        }
       }
 
       stateCopy[trackIndex].timeline = timeline

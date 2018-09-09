@@ -8,18 +8,20 @@ type Props = {
   timeline: Array<Array<Object>>,
   gridVSpacing: number,
   gridHSpacing: number,
+  trackIndex: number,
+  deleteNote: Function,
 };
 
 type State = {};
 
 
 class Notes extends React.Component<Props, State> {
-  handleClickNote = (startsAt, id) => {
-    console.log("You clicked note", event)
+  handleClickNote = (startsAt, id, duration) => {
     this.props.deleteNote({
       trackIndex: this.props.trackIndex,
       timelineIndex: startsAt,
       id: id,
+      duration: duration,
     })
   }
 
@@ -41,7 +43,7 @@ class Notes extends React.Component<Props, State> {
           stroke="#222"
           strokeWidth={0}
           opacity={1}
-          onClick={() => this.handleClickNote(startsAt, id)}
+          onClick={() => this.handleClickNote(startsAt, id, duration)}
         />
       )
     }
