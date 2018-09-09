@@ -47,7 +47,6 @@ export default (state: Array<Object> = initialState.tracks, action: Object): Arr
 
       const indexInFrame = timeline[timelineIndex].findIndex(item => item.id === id)
 
-      // timeline[timelineIndex][indexInFrame] = null
       timeline[timelineIndex].splice(indexInFrame, 1)
 
       stateCopy[trackIndex].timeline = timeline
