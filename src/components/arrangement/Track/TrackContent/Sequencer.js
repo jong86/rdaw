@@ -9,8 +9,6 @@ import BeatDarkeners from './BeatDarkeners.js';
 import { getLongestTrackInfo } from '../../../../util/music'
 
 type Props = {
-  containerWidth: number,
-  containerHeight: number,
   instrument: string,
   numNotes: Object,
   createNote: Function,
@@ -20,6 +18,7 @@ type Props = {
   view: Object,
   barWidth: number,
   tracks: Array<Object>,
+  trackHeight: number,
 };
 
 type State = {};
@@ -41,7 +40,7 @@ export class Sequencer extends React.Component<Props, State> {
   }
 
   componentDidMount(): void {
-    const amt = 400
+    const amt = 12
 
     for (let i = 0; i <= amt; i += 1) {
       this.props.createNote({

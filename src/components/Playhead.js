@@ -8,7 +8,7 @@ import { getLongestTrackInfo } from '../util/music'
 
 type Props = {
   classes: Object,
-  tracks: Object,
+  tracks: Array<Object>,
   project: Object,
   global: Object,
 }
@@ -43,7 +43,7 @@ class Playhead extends React.Component<Props, State> {
 
     // This is duplicated in Sequencer so maybe can use some DRYing:
     const { timelineFinish } = getLongestTrackInfo(tracks)
-    const pixelWidth = timelineFinish / FRAMES_PER_BAR * barWidth
+    const pixelWidth: number = timelineFinish / FRAMES_PER_BAR * barWidth
 
     return (
       <Stage

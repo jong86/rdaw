@@ -34,7 +34,7 @@ export type appState = {
     swing: number,
 
     isPlaying: boolean,
-    isRecording: boolean,
+    isRecordingArmed: boolean,
     isLooping: boolean,
 
     playheadAnimation: {

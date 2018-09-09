@@ -22,6 +22,7 @@ type Props = {
   name: string,
   createNote: Function,
   trackIndex: number,
+  track: Object,
 };
 
 type State = {};

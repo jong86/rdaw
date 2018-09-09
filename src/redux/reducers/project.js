@@ -6,7 +6,7 @@ import {
   getLongestTrackInfo,
 } from '../../util/music';
 
-export function startPlayheadAnimation(project: Object, tracks: Object): void {
+export function startPlayheadAnimation(project: Object, tracks: Array<Object>): void {
   if (project.isLooping) {
     const { barWidth, bpm } = project
     setLoopingPlayheadAnimation(bpm, barWidth, tracks)
@@ -15,7 +15,7 @@ export function startPlayheadAnimation(project: Object, tracks: Object): void {
   }
 }
 
-function setLoopingPlayheadAnimation(bpm: number, barWidth: number, tracks: Object): void {
+function setLoopingPlayheadAnimation(bpm: number, barWidth: number, tracks: Array<Object>): void {
   const pixelsPerTimelineDivision = barWidth / 4096
 
   // Get starting playhead position (just use 0 for now) to use for 'from'

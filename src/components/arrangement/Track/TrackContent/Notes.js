@@ -14,10 +14,20 @@ type State = {};
 
 
 class Notes extends React.Component<Props, State> {
+  handleClickNote = (startsAt, id) => {
+    console.log("You clicked note", event)
+    this.props.deleteNote({
+      trackIndex: this.props.trackIndex,
+      timelineIndex: startsAt,
+      id: id,
+    })
+  }
+
+
   render() {
     const { timeline, gridHSpacing, gridVSpacing } = this.props
 
-    const Note = ({ midiNum, startsAt, duration }) => {
+    const Note = ({ midiNum, startsAt, duration, id }) => {
       const xPosMultiplier = startsAt / 1024;
       const yPosMultiplier = midiNum - 21;
 
@@ -31,6 +41,7 @@ class Notes extends React.Component<Props, State> {
           stroke="#222"
           strokeWidth={0}
           opacity={1}
+          onClick={() => this.handleClickNote(startsAt, id)}
         />
       )
     }
@@ -39,8 +50,9 @@ class Notes extends React.Component<Props, State> {
       <Layer>
         {timeline.map((division, index) =>
           division.map(note =>
-            <Note
+            note && <Note
               key={note.id}
+              id={note.id}
               midiNum={note.midiNum}
               startsAt={index}
               duration={note.duration}
@@ -59,5 +71,12 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-Notes = connect(mapStateToProps)(Notes);
+const mapDispatchToProps = dispatch => ({
+  deleteNote: options => dispatch({
+    type: 'DELETE_NOTE',
+    options,
+  })
+})
+
+Notes = connect(mapStateToProps, mapDispatchToProps)(Notes);
 export default Notes;

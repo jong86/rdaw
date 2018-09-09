@@ -20,7 +20,10 @@ export function getLongestTrackInfo(tracks: Array<Object>): Object {
 
   let timelineFinish = 0
   if (longestTrack.timeline.length > 0) {
-    timelineFinish = longestTrack.timeline.length + longestTrack.timeline.slice(-1)[0][0].duration
+    const timelineLength = longestTrack.timeline.length
+    const lastFrame = longestTrack.timeline.slice(-1)
+    const lastNoteDuration = lastFrame[0][0].duration
+    timelineFinish = timelineLength + lastNoteDuration
   }
 
   return {
