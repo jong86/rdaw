@@ -49,6 +49,10 @@ export default (state: Array<Object> = initialState.tracks, action: Object): Arr
 
       timeline[timelineIndex].splice(indexInFrame, 1)
 
+      if (Array.isArray(timeline[timelineIndex]) && timeline[timelineIndex].length === 0) {
+        timeline[timelineIndex] = null
+      }
+
       stateCopy[trackIndex].timeline = timeline
 
       return stateCopy

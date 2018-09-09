@@ -49,7 +49,7 @@ class Notes extends React.Component<Props, State> {
     return (
       <Layer>
         {timeline.map((division, index) =>
-          division.map(note =>
+          division && division.map(note =>
             note && <Note
               key={note.id}
               id={note.id}

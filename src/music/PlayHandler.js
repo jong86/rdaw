@@ -62,15 +62,17 @@ class PlayHandler {
     tracks.forEach(({ timeline }) => {
       const slice = timeline.slice(startFrame, startFrame + framesPerLookahead);
       slice.forEach((frame, frameIndex) => {
-        frame.forEach(noteFrame => {
-          if (!this.scheduledNoteIds.includes(noteFrame.id)) {
-            const timeUntilNoteStarts: number = frameIndex * timePerFrame
-            // Schedule notes in advance
-            instrumentPlayer.play(noteFrame.midiNum, currentTime() + timeUntilNoteStarts)
-            // Keep track of note IDs so they aren't rescheduled
-            this.scheduledNoteIds.push(noteFrame.id)
-          }
-        })
+        if (frame) {
+          frame.forEach(noteFrame => {
+            if (!this.scheduledNoteIds.includes(noteFrame.id)) {
+              const timeUntilNoteStarts: number = frameIndex * timePerFrame
+              // Schedule notes in advance
+              instrumentPlayer.play(noteFrame.midiNum, currentTime() + timeUntilNoteStarts)
+              // Keep track of note IDs so they aren't rescheduled
+              this.scheduledNoteIds.push(noteFrame.id)
+            }
+          })
+        }
       })
     })
   }
